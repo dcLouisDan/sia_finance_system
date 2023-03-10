@@ -25,13 +25,13 @@
 
 <body>
   <header class="header">
-    <div class="brand">
+    <a href="" class="brand">
       <img src="icon.png" alt="" class="logo">
       <div class="site-name">
         <p class="school">DHVSU</p>
         <p class="office">Finance Office</p>
       </div>
-    </div>
+    </a>
 
     <div class="header-icon">
       <i class="bi bi-gear-fill"></i>
@@ -82,10 +82,10 @@
           <li class="nav-link">Employees</li>
         </a>
         <a href="">
-          <li class="nav-link">Salary Management</li>
+          <li class="nav-link">Manage Salaries</li>
         </a>
         <a href="">
-          <li class="nav-link">Time and Attendance</li>
+          <li class="nav-link">Time & Attendance</li>
         </a>
       </ul>
 
