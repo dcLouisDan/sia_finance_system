@@ -52,6 +52,61 @@
       <img src="assets/profile-placeholder.jpg" alt="" class="display-photo">
     </div>
   </header>
+
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <ul>
+        <a href="">
+          <li class="nav-link active">Dashboard</li>
+        </a>
+      </ul>
+
+      <h5>Student Fees</h5>
+      <ul>
+        <a href="">
+          <li class="nav-link">Students</li>
+        </a>
+        <a href="">
+          <li class="nav-link">Programs</li>
+        </a>
+        <a href="">
+          <li class="nav-link">Fees</li>
+        </a>
+      </ul>
+
+      <h5>Employee Payroll</h5>
+      <ul>
+        <a href="">
+          <li class="nav-link">Employees</li>
+        </a>
+        <a href="">
+          <li class="nav-link">Salary Management</li>
+        </a>
+        <a href="">
+          <li class="nav-link">Time and Attendance</li>
+        </a>
+      </ul>
+
+      <h5>Reports</h5>
+      <ul>
+        <a href="">
+          <li class="nav-link">Financial Reports</li>
+        </a>
+        <a href="">
+          <li class="nav-link">Audit log</li>
+        </a>
+      </ul>
+
+      <img src="icon.png" class="logo" alt="">
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+
+    </main>
+  </div>
 </body>
 
 </html>
