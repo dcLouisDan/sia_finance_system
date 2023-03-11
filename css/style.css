@@ -139,6 +139,7 @@ ul {
   padding: 1.2rem;
   position: relative;
   margin-right: 1rem;
+  margin-bottom: 1rem;
 }
 
 .sidebar .nav-link {
@@ -182,4 +183,5 @@ ul {
   border-radius: 15px;
   height: auto;
   width: 100%;
+  margin-bottom: 1rem;
 }
