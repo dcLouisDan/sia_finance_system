@@ -58,45 +58,63 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <ul>
-        <a href="">
-          <li class="nav-link">Dashboard</li>
-        </a>
+        <li>
+          <a class="nav-link" href="dashboard.php">
+            Dashboard
+          </a>
+        </li>
       </ul>
 
       <h5>Student Fees</h5>
       <ul>
-        <a href="">
-          <li class="nav-link">Students</li>
-        </a>
-        <a href="">
-          <li class="nav-link">Programs</li>
-        </a>
-        <a href="">
-          <li class="nav-link">Fees</li>
-        </a>
+        <li>
+          <a class="nav-link" href="students.php">
+            Students
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="">
+            Programs
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="">
+            Fees
+          </a>
+        </li>
       </ul>
 
       <h5>Employee Payroll</h5>
       <ul>
-        <a href="">
-          <li class="nav-link">Employees</li>
-        </a>
-        <a href="">
-          <li class="nav-link">Manage Salaries</li>
-        </a>
-        <a href="">
-          <li class="nav-link">Time & Attendance</li>
-        </a>
+        <li>
+          <a class="nav-link" href="">
+            Employees
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="">
+            Manage Salaries
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="">
+            Time & Attendance
+          </a>
+        </li>
       </ul>
 
       <h5>Reports</h5>
       <ul>
-        <a href="">
-          <li class="nav-link">Financial Reports</li>
-        </a>
-        <a href="">
-          <li class="nav-link">Audit log</li>
-        </a>
+        <li>
+          <a class="nav-link" href="">
+            Financial Reports
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="">
+            Audit log
+          </a>
+        </li>
       </ul>
 
       <img src="../icon.png" class="logo" alt="">

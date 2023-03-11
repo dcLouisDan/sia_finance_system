@@ -56,7 +56,7 @@
 
   <div class="container">
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
       <ul>
         <a href="">
           <li class="nav-link active">Dashboard</li>
