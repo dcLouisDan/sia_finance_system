@@ -68,9 +68,15 @@
       <h5>Student Fees</h5>
       <ul>
         <li>
-          <a class="nav-link" href="students.php">
-            Students
-          </a>
+          <button type="button" class="nav-menu-btn" href="">
+            <i class="bi bi-caret-down-fill"></i>Students
+          </button>
+
+          <ul class="nav-menu">
+            <li><a href="">Link 1</a></li>
+            <li><a href="">Link 2</a></li>
+            <li><a href="">Link 3</a></li>
+          </ul>
         </li>
         <li>
           <a class="nav-link" href="">

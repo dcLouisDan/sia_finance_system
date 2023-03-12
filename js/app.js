@@ -8,3 +8,13 @@ navLinks.map((link) => {
     link.classList.toggle("active");
   }
 });
+
+const navMenuBtns = Array.from(document.querySelectorAll(".nav-menu-btn"));
+
+navMenuBtns.map((btn) => {
+  btn.addEventListener("click", (e) => {
+    btn.classList.toggle("active");
+    btn.nextElementSibling.classList.toggle("active");
+    btn.querySelector(".bi").classList.toggle("active");
+  });
+});

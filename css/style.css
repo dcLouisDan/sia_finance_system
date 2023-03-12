@@ -16,6 +16,11 @@
   pointer-events: none;
 }
 
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 a {
   color: black;
   text-decoration: none;
@@ -142,12 +147,42 @@ ul {
   margin-bottom: 1rem;
 }
 
-.sidebar .nav-link {
+.sidebar > ul > li {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-menu {
+  display: none;
+  width: 80%;
+  margin-left: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-menu.active {
+  display: block;
+}
+
+.nav-menu li a {
+  display: grid;
+  font-size: 16px;
+  margin-top: 0.5rem;
+  place-items: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  width: 100%;
+  border-radius: 5px;
+}
+
+.sidebar .nav-link,
+.sidebar .nav-menu-btn {
+  position: relative;
   display: grid;
   place-items: center;
   text-align: center;
   line-height: 1;
-  margin-bottom: 0.75rem;
   color: var(--primary);
   background-color: var(--secondary);
   height: 50px;
@@ -156,10 +191,25 @@ ul {
   font-weight: 500;
   border-radius: 10px;
   transition: all 0.12s ease-in;
+  z-index: 5;
+}
+
+.sidebar .nav-menu-btn .bi {
+  position: absolute;
+  right: 1rem;
+  transform: rotate(0deg);
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar .nav-menu-btn .bi.active {
+  transform: rotate(180deg);
 }
 
 .sidebar .nav-link:hover,
-.sidebar .active {
+.sidebar .nav-menu-btn:hover,
+.sidebar .nav-menu-btn.active,
+.sidebar .nav-link.active,
+.nav-menu li a:hover {
   background-color: white;
 }
 
