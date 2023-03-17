@@ -21,6 +21,15 @@ button {
   cursor: pointer;
 }
 
+input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
 a {
   color: black;
   text-decoration: none;
@@ -235,4 +244,68 @@ ul {
   height: auto;
   width: 100%;
   margin-bottom: 1rem;
+}
+
+.container-centered {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.login-card {
+  background-color: var(--primary);
+  border-radius: 15px;
+  height: 600px;
+  width: 500px;
+  padding: 3rem 2rem;
+}
+
+.login-card .site-name .school {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.login-card .site-name .office {
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.login-card .logo {
+  height: 80px;
+}
+
+.login-card h1 {
+  color: white;
+  font-weight: 500;
+  font-size: 48px;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.input-control {
+  font-size: 20px;
+  width: 100%;
+  color: black;
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+  background-color: white;
+  margin-bottom: 1rem;
+}
+
+.btn-wide {
+  width: 100%;
+  border-radius: 5px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  font-size: 20px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.login-card .btn-wide {
+  margin-top: 3rem;
+}
+
+.btn-wide:hover {
+  background-color: white;
 }
