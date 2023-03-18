@@ -1,5 +1,6 @@
 <?php
 require '../config.php';
+require '../app/util_func.php';
 session_start();
 if (!isset($_SESSION["user"])) {
   header("Location: ./index.php");
