@@ -5,7 +5,7 @@ require_once  './includes/header.php';
 
 <!-- Main Content -->
 <main>
-
+  <?= $_SESSION["folder"] ?>
 </main>
 
 <?php

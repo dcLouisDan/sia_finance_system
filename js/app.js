@@ -44,13 +44,13 @@ const cancelFeesBtn = document.getElementById("cancel-fee-btn");
 const feeInputs = Array.from(
   document.getElementById("fee-list").querySelectorAll("input")
 );
-
+console.log(feeInputs);
 function unlockInputs() {
-  console.log("click");
   editFeesBtn.style.display = "none";
   saveFeesBtn.style.display = "block";
   cancelFeesBtn.style.display = "block";
   feeInputs.forEach((input) => {
+    input.previousElementSibling.style.color = "var(--primary)";
     input.disabled = false;
   });
 }
@@ -60,10 +60,10 @@ function lockInputs() {
   saveFeesBtn.style.display = "none";
   cancelFeesBtn.style.display = "none";
   feeInputs.forEach((input) => {
+    input.previousElementSibling.style.color = "gray";
     input.disabled = true;
   });
 }
 
 editFeesBtn.addEventListener("click", unlockInputs);
-saveFeesBtn.addEventListener("click", lockInputs);
 cancelFeesBtn.addEventListener("click", lockInputs);

@@ -498,3 +498,7 @@ main {
 #save-fee-btn {
   display: none;
 }
+
+input:disabled {
+  color: gray;
+}

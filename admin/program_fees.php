@@ -43,72 +43,72 @@ if (isset($_GET["id"])) {
       <div class="card-body">
         <div class="program-label">
           <p>Fee Structure</p>
-          <form action="" method="post">
-            <input type="number" value="<?= $_GET["id"] ?>" name="program_id" hidden>
         </div>
-        <div class="fee-list" id="fee-list">
-          <div class="fee">
-            <label for="">Tuition Fee (per unit)</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['tuition_fee'] ?>" name="tuition_fee">
+        <form action="../app/fee_update.php" method="post">
+          <input type="number" value="<?= $_GET["id"] ?>" name="program_id" hidden>
+          <div class="fee-list" id="fee-list">
+            <div class="fee">
+              <label for="">Tuition Fee (per unit)</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['tuition_fee'] ?>" name="tuition_fee">
+              </div>
+            </div>
+            <div class="fee">
+              <label for="">Miscellaneous Fee</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['misc_fee'] ?>" name="misc_fee">
+              </div>
+            </div>
+            <div class="fee">
+              <label for="">Registration Fee</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['registration_fee'] ?>" name="registration_fee">
+              </div>
+            </div>
+            <div class="fee">
+              <label for="">Library Fee</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['library_fee'] ?>" name="library_fee">
+              </div>
+            </div>
+            <div class="fee">
+              <label for="">Laboratory Fee</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['laboratory_fee'] ?>" name="laboratory_fee">
+              </div>
+            </div>
+            <div class="fee">
+              <label for="">Guidance Fee</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['guidance_fee'] ?>" name="guidance_fee">
+              </div>
+            </div>
+            <div class="fee">
+              <label for="">Computer Fee</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['computer_fee'] ?>" name="computer_fee">
+              </div>
+            </div>
+            <div class="fee">
+              <label for="">Athletic Fee</label>
+              <div class="input-with-currency">
+                <div class="currency">Php</div>
+                <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['athletic_fee'] ?>" name="athletic_fee">
+              </div>
             </div>
           </div>
-          <div class="fee">
-            <label for="">Miscellaneous Fee</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['misc_fee'] ?>" name="misc_fee">
-            </div>
+          <div class="edit-btn-group">
+            <button type="button" class="btn-outline gray" id="cancel-fee-btn">Cancel</button>
+            <button type="submit" class="btn positive" id="save-fee-btn">Save Changes</button>
+            <button type="button" class="btn" id="edit-fee-btn">Edit Fees</button>
           </div>
-          <div class="fee">
-            <label for="">Registration Fee</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['registration_fee'] ?>" name="registration_fee">
-            </div>
-          </div>
-          <div class="fee">
-            <label for="">Library Fee</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['library_fee'] ?>" name="library_fee">
-            </div>
-          </div>
-          <div class="fee">
-            <label for="">Laboratory Fee</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['laboratory_fee'] ?>" name="laboratory_fee">
-            </div>
-          </div>
-          <div class="fee">
-            <label for="">Guidance Fee</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['guidance_fee'] ?>" name="guidance_fee">
-            </div>
-          </div>
-          <div class="fee">
-            <label for="">Computer Fee</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['computer_fee'] ?>" name="computer_fee">
-            </div>
-          </div>
-          <div class="fee">
-            <label for="">Athletic Fee</label>
-            <div class="input-with-currency">
-              <div class="currency">Php</div>
-              <input type="number" placeholder="1.00" step="0.01" class="input-control gray" disabled value="<?= $fees['athletic_fee'] ?>" name="athletic_fee">
-            </div>
-          </div>
-        </div>
-        <div class="edit-btn-group">
-          <button type="button" class="btn-outline gray" id="cancel-fee-btn">Cancel</button>
-          <button type="button" class="btn positive" id="save-fee-btn">Save Changes</button>
-          <button type="button" class="btn" id="edit-fee-btn">Edit Fees</button>
-        </div>
         </form>
       </div>
     </div>
