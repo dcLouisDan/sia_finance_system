@@ -87,14 +87,15 @@ if (!isset($_SESSION["user"])) {
           </ul>
         </li>
         <li>
-          <a class="nav-link" href="">
-            Programs
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" href="">
-            Fees
-          </a>
+          <button type="button" class="nav-menu-btn" href="">
+            <i class="bi bi-caret-down-fill"></i>Fees
+          </button>
+
+          <ul class="nav-menu">
+            <li><a href="">Process Payment</a></li>
+            <li><a href="">Payment History</a></li>
+            <li><a href="program_fees.php">Manage Program Fees</a></li>
+          </ul>
         </li>
       </ul>
 

@@ -4,7 +4,7 @@ require_once  './includes/header.php';
 ?>
 
 <!-- Main Content -->
-<main class="main">
+<main>
 
 </main>
 

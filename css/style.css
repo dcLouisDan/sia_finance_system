@@ -3,6 +3,7 @@
   --secondary: #e6bfbf;
   --accent: #ef6025;
   --background: #ffffff;
+  --light: rgb(241, 241, 241);
 }
 
 * {
@@ -22,6 +23,8 @@ button {
 }
 
 input {
+  font: inherit;
+  color: inherit;
   border: none;
   -webkit-appearance: none;
   -ms-appearance: none;
@@ -148,7 +151,7 @@ ul {
 .sidebar {
   width: 330px;
   background-color: var(--primary);
-  height: auto;
+  height: fit-content;
   border-radius: 15px;
   padding: 1.2rem 1.2rem 10rem;
   position: relative;
@@ -164,7 +167,7 @@ ul {
 
 .nav-menu {
   display: none;
-  width: 80%;
+  width: 100%;
   margin-left: auto;
   position: relative;
   overflow: hidden;
@@ -176,6 +179,10 @@ ul {
 
 .nav-menu li a {
   display: grid;
+  place-items: center;
+  text-align: center;
+  line-height: 1;
+  padding: 0.5rem;
   font-size: 16px;
   margin-top: 0.5rem;
   place-items: center;
@@ -238,12 +245,13 @@ ul {
   transform: translateX(-50%);
 }
 
-.main {
+main {
   background-color: var(--secondary);
   border-radius: 15px;
   height: auto;
   width: 100%;
   margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 .container-centered {
@@ -308,4 +316,68 @@ ul {
 
 .btn-wide:hover {
   background-color: white;
+}
+
+.program-fees {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  gap: 1rem;
+}
+
+.card {
+  background-color: var(--background);
+  border-radius: 10px;
+}
+
+.card-header {
+  padding: 1rem;
+  border-bottom: 2px solid var(--light);
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon .bi {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 1rem;
+  color: gray;
+  font-size: 18px;
+}
+
+.input-control.search {
+  background-color: var(--light);
+  font-size: 18px;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  margin: 0;
+}
+
+.card-list {
+  height: 705px;
+  overflow: scroll;
+}
+
+.card-list li a {
+  display: block;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+  text-align: center;
+  padding: 1rem;
+}
+
+.card-list li .active {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 500;
+}
+
+.card-list li a:not(.active):hover {
+  color: var(--primary);
+}
+
+.card-list li {
+  border-bottom: 2px solid var(--light);
 }
