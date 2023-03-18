@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 18, 2023 at 02:50 AM
+-- Generation Time: Mar 18, 2023 at 01:29 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,7 +31,6 @@ CREATE TABLE `tbl_fee_struc` (
   `id` int(11) NOT NULL,
   `program_id` int(11) NOT NULL DEFAULT 0,
   `tuition_fee` decimal(15,2) NOT NULL DEFAULT 0.00,
-  `lab_fee` decimal(15,2) NOT NULL DEFAULT 0.00,
   `misc_fee` decimal(15,2) NOT NULL DEFAULT 0.00,
   `registration_fee` decimal(15,2) NOT NULL DEFAULT 0.00,
   `library_fee` decimal(15,2) NOT NULL DEFAULT 0.00,
@@ -46,10 +45,10 @@ CREATE TABLE `tbl_fee_struc` (
 -- Dumping data for table `tbl_fee_struc`
 --
 
-INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `lab_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
-(1, 1, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2023-03-17 18:53:59'),
-(2, 2, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2023-03-17 18:54:06'),
-(3, 3, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2023-03-17 18:54:13');
+INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
+(1, 1, '1.00', '2.00', '3.00', '4.00', '5.00', '6.00', '7.00', '8.00', '2023-03-18 20:27:13'),
+(2, 2, '8.00', '7.00', '6.00', '5.00', '4.00', '3.00', '2.00', '1.00', '2023-03-18 20:27:37'),
+(3, 3, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2023-03-17 18:54:13');
 
 -- --------------------------------------------------------
 
