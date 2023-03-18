@@ -4,6 +4,7 @@
   --accent: #ef6025;
   --background: #ffffff;
   --light: rgb(241, 241, 241);
+  --positive: rgb(24, 133, 24);
 }
 
 * {
@@ -291,13 +292,17 @@ main {
 }
 
 .input-control {
-  font-size: 20px;
+  font-size: 18px;
   width: 100%;
   color: black;
   border-radius: 5px;
   padding: 1rem 1.5rem;
   background-color: white;
   margin-bottom: 1rem;
+}
+
+.login-card .input-control {
+  font-size: 20px;
 }
 
 .btn-wide {
@@ -327,11 +332,17 @@ main {
 .card {
   background-color: var(--background);
   border-radius: 10px;
+  height: fit-content;
 }
 
 .card-header {
   padding: 1rem;
   border-bottom: 2px solid var(--light);
+}
+
+.card-body {
+  height: fit-content;
+  padding: 1rem;
 }
 
 .input-with-icon {
@@ -355,7 +366,7 @@ main {
 }
 
 .card-list {
-  height: 705px;
+  height: 750px;
   overflow: scroll;
 }
 
@@ -380,4 +391,110 @@ main {
 
 .card-list li {
   border-bottom: 2px solid var(--light);
+}
+
+.program-label {
+  padding: 1rem 2rem;
+}
+
+.program-label p {
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.program-label h2 {
+  font-weight: 400;
+}
+
+.fee-list {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.fee {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  margin-bottom: 1rem;
+}
+
+.fee label {
+  font-size: 16px;
+  margin: auto 2rem;
+  font-weight: 500;
+}
+
+.input-control.gray {
+  background-color: var(--light);
+}
+
+.input-with-currency {
+  position: relative;
+}
+
+.input-with-currency .input-control {
+  font-size: 16px;
+  padding-left: 4rem;
+  margin-bottom: 0;
+}
+
+.input-with-currency .currency {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 1rem;
+  font-size: 16px;
+  color: gray;
+}
+
+.edit-btn-group {
+  display: flex;
+  justify-content: end;
+  margin: 2rem 1rem;
+  gap: 1rem;
+}
+
+.btn,
+.btn-outline {
+  font-size: 16px;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+}
+
+.btn {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn.positive {
+  background-color: var(--positive);
+}
+
+.btn:hover {
+  filter: brightness(120%);
+}
+
+.btn-outline {
+  border: 2px solid var(--primary);
+  background-color: transparent;
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  color: var(--primary);
+}
+
+.btn-outline.gray {
+  border: 2px solid gray;
+  color: gray;
+}
+
+.btn-outline.gray:hover {
+  color: white;
+  background-color: gray;
+}
+
+#cancel-fee-btn,
+#save-fee-btn {
+  display: none;
 }
