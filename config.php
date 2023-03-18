@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'root';
 $password = '';
-$dbname = '';
+$dbname = 'sia_sms';
 $charset = 'utf8mb4';
 
 

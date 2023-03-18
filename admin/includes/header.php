@@ -1,3 +1,10 @@
+<?php
+require '../config.php';
+session_start();
+if (!isset($_SESSION["user"])) {
+  header("Location: ./index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,10 +51,10 @@
 
     <div class="header-user">
       <div class="user-account">
-        <a href="" class="username">
-          <p>Juan Dela Cruz</p>
+        <a href="#" class="username">
+          <p><?= $_SESSION["user"]["full_name"] ?></p>
         </a>
-        <a href="" class="logout">Logout</a>
+        <a href="./logout.php" class="logout">Logout</a>
       </div>
       <img src="../assets/profile-placeholder.jpg" alt="" class="display-photo">
     </div>
