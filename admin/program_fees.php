@@ -10,35 +10,18 @@ require_once  './includes/header.php';
       <div class="card-header">
         <div class="input-with-icon">
           <i class="bi bi-search"></i>
-          <input type="text" class="input-control search" placeholder="Search">
+          <input type="text" class="input-control search" placeholder="Search" id="program-search">
         </div>
       </div>
       <div class="card-body">
         <ul class="card-list" id="program-list">
           <li><a href="" class="active">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="" class="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="" class="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="" class="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="" class="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="" class="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
-          <li><a href="">Bachelor of Science in Information Technology</a></li>
+          <li><a href="" class="">Bachelor of Science in Computer Science</a></li>
+          <li><a href="" class="">Bachelor of Science in Information Systems</a></li>
+          <li><a href="" class="">Bachelor of Science in Civil Engineering</a></li>
+          <li><a href="" class="">Bachelor of Science in Architecture</a></li>
+          <li><a href="" class="">Bachelor of Science in Education</a></li>
+
         </ul>
       </div>
     </div>

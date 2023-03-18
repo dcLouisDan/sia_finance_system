@@ -18,3 +18,20 @@ navMenuBtns.map((btn) => {
     btn.querySelector(".bi").classList.toggle("active");
   });
 });
+
+const programSearchInput = document.getElementById("program-search");
+const programList = Array.from(
+  document.getElementById("program-list").children
+);
+
+programSearchInput.addEventListener("keyup", (e) => {
+  let key = e.target.value.toLowerCase();
+  programList.forEach((program) => {
+    let itemName = program.textContent;
+    if (itemName.toLowerCase().indexOf(key) != -1) {
+      program.style.display = "block";
+    } else {
+      program.style.display = "none";
+    }
+  });
+});
