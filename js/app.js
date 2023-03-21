@@ -1,69 +1,78 @@
-const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-const URLArray = document.URL.split("/");
-const currentFile = URLArray[URLArray.length - 1];
-navLinks.map((link) => {
-  link.classList.remove("active");
-  var href = link.getAttribute("href");
-  if (href === currentFile) {
-    link.classList.toggle("active");
-  }
-});
-
-const navMenuBtns = Array.from(document.querySelectorAll(".nav-menu-btn"));
-
-navMenuBtns.map((btn) => {
-  btn.addEventListener("click", (e) => {
-    btn.classList.toggle("active");
-    btn.nextElementSibling.classList.toggle("active");
-    btn.querySelector(".bi").classList.toggle("active");
-  });
-});
-
-//Search Program List
-const programSearchInput = document.getElementById("program-search");
-const programList = Array.from(
-  document.getElementById("program-list").children
-);
-
-programSearchInput.addEventListener("keyup", (e) => {
-  let key = e.target.value.toLowerCase();
-  programList.forEach((program) => {
-    let itemName = program.textContent;
-    if (itemName.toLowerCase().indexOf(key) != -1) {
-      program.style.display = "block";
-    } else {
-      program.style.display = "none";
+try {
+  const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+  const URLArray = document.URL.split("/");
+  const currentFile = URLArray[URLArray.length - 1];
+  navLinks.map((link) => {
+    link.classList.remove("active");
+    var href = link.getAttribute("href");
+    if (href === currentFile) {
+      link.classList.toggle("active");
     }
   });
-});
 
-//Unlock Fee Inputs
-const editFeesBtn = document.getElementById("edit-fee-btn");
-const saveFeesBtn = document.getElementById("save-fee-btn");
-const cancelFeesBtn = document.getElementById("cancel-fee-btn");
-const feeInputs = Array.from(
-  document.getElementById("fee-list").querySelectorAll("input")
-);
-console.log(feeInputs);
-function unlockInputs() {
-  editFeesBtn.style.display = "none";
-  saveFeesBtn.style.display = "block";
-  cancelFeesBtn.style.display = "block";
-  feeInputs.forEach((input) => {
-    input.previousElementSibling.style.color = "var(--primary)";
-    input.disabled = false;
+  const navMenuBtns = Array.from(document.querySelectorAll(".nav-menu-btn"));
+
+  navMenuBtns.map((btn) => {
+    btn.addEventListener("click", (e) => {
+      btn.classList.toggle("active");
+      btn.nextElementSibling.classList.toggle("active");
+      btn.querySelector(".bi").classList.toggle("active");
+    });
   });
-}
+} catch {}
 
-function lockInputs() {
-  editFeesBtn.style.display = "block";
-  saveFeesBtn.style.display = "none";
-  cancelFeesBtn.style.display = "none";
-  feeInputs.forEach((input) => {
-    input.previousElementSibling.style.color = "gray";
-    input.disabled = true;
+try {
+  //Search Program List
+  const programSearchInput = document.getElementById("program-search");
+  const programList = Array.from(
+    document.getElementById("program-list").children
+  );
+
+  programSearchInput.addEventListener("keyup", (e) => {
+    let key = e.target.value.toLowerCase();
+    programList.forEach((program) => {
+      let itemName = program.textContent;
+      if (itemName.toLowerCase().indexOf(key) != -1) {
+        program.style.display = "block";
+      } else {
+        program.style.display = "none";
+      }
+    });
   });
-}
+} catch {}
 
-editFeesBtn.addEventListener("click", unlockInputs);
-cancelFeesBtn.addEventListener("click", lockInputs);
+try {
+  //Unlock Inputs
+  const editBtn = document.getElementById("edit-btn");
+  const saveBtn = document.getElementById("save-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const inputList = Array.from(
+    document.getElementById("input-list").querySelectorAll("input")
+  );
+  function unlockInputs() {
+    editBtn.style.display = "none";
+    saveBtn.style.display = "block";
+    cancelBtn.style.display = "block";
+    inputList.forEach((input) => {
+      if (input.previousElementSibling) {
+        input.previousElementSibling.style.color = "var(--primary)";
+      }
+      input.disabled = false;
+    });
+  }
+
+  function lockInputs() {
+    editBtn.style.display = "block";
+    saveBtn.style.display = "none";
+    cancelBtn.style.display = "none";
+    inputList.forEach((input) => {
+      if (input.previousElementSibling) {
+        input.previousElementSibling.style.color = "gray";
+      }
+      input.disabled = true;
+    });
+  }
+
+  editBtn.addEventListener("click", unlockInputs);
+  cancelBtn.addEventListener("click", lockInputs);
+} catch {}

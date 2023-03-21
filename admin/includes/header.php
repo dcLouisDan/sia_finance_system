@@ -52,7 +52,7 @@ if (!isset($_SESSION["user"])) {
 
     <div class="header-user">
       <div class="user-account">
-        <a href="#" class="username">
+        <a href="profile.php" class="username">
           <p><?= $_SESSION["user"]["full_name"] ?></p>
         </a>
         <a href="./logout.php" class="logout">Logout</a>

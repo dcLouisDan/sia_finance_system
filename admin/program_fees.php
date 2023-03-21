@@ -46,7 +46,7 @@ if (isset($_GET["id"])) {
         </div>
         <form action="../app/fee_update.php" method="post">
           <input type="number" value="<?= $_GET["id"] ?>" name="program_id" hidden>
-          <div class="fee-list" id="fee-list">
+          <div class="input-list" id="input-list">
             <div class="fee">
               <label for="">Tuition Fee (per unit)</label>
               <div class="input-with-currency">
@@ -105,9 +105,9 @@ if (isset($_GET["id"])) {
             </div>
           </div>
           <div class="edit-btn-group">
-            <button type="button" class="btn-outline gray" id="cancel-fee-btn">Cancel</button>
-            <button type="submit" class="btn positive" id="save-fee-btn">Save Changes</button>
-            <button type="button" class="btn" id="edit-fee-btn">Edit Fees</button>
+            <button type="button" class="btn-outline gray" id="cancel-btn">Cancel</button>
+            <button type="submit" class="btn positive" id="save-btn">Save Changes</button>
+            <button type="button" class="btn" id="edit-btn">Edit Fees</button>
           </div>
         </form>
       </div>

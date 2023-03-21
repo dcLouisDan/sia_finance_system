@@ -333,11 +333,17 @@ main {
   background-color: var(--background);
   border-radius: 10px;
   height: fit-content;
+  overflow: hidden;
 }
 
 .card-header {
   padding: 1rem;
   border-bottom: 2px solid var(--light);
+}
+
+.bg-primary {
+  color: white;
+  background-color: var(--primary);
 }
 
 .card-body {
@@ -407,7 +413,7 @@ main {
   font-weight: 400;
 }
 
-.fee-list {
+.input-list {
   width: 100%;
   max-width: 1000px;
 }
@@ -494,11 +500,42 @@ main {
   background-color: gray;
 }
 
-#cancel-fee-btn,
-#save-fee-btn {
+#cancel-btn,
+#save-btn {
   display: none;
 }
-
+.btn-sm {
+  font-size: 14px;
+  padding: 0.25rem 0.5rem;
+}
 input:disabled {
   color: gray;
+}
+
+.card-body.profile {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 3fr;
+}
+
+.user-info {
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.profile-picture img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-photo-container {
+  display: grid;
+  place-items: center;
+}
+
+.profile-photo-container:hover {
 }
