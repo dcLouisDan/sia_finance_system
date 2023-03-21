@@ -57,7 +57,7 @@ if (!isset($_SESSION["user"])) {
         </a>
         <a href="./logout.php" class="logout">Logout</a>
       </div>
-      <img src="../assets/profile-placeholder.jpg" alt="" class="display-photo">
+      <img srcset="<?= $_SESSION["user"]["profile_photo"] ?>" src="../assets/profile-placeholder.jpg" alt="" class="display-photo">
     </div>
   </header>
 

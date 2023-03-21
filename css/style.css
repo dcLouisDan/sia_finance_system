@@ -95,6 +95,7 @@ body {
 
 .display-photo {
   height: 50px;
+  width: 50px;
   object-fit: fill;
   border-radius: 50%;
 }
