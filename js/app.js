@@ -82,3 +82,19 @@ try {
   editBtn.addEventListener("click", unlockInputs);
   cancelBtn.addEventListener("click", lockInputs);
 } catch {}
+
+try {
+  const changeDpForm = document.getElementById("change-dp-form");
+  const changeDpBtn = document.getElementById("change-dp-btn");
+  const canelDpBtn = document.getElementById("cancel-dp-btn");
+
+  changeDpBtn.addEventListener("click", () => {
+    changeDpForm.style.display = "block";
+    changeDpBtn.style.display = "none";
+  });
+
+  canelDpBtn.addEventListener("click", () => {
+    changeDpForm.style.display = "none";
+    changeDpBtn.style.display = "block";
+  });
+} catch (error) {}

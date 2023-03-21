@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 18, 2023 at 01:29 PM
+-- Generation Time: Mar 21, 2023 at 12:44 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,7 +46,7 @@ CREATE TABLE `tbl_fee_struc` (
 --
 
 INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
-(1, 1, '1.00', '2.00', '3.00', '4.00', '5.00', '6.00', '7.00', '8.00', '2023-03-18 20:27:13'),
+(1, 1, '100.00', '200.00', '300.00', '400.00', '500.00', '600.00', '700.00', '800.00', '2023-03-21 13:38:02'),
 (2, 2, '8.00', '7.00', '6.00', '5.00', '4.00', '3.00', '2.00', '1.00', '2023-03-18 20:27:37'),
 (3, 3, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2023-03-17 18:54:13');
 
@@ -72,7 +72,7 @@ CREATE TABLE `tbl_finance_users` (
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '12345', '', 0, '2023-03-17 18:56:14');
+(1, 'John', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/John64199826745c73.76670441.jpg', 0, '2023-03-17 18:56:14');
 
 --
 -- Triggers `tbl_finance_users`
