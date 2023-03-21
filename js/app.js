@@ -1,7 +1,13 @@
 try {
-  const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+  const mainNavLinks = Array.from(document.querySelectorAll(".nav-link"));
   const URLArray = document.URL.split("/");
-  const currentFile = URLArray[URLArray.length - 1];
+  let currentFile = URLArray[URLArray.length - 1];
+  if (currentFile.includes("?")) {
+    currentFile = currentFile.slice(0, currentFile.indexOf("?"));
+  }
+  const subNavLinks = Array.from(document.querySelectorAll(".nav-menu li a "));
+  const navLinks = mainNavLinks.concat(subNavLinks);
+
   navLinks.map((link) => {
     link.classList.remove("active");
     var href = link.getAttribute("href");

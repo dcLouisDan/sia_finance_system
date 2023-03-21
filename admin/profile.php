@@ -14,7 +14,8 @@ require_once  './includes/header.php';
         <picture class="profile-picture">
           <img srcset="<?= $_SESSION["user"]["profile_photo"] ?>" src="../assets/profile-placeholder.jpg" alt="" class="">
         </picture>
-        <button type="button" class="btn btn-sm" id="edit-btn">Change Profile Photo</button>
+        <!-- <input type="file" class="input-control"> -->
+        <button type="button" class="btn btn-sm">Change Profile Photo</button>
       </div>
       <form action="../app/user_info_update.php" method="post">
         <div class="user-info" id="input-list">

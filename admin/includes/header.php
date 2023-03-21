@@ -53,7 +53,7 @@ if (!isset($_SESSION["user"])) {
     <div class="header-user">
       <div class="user-account">
         <a href="profile.php" class="username">
-          <p><?= $_SESSION["user"]["full_name"] ?></p>
+          <p><?= $_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"] ?></p>
         </a>
         <a href="./logout.php" class="logout">Logout</a>
       </div>
@@ -69,6 +69,11 @@ if (!isset($_SESSION["user"])) {
         <li>
           <a class="nav-link" href="dashboard.php">
             Dashboard
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="profile.php">
+            User Profile
           </a>
         </li>
       </ul>
@@ -92,9 +97,9 @@ if (!isset($_SESSION["user"])) {
           </button>
 
           <ul class="nav-menu">
-            <li><a href="">Process Payment</a></li>
+            <li><a href="process_payment.php">Process Payment</a></li>
             <li><a href="">Payment History</a></li>
-            <li><a href="program_fees.php">Manage Program Fees</a></li>
+            <li><a href="program_fees.php" class="active">Manage Program Fees</a></li>
           </ul>
         </li>
       </ul>

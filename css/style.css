@@ -226,7 +226,8 @@ ul {
 .sidebar .nav-menu-btn:hover,
 .sidebar .nav-menu-btn.active,
 .sidebar .nav-link.active,
-.nav-menu li a:hover {
+.nav-menu li a:hover,
+.nav-menu li a.active {
   background-color: white;
 }
 
@@ -526,16 +527,16 @@ input:disabled {
 }
 
 .profile-picture img {
-  height: 250px;
-  width: 250px;
+  height: 200px;
+  width: 200px;
   object-fit: cover;
   border-radius: 50%;
 }
 
 .profile-photo-container {
-  display: grid;
-  place-items: center;
-}
-
-.profile-photo-container:hover {
+  padding-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
 }
