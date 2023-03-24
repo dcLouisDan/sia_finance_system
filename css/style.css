@@ -339,6 +339,10 @@ main {
   margin-bottom: 1rem;
 }
 
+.h-100 {
+  height: 100%;
+}
+
 .card-header {
   padding: 1rem;
   border-bottom: 2px solid var(--light);
@@ -404,6 +408,21 @@ main {
 
 .card-list li {
   border-bottom: 2px solid var(--light);
+}
+
+.empty-card {
+  color: var(--secondary);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+}
+
+.empty-card .bi {
+  font-size: 50px;
 }
 
 .program-label {
