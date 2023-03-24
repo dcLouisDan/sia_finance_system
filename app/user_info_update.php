@@ -19,6 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       $_SESSION["user"]["first_name"] = $first_name;
       $_SESSION["user"]["last_name"] = $last_name;
       $_SESSION["user"]["email"] = $email;
+
+      logAction("Updated personal information", $pdo);
+
+
       $folder = $_SESSION["folder"];
       header("Location: ../$folder/profile.php");
       clearPostInputs(["first_name", "last_name", "email"]);

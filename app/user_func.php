@@ -11,6 +11,7 @@ function loginFinanceUser(string $email, string $password, int $access_lvl, stri
       $row['date_created'] = date_parse($row['date_created']);
       $_SESSION['user'] = $row;
       $_SESSION["folder"] = $folder;
+      logAction("Login", $pdo);
       clearPostInputs(['email', 'password']);
       header("Location: ./dashboard.php");
       exit;

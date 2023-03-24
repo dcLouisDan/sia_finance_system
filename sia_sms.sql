@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2023 at 12:44 PM
+-- Generation Time: Mar 24, 2023 at 02:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,9 +46,36 @@ CREATE TABLE `tbl_fee_struc` (
 --
 
 INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
-(1, 1, '100.00', '200.00', '300.00', '400.00', '500.00', '600.00', '700.00', '800.00', '2023-03-21 13:38:02'),
+(1, 1, '100.00', '200.00', '300.00', '400.00', '500.00', '100.00', '250.00', '100.00', '2023-03-24 21:48:35'),
 (2, 2, '8.00', '7.00', '6.00', '5.00', '4.00', '3.00', '2.00', '1.00', '2023-03-18 20:27:37'),
 (3, 3, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2023-03-17 18:54:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_finance_audit_log`
+--
+
+CREATE TABLE `tbl_finance_audit_log` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `action_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `action_desc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_finance_audit_log`
+--
+
+INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_desc`) VALUES
+(1, 1, '2023-03-24 21:10:13', 'Login'),
+(2, 1, '2023-03-24 21:42:49', 'Updated personal information'),
+(3, 1, '2023-03-24 21:43:14', 'Updated profile photo.'),
+(4, 1, '2023-03-24 21:47:47', 'Login'),
+(5, 1, '2023-03-24 21:47:49', 'Logout'),
+(6, 1, '2023-03-24 21:48:04', 'Login'),
+(7, 1, '2023-03-24 21:48:35', 'Updated fee structure of Program ID #1'),
+(8, 1, '2023-03-24 21:48:59', 'Updated profile photo.');
 
 -- --------------------------------------------------------
 
@@ -72,7 +99,7 @@ CREATE TABLE `tbl_finance_users` (
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'John', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/John64199826745c73.76670441.jpg', 0, '2023-03-17 18:56:14');
+(1, 'John', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/John641daa4b8f9351.98352420.jpg', 0, '2023-03-17 18:56:14');
 
 --
 -- Triggers `tbl_finance_users`
@@ -126,6 +153,13 @@ ALTER TABLE `tbl_fee_struc`
   ADD UNIQUE KEY `program_id` (`program_id`);
 
 --
+-- Indexes for table `tbl_finance_audit_log`
+--
+ALTER TABLE `tbl_finance_audit_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `audit user` (`user_id`);
+
+--
 -- Indexes for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
@@ -148,6 +182,12 @@ ALTER TABLE `tbl_fee_struc`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tbl_finance_audit_log`
+--
+ALTER TABLE `tbl_finance_audit_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
@@ -168,6 +208,12 @@ ALTER TABLE `tbl_programs`
 --
 ALTER TABLE `tbl_fee_struc`
   ADD CONSTRAINT `Program ID` FOREIGN KEY (`program_id`) REFERENCES `tbl_programs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_finance_audit_log`
+--
+ALTER TABLE `tbl_finance_audit_log`
+  ADD CONSTRAINT `audit user` FOREIGN KEY (`user_id`) REFERENCES `tbl_finance_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

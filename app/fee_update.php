@@ -20,6 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $params = [$tuition_fee, $misc_fee, $registration_fee, $library_fee, $laboratory_fee, $guidance_fee, $computer_fee, $athletic_fee, $program_id];
 
     if ($stmt->execute($params)) {
+      logAction("Updated fee structure of Program ID #$program_id", $pdo);
+
       $folder = $_SESSION["folder"];
       header("Location: ../$folder/program_fees.php?id=$program_id");
       clearPostInputs(["program_id", "tuition_fee", "misc_fee", "registration_fee", "library_fee", "laboratory_fee", "guidance_fee", "computer_fee", "athletic_fee"]);

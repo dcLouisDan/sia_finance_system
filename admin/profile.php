@@ -1,10 +1,13 @@
 <?php
 $page_title = 'My Profile';
 require_once  './includes/header.php';
+
+$auditLog = fetchUserAuditLog($pdo);
 ?>
 
 <!-- Main Content -->
 <main>
+  <!-- Profile Card -->
   <div class="card">
     <div class="card-header">
       <h4>User Information</h4>
@@ -45,6 +48,36 @@ require_once  './includes/header.php';
           <button type="button" class="btn" id="edit-btn">Edit User Information</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h4>User History Log</h4>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <th>Date</th>
+            <th>Time</th>
+            <th style="width:70%">Action</th>
+          </thead>
+          <tbody>
+            <?php
+            foreach ($auditLog as $log) {
+            ?>
+              <tr>
+                <td><?= date("F d, Y", strtotime($log["action_date"])) ?></td>
+                <td><?= date("h:i:s A", strtotime($log["action_date"])) ?></td>
+                <td><?= $log["action_desc"] ?></td>
+              </tr>
+            <?php
+            }
+            ?>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </main>

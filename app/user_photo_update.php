@@ -34,6 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $stmt = $pdo->prepare("UPDATE tbl_finance_users 
         SET profile_photo = ? WHERE id = ?");
         if ($stmt->execute([$img_upload_path, $id])) {
+          logAction("Updated profile photo.", $pdo);
+
           $_SESSION["user"]["profile_photo"] = $img_upload_path;
           header("Location: ../$folder/profile.php");
           exit;
