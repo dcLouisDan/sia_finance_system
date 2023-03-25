@@ -81,15 +81,9 @@ if (!isset($_SESSION["user"])) {
       <h5>Student Fees</h5>
       <ul>
         <li>
-          <button type="button" class="nav-menu-btn" href="">
-            <i class="bi bi-caret-down-fill"></i>Students
-          </button>
-
-          <ul class="nav-menu">
-            <li><a href="">Link 1</a></li>
-            <li><a href="">Link 2</a></li>
-            <li><a href="">Link 3</a></li>
-          </ul>
+          <a class="nav-link" href="students.php">
+            Student Records
+          </a>
         </li>
         <li>
           <button type="button" class="nav-menu-btn" href="">

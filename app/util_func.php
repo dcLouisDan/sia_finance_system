@@ -40,7 +40,7 @@ function logAction(string $desc, $pdo)
 function fetchUserAuditLog($pdo)
 {
   $user_id = $_SESSION["user"]["id"];
-  $sql = "SELECT * FROM `tbl_finance_audit_log` WHERE user_id = ?";
+  $sql = "SELECT * FROM `tbl_finance_audit_log` WHERE user_id = ? ORDER BY id DESC";
   $stmt = $pdo->prepare($sql);
   $stmt->execute([$user_id]);
   if ($stmt->rowCount() > 0) {

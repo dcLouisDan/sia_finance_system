@@ -7,7 +7,9 @@
   --positive: rgb(24, 133, 24);
 }
 
-* {
+*,
+*::before,
+*::after {
   font-family: Poppins, Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -32,6 +34,42 @@ input {
   -moz-appearance: none;
   appearance: none;
   outline: none;
+}
+
+input[type="radio"] {
+  appearance: default;
+  font-size: 18px;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
+  transform: translateY(0.08em);
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--primary);
+}
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.radio-control {
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  white-space: nowrap;
 }
 
 a {
@@ -378,8 +416,12 @@ main {
 .input-control.search {
   background-color: var(--light);
   font-size: 18px;
-  padding: 0.75rem 1rem 0.75rem 3rem;
+  padding: 0.75rem 1rem;
   margin: 0;
+}
+
+.input-with-icon .input-control.search {
+  padding-left: 3rem;
 }
 
 .card-list {
@@ -436,6 +478,10 @@ main {
 }
 
 .program-label h2 {
+  font-weight: 400;
+}
+
+.program-label h4 {
   font-weight: 400;
 }
 
@@ -624,4 +670,22 @@ tbody tr:hover {
 
 .card-body.p-0 {
   padding: 0;
+}
+
+#user-log {
+  height: fit-content;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.filter-group *,
+.filter-group .input-control {
+  font-size: 16px;
 }

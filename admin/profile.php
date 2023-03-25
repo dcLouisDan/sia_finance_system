@@ -55,7 +55,7 @@ $auditLog = fetchUserAuditLog($pdo);
     <div class="card-header">
       <h4>User History Log</h4>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0" id="user-log">
       <div class="table-responsive">
         <table>
           <thead>
