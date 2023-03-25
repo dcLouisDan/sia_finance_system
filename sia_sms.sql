@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2023 at 02:51 PM
+-- Generation Time: Mar 25, 2023 at 06:56 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,9 +46,9 @@ CREATE TABLE `tbl_fee_struc` (
 --
 
 INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
-(1, 1, '100.00', '200.00', '300.00', '400.00', '500.00', '100.00', '250.00', '100.00', '2023-03-24 21:48:35'),
-(2, 2, '8.00', '7.00', '6.00', '5.00', '4.00', '3.00', '2.00', '1.00', '2023-03-18 20:27:37'),
-(3, 3, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '2023-03-17 18:54:13');
+(1, 1, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16'),
+(2, 2, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16'),
+(3, 3, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,10 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (5, 1, '2023-03-24 21:47:49', 'Logout'),
 (6, 1, '2023-03-24 21:48:04', 'Login'),
 (7, 1, '2023-03-24 21:48:35', 'Updated fee structure of Program ID #1'),
-(8, 1, '2023-03-24 21:48:59', 'Updated profile photo.');
+(8, 1, '2023-03-24 21:48:59', 'Updated profile photo.'),
+(9, 1, '2023-03-25 10:32:55', 'Login'),
+(10, 1, '2023-03-25 11:47:16', 'Updated fee structure of all College Programs'),
+(11, 1, '2023-03-25 11:49:33', 'Updated personal information');
 
 -- --------------------------------------------------------
 
@@ -99,7 +102,7 @@ CREATE TABLE `tbl_finance_users` (
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'John', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/John641daa4b8f9351.98352420.jpg', 0, '2023-03-17 18:56:14');
+(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/John641daa4b8f9351.98352420.jpg', 0, '2023-03-17 18:56:14');
 
 --
 -- Triggers `tbl_finance_users`
@@ -141,6 +144,49 @@ CREATE TRIGGER `update_fee_struc` AFTER INSERT ON `tbl_programs` FOR EACH ROW IN
 $$
 DELIMITER ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_semester`
+--
+
+CREATE TABLE `tbl_semester` (
+  `id` int(11) NOT NULL,
+  `sem_num` varchar(10) NOT NULL,
+  `start_year` int(11) NOT NULL,
+  `end_year` int(11) NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_students`
+--
+
+CREATE TABLE `tbl_students` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `middle_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_student_course`
+--
+
+CREATE TABLE `tbl_student_course` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `program_id` int(11) NOT NULL,
+  `sem_id` int(11) NOT NULL,
+  `units` int(11) NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
@@ -172,6 +218,26 @@ ALTER TABLE `tbl_programs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_semester`
+--
+ALTER TABLE `tbl_semester`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_students`
+--
+ALTER TABLE `tbl_students`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_student_course`
+--
+ALTER TABLE `tbl_student_course`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student id` (`student_id`),
+  ADD KEY `program` (`program_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -185,7 +251,7 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
@@ -198,6 +264,24 @@ ALTER TABLE `tbl_finance_users`
 --
 ALTER TABLE `tbl_programs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_semester`
+--
+ALTER TABLE `tbl_semester`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_students`
+--
+ALTER TABLE `tbl_students`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_student_course`
+--
+ALTER TABLE `tbl_student_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -214,6 +298,13 @@ ALTER TABLE `tbl_fee_struc`
 --
 ALTER TABLE `tbl_finance_audit_log`
   ADD CONSTRAINT `audit user` FOREIGN KEY (`user_id`) REFERENCES `tbl_finance_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_student_course`
+--
+ALTER TABLE `tbl_student_course`
+  ADD CONSTRAINT `program` FOREIGN KEY (`program_id`) REFERENCES `tbl_programs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student id` FOREIGN KEY (`student_id`) REFERENCES `tbl_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
