@@ -98,3 +98,85 @@ try {
     changeDpBtn.style.display = "block";
   });
 } catch (error) {}
+
+try {
+  const searchStudNum = document.getElementById("searchStudNum");
+  const searchStudName = document.getElementById("searchStudName");
+  const searchStudProgram = document.getElementById("searchStudProgram");
+  const studentRows = Array.from(
+    document.getElementById("studentRows").children
+  );
+
+  console.log(studentRows);
+
+  searchStudNum.addEventListener("keyup", (e) => {
+    let numKey = e.target.value;
+
+    studentRows.forEach((row) => {
+      let itemName = row.querySelector("[data-field='studNum']").textContent;
+      if (itemName.toLowerCase().indexOf(numKey) != -1) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  });
+  searchStudName.addEventListener("keyup", (e) => {
+    let nameKey = e.target.value;
+
+    studentRows.forEach((row) => {
+      let itemName = row.querySelector("[data-field='studName']").textContent;
+      if (itemName.toLowerCase().indexOf(nameKey) != -1) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  });
+  searchStudProgram.addEventListener("keyup", (e) => {
+    let progKey = e.target.value;
+
+    studentRows.forEach((row) => {
+      let itemName = row.querySelector(
+        "[data-field='studProgram']"
+      ).textContent;
+      if (itemName.toLowerCase().indexOf(progKey) != -1) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  });
+
+  const radAll = document.getElementById("radAll");
+  const radPaid = document.getElementById("radPaid");
+  const radUnpaid = document.getElementById("radUnpaid");
+  const feeRadFilter = document.getElementById("feeRadFilter");
+
+  feeRadFilter.addEventListener("click", () => {
+    const noBal = "Php 0.00";
+    if (radPaid.checked) {
+      studentRows.forEach((row) => {
+        let balance = row.querySelector("[data-field='studBal']").textContent;
+        if (balance == noBal) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    } else if (radUnpaid.checked) {
+      studentRows.forEach((row) => {
+        let balance = row.querySelector("[data-field='studBal']").textContent;
+        if (balance != noBal) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    } else if (radAll.checked) {
+      studentRows.forEach((row) => {
+        row.style.display = "";
+      });
+    }
+  });
+} catch (error) {}

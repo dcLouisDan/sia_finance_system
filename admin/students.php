@@ -12,17 +12,17 @@ require_once './includes/header.php'
     <div class="card-header">
       <div class="filter-group">
         <h4>Search and Filter</h4>
-        <div class="filter-group">
+        <div class="filter-group" id="feeRadFilter">
           <label for="all" class="radio-control">
-            <input type="radio" name="show" id="all" checked>
+            <input type="radio" name="show" id="radAll" checked>
             Show All
           </label>
           <label for="paid" class="radio-control">
-            <input type="radio" name="show" id="paid">
+            <input type="radio" name="show" id="radPaid">
             Paid Accounts
           </label>
           <label for="unpaid" class="radio-control">
-            <input type="radio" name="show" id="unpaid">
+            <input type="radio" name="show" id="radUnpaid">
             Unpaid Accounts
           </label>
         </div>
@@ -30,11 +30,9 @@ require_once './includes/header.php'
     </div>
     <div class="card-body">
       <div class="filter-group">
-        <input type="text" class="input-control search" placeholder="Student Number" id="">
-        <input type="text" class="input-control search" placeholder="Last Name" id="">
-        <input type="text" class="input-control search" placeholder="First Name" id="">
-        <input type="text" class="input-control search" placeholder="Middle Name" id="">
-        <input type="text" class="input-control search" placeholder="Program" id="">
+        <input type="number" class="input-control search" placeholder="Student Number" id="searchStudNum">
+        <input type="text" class="input-control search" placeholder="Name" id="searchStudName">
+        <input type="text" class="input-control search" placeholder="Program" id="searchStudProgram">
       </div>
 
     </div>
@@ -48,22 +46,53 @@ require_once './includes/header.php'
         <table>
           <thead>
             <th>No.</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
+            <th>Name</th>
             <th>Program</th>
             <th>Amount Paid</th>
             <th>Remaining Balance</th>
           </thead>
-          <tbody>
+          <tbody id="studentRows">
             <tr>
-              <td>1</td>
-              <td>Garcia</td>
-              <td>Jake</td>
-              <td>Perez</td>
-              <td>Bachelor of Science in Information Technology</td>
-              <td>Php 8,123.50</td>
-              <td>Php 0.00</td>
+              <td data-field="studNum">1</td>
+              <td data-field="studName">Garcia, Jake Perez</td>
+              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
+              <td data-field="studPaid">Php 8,123.50</td>
+              <td data-field="studBal">Php 0.00</td>
+            </tr>
+            <tr>
+              <td data-field="studNum">2</td>
+              <td data-field="studName">Dela Cruz, Maria Gomez</td>
+              <td data-field="studProgram">Bachelor of Science in Computer Science</td>
+              <td data-field="studPaid">Php 0.00</td>
+              <td data-field="studBal">Php 8,123.50</td>
+            </tr>
+            <tr>
+              <td data-field="studNum">3</td>
+              <td data-field="studName">Padilla, Mark John Javier</td>
+              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
+              <td data-field="studPaid">Php 3,000.00</td>
+              <td data-field="studBal">Php 5,123.50</td>
+            </tr>
+            <tr>
+              <td data-field="studNum">1</td>
+              <td data-field="studName">Garcia, Jake Pereq</td>
+              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
+              <td data-field="studPaid">Php 8,123.50</td>
+              <td data-field="studBal">Php 0.00</td>
+            </tr>
+            <tr>
+              <td data-field="studNum">2</td>
+              <td data-field="studName">Dela Cruz, Maria Gomez</td>
+              <td data-field="studProgram">Bachelor of Science in Computer Science</td>
+              <td data-field="studPaid">Php 0.00</td>
+              <td data-field="studBal">Php 8,123.50</td>
+            </tr>
+            <tr>
+              <td data-field="studNum">3</td>
+              <td data-field="studName">Padilla, Mark John Javier</td>
+              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
+              <td data-field="studPaid">Php 3,000.00</td>
+              <td data-field="studBal">Php 5,123.50</td>
             </tr>
           </tbody>
         </table>
