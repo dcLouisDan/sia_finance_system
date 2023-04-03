@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 25, 2023 at 06:56 AM
+-- Generation Time: Apr 03, 2023 at 09:18 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,61 @@ SET time_zone = "+00:00";
 --
 -- Database: `sia_sms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `student_course_amount_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `student_course_amount_view` (
+`student_id` int(11)
+,`student_course_id` int(11)
+,`last_name` varchar(150)
+,`first_name` varchar(150)
+,`middle_name` varchar(150)
+,`program_name` varchar(255)
+,`amount` decimal(15,2)
+,`remaining_balance` decimal(15,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `student_course_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `student_course_view` (
+`id` int(11)
+,`student_course_id` int(11)
+,`last_name` varchar(150)
+,`first_name` varchar(150)
+,`middle_name` varchar(150)
+,`program_name` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_fees`
+--
+
+CREATE TABLE `tbl_fees` (
+  `id` int(11) NOT NULL,
+  `student_course_id` int(11) NOT NULL,
+  `amount` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `remaining_balance` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `record_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_fees`
+--
+
+INSERT INTO `tbl_fees` (`id`, `student_course_id`, `amount`, `remaining_balance`, `record_date`) VALUES
+(1, 1, '5950.00', '5950.00', '2023-04-03 13:05:38'),
+(2, 2, '5950.00', '5950.00', '2023-04-03 15:15:28'),
+(3, 3, '4850.00', '4850.00', '2023-04-03 15:15:28');
 
 -- --------------------------------------------------------
 
@@ -78,7 +133,10 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (8, 1, '2023-03-24 21:48:59', 'Updated profile photo.'),
 (9, 1, '2023-03-25 10:32:55', 'Login'),
 (10, 1, '2023-03-25 11:47:16', 'Updated fee structure of all College Programs'),
-(11, 1, '2023-03-25 11:49:33', 'Updated personal information');
+(11, 1, '2023-03-25 11:49:33', 'Updated personal information'),
+(12, 1, '2023-03-26 19:14:28', 'Login'),
+(13, 1, '2023-04-03 11:25:23', 'Login'),
+(14, 1, '2023-04-03 15:18:28', 'Logout');
 
 -- --------------------------------------------------------
 
@@ -113,6 +171,21 @@ CREATE TRIGGER `insert_total_fee` AFTER INSERT ON `tbl_finance_users` FOR EACH R
     WHERE id = NEW.id
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_payments`
+--
+
+CREATE TABLE `tbl_payments` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `fee_id` int(11) NOT NULL,
+  `amount_paid` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `payment_method` int(11) NOT NULL,
+  `payment_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -158,6 +231,14 @@ CREATE TABLE `tbl_semester` (
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_semester`
+--
+
+INSERT INTO `tbl_semester` (`id`, `sem_num`, `start_year`, `end_year`, `date_created`) VALUES
+(1, '1', 2022, 2023, '2023-04-03 11:16:13'),
+(2, '2', 2022, 2023, '2023-04-03 11:16:36');
+
 -- --------------------------------------------------------
 
 --
@@ -171,6 +252,15 @@ CREATE TABLE `tbl_students` (
   `last_name` varchar(150) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_students`
+--
+
+INSERT INTO `tbl_students` (`id`, `first_name`, `middle_name`, `last_name`, `date_added`) VALUES
+(1, 'Walter', 'Hartwell', 'White', '2023-04-03 11:17:07'),
+(2, 'James', 'Morgan', 'McGill', '2023-04-03 15:12:20'),
+(3, 'Jesse', 'Bruce', 'Pinkman', '2023-04-03 15:12:37');
 
 -- --------------------------------------------------------
 
@@ -188,8 +278,42 @@ CREATE TABLE `tbl_student_course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `tbl_student_course`
+--
+
+INSERT INTO `tbl_student_course` (`id`, `student_id`, `program_id`, `sem_id`, `units`, `date_created`) VALUES
+(1, 1, 1, 1, 21, '2023-04-03 11:18:12'),
+(2, 2, 3, 1, 21, '2023-04-03 15:14:38'),
+(3, 3, 2, 1, 16, '2023-04-03 15:14:59');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `student_course_amount_view`
+--
+DROP TABLE IF EXISTS `student_course_amount_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_amount_view`  AS SELECT `student_course_view`.`id` AS `student_id`, `student_course_view`.`student_course_id` AS `student_course_id`, `student_course_view`.`last_name` AS `last_name`, `student_course_view`.`first_name` AS `first_name`, `student_course_view`.`middle_name` AS `middle_name`, `student_course_view`.`program_name` AS `program_name`, `tbl_fees`.`amount` AS `amount`, `tbl_fees`.`remaining_balance` AS `remaining_balance` FROM (`student_course_view` left join `tbl_fees` on(`student_course_view`.`student_course_id` = `tbl_fees`.`student_course_id`))  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `student_course_view`
+--
+DROP TABLE IF EXISTS `student_course_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_view`  AS SELECT `tbl_students`.`id` AS `id`, `tbl_student_course`.`id` AS `student_course_id`, `tbl_students`.`last_name` AS `last_name`, `tbl_students`.`first_name` AS `first_name`, `tbl_students`.`middle_name` AS `middle_name`, `tbl_programs`.`program_name` AS `program_name` FROM ((`tbl_students` left join `tbl_student_course` on(`tbl_students`.`id` = `tbl_student_course`.`student_id`)) left join `tbl_programs` on(`tbl_student_course`.`program_id` = `tbl_programs`.`id`))  ;
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_fees`
+--
+ALTER TABLE `tbl_fees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fee studcour id` (`student_course_id`);
 
 --
 -- Indexes for table `tbl_fee_struc`
@@ -209,6 +333,12 @@ ALTER TABLE `tbl_finance_audit_log`
 -- Indexes for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_payments`
+--
+ALTER TABLE `tbl_payments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -235,11 +365,18 @@ ALTER TABLE `tbl_students`
 ALTER TABLE `tbl_student_course`
   ADD PRIMARY KEY (`id`),
   ADD KEY `student id` (`student_id`),
-  ADD KEY `program` (`program_id`);
+  ADD KEY `program` (`program_id`),
+  ADD KEY `cor sem id` (`sem_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `tbl_fees`
+--
+ALTER TABLE `tbl_fees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_fee_struc`
@@ -251,13 +388,19 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_payments`
+--
+ALTER TABLE `tbl_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_programs`
@@ -269,23 +412,29 @@ ALTER TABLE `tbl_programs`
 -- AUTO_INCREMENT for table `tbl_semester`
 --
 ALTER TABLE `tbl_semester`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_students`
 --
 ALTER TABLE `tbl_students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_course`
 --
 ALTER TABLE `tbl_student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_fees`
+--
+ALTER TABLE `tbl_fees`
+  ADD CONSTRAINT `fee studcour id` FOREIGN KEY (`student_course_id`) REFERENCES `tbl_student_course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_fee_struc`
@@ -303,6 +452,7 @@ ALTER TABLE `tbl_finance_audit_log`
 -- Constraints for table `tbl_student_course`
 --
 ALTER TABLE `tbl_student_course`
+  ADD CONSTRAINT `cor sem id` FOREIGN KEY (`sem_id`) REFERENCES `tbl_semester` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `program` FOREIGN KEY (`program_id`) REFERENCES `tbl_programs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `student id` FOREIGN KEY (`student_id`) REFERENCES `tbl_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
