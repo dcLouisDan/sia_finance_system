@@ -3,7 +3,9 @@ require '../config.php';
 $page_title = 'Students';
 
 
-require_once './includes/header.php'
+require_once './includes/header.php';
+require_once '../app/fee_func.php';
+$student_records = fetchAll("student_course_amount_view", $pdo);
 ?>
 
 <!-- Main Content -->
@@ -48,52 +50,24 @@ require_once './includes/header.php'
             <th>No.</th>
             <th>Name</th>
             <th>Program</th>
-            <th>Amount Paid</th>
+            <th>Amount</th>
             <th>Remaining Balance</th>
           </thead>
           <tbody id="studentRows">
-            <tr>
-              <td data-field="studNum">1</td>
-              <td data-field="studName">Garcia, Jake Perez</td>
-              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
-              <td data-field="studPaid">Php 8,123.50</td>
-              <td data-field="studBal">Php 0.00</td>
-            </tr>
-            <tr>
-              <td data-field="studNum">2</td>
-              <td data-field="studName">Dela Cruz, Maria Gomez</td>
-              <td data-field="studProgram">Bachelor of Science in Computer Science</td>
-              <td data-field="studPaid">Php 0.00</td>
-              <td data-field="studBal">Php 8,123.50</td>
-            </tr>
-            <tr>
-              <td data-field="studNum">3</td>
-              <td data-field="studName">Padilla, Mark John Javier</td>
-              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
-              <td data-field="studPaid">Php 3,000.00</td>
-              <td data-field="studBal">Php 5,123.50</td>
-            </tr>
-            <tr>
-              <td data-field="studNum">1</td>
-              <td data-field="studName">Garcia, Jake Pereq</td>
-              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
-              <td data-field="studPaid">Php 8,123.50</td>
-              <td data-field="studBal">Php 0.00</td>
-            </tr>
-            <tr>
-              <td data-field="studNum">2</td>
-              <td data-field="studName">Dela Cruz, Maria Gomez</td>
-              <td data-field="studProgram">Bachelor of Science in Computer Science</td>
-              <td data-field="studPaid">Php 0.00</td>
-              <td data-field="studBal">Php 8,123.50</td>
-            </tr>
-            <tr>
-              <td data-field="studNum">3</td>
-              <td data-field="studName">Padilla, Mark John Javier</td>
-              <td data-field="studProgram">Bachelor of Science in Information Technology</td>
-              <td data-field="studPaid">Php 3,000.00</td>
-              <td data-field="studBal">Php 5,123.50</td>
-            </tr>
+            <?php
+            foreach ($student_records as $student) {
+              generateStudentCollegeBill($student["student_id"], 1, $pdo);
+            ?>
+              <tr>
+                <td data-field="studNum"><?= $student['student_id'] ?></td>
+                <td data-field="studName"><?= $student['last_name'] . ", " . $student['first_name'] . " " . $student["middle_name"] ?></td>
+                <td data-field="studProgram"><?= ucwords(strtolower($student['program_name'])) ?></td>
+                <td data-field="studAmount">Php <?= $student['amount'] ?></td>
+                <td data-field="studBal">Php <?= $student['remaining_balance'] ?></td>
+              </tr>
+            <?php
+            }
+            ?>
           </tbody>
         </table>
       </div>
