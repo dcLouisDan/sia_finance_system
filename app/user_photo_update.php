@@ -37,23 +37,31 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
           logAction("Updated profile photo.", $pdo);
 
           $_SESSION["user"]["profile_photo"] = $img_upload_path;
+          $_SESSION["alert"] = "Profile Photo updated successfuly.";
           header("Location: ../$folder/profile.php");
           exit;
         } else {
-          echo "<script>alert('Something Went Wrong!')</script>";
+          $folder = $_SESSION["folder"];
+          $_SESSION["alert"] = "Something went wrong.";
+          header("Location: ../$folder/profile.php");
+          exit;
         }
       } else {
-        echo "<script>alert('Unsupported File Type!')</script>";
-
+        $folder = $_SESSION["folder"];
+        $_SESSION["alert"] = "Unsupported file type.";
         header("Location: ../$folder/profile.php");
         exit;
       }
     }
   } else {
-    echo "<script>alert('Something went wrong')</script>";
+    $folder = $_SESSION["folder"];
+    $_SESSION["alert"] = "Something went wrong.";
     header("Location: ../$folder/profile.php");
     exit;
   }
 } else {
-  echo "<script>alert('Something went wrong')</script>";
+  $folder = $_SESSION["folder"];
+  $_SESSION["alert"] = "Something went wrong.";
+  header("Location: ../$folder/profile.php");
+  exit;
 }

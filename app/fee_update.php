@@ -25,14 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       $folder = $_SESSION["folder"];
       header("Location: ../$folder/program_fees.php?id=$program_id");
       clearPostInputs(["program_id", "tuition_fee", "misc_fee", "registration_fee", "library_fee", "laboratory_fee", "guidance_fee", "computer_fee", "athletic_fee"]);
-      echo "<script>alert('Success')</script>";
+      $_SESSION["alert"] = "Fee structure updated successfuly.";
       exit;
     } else {
-      echo "<script>alert('Something went wrong')</script>";
+      $folder = $_SESSION["folder"];
+      $_SESSION["alert"] = "Something went wrong.";
+      header("Location: ../$folder/program_fees.php?id=$program_id");
+      exit;
     }
   } else {
-    echo "<script>alert('Something went wrong')</script>";
+    $folder = $_SESSION["folder"];
+    $_SESSION["alert"] = "Incomplete input.";
+    header("Location: ../$folder/program_fees.php?id=$program_id");
+    exit;
   }
 } else {
-  echo "<script>alert('Something went wrong')</script>";
+  $folder = $_SESSION["folder"];
+  $_SESSION["alert"] = "Something went wrong.";
+  header("Location: ../$folder/program_fees.php?id=$program_id");
+  exit;
 }

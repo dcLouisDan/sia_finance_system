@@ -16,9 +16,9 @@ function loginFinanceUser(string $email, string $password, int $access_lvl, stri
       header("Location: ./dashboard.php");
       exit;
     } else {
-      echo "<script>alert('Invalid username or password')</script>";
+      $_SESSION["alert"] = "Invalid username or password.";
     }
   } else {
-    echo "<script>alert('Empty username or password')</script>";
+    $_SESSION["alert"] = "Empty username or password.";
   }
 }

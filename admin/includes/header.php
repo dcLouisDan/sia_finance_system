@@ -23,8 +23,11 @@ if (!isset($_SESSION["user"])) {
 
   <!-- CSS -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/toastify.css">
+
 
   <!-- JS -->
+  <script defer src="../js/micromodal.min.js"></script>
   <script defer src="../js/app.js"></script>
 
   <!-- Bootstrap Icons -->

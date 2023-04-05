@@ -160,7 +160,7 @@ CREATE TABLE `tbl_finance_users` (
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/John641daa4b8f9351.98352420.jpg', 0, '2023-03-17 18:56:14');
+(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/Juan642d11932f81f6.72625293.png', 0, '2023-03-17 18:56:14');
 
 --
 -- Triggers `tbl_finance_users`

@@ -24,16 +24,25 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
 
       $folder = $_SESSION["folder"];
+      $_SESSION["alert"] = "User information successfuly updated.";
       header("Location: ../$folder/profile.php");
       clearPostInputs(["first_name", "last_name", "email"]);
-      echo "<script>alert('Success')</script>";
       exit;
     } else {
-      echo "<script>alert('Something went wrong')</script>";
+      $folder = $_SESSION["folder"];
+      $_SESSION["alert"] = "Something went wrong.";
+      header("Location: ../$folder/profile.php");
+      exit;
     }
   } else {
-    echo "<script>alert('Something went wrong')</script>";
+    $folder = $_SESSION["folder"];
+    $_SESSION["alert"] = "Incomplete input";
+    header("Location: ../$folder/profile.php");
+    exit;
   }
 } else {
-  echo "<script>alert('Something went wrong')</script>";
+  $folder = $_SESSION["folder"];
+  $_SESSION["alert"] = "Something went wrong.";
+  header("Location: ../$folder/profile.php");
+  exit;
 }

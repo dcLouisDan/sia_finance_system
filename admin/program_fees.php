@@ -3,7 +3,9 @@ $page_title = 'Manage Program Fees';
 require_once './includes/header.php';
 require_once '../app/fee_func.php';
 $programs = fetchAll('tbl_programs', $pdo);
+$getID = 0;
 if (isset($_GET["id"])) {
+  $getID = $_GET["id"];
   $item = fetchItem('tbl_programs', $_GET["id"], $pdo);
   $fees = fetchFeesOnProgram($_GET["id"], $pdo);
 }
@@ -27,7 +29,7 @@ if (isset($_GET["id"])) {
           <?php
           foreach ($programs as $program) {
           ?>
-            <li><a href='<?= "./program_fees.php?id=" . $program['id'] ?>' class="<?php echo ($_GET["id"] == $program['id']) ?  'active' : '' ?>">
+            <li><a href='<?= "./program_fees.php?id=" . $program['id'] ?>' class="<?php echo ($getID == $program['id']) ?  'active' : '' ?>">
                 <?= ucwords(strtolower($program['program_name'])); ?>
               </a></li>
           <?php

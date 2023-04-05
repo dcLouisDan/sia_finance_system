@@ -26,9 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   <!-- CSS -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/toastify.css">
 
   <!-- JS -->
-  <script defer src="../js/app.js"></script>
+  <script defer src="../js/micromodal.min.js"></script>
+  <script defer type="module" src="../js/app.js"></script>
 
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -59,6 +61,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       </form>
     </div>
   </div>
+
+  <script type="module">
+    import Toastify from "../js/toastify-es.js";
+
+    let sessionAlert = Toastify({
+      text: "<?= $_SESSION["alert"] ?>",
+      duration: 3000,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "var(--accent)",
+      },
+      offset: {
+        y: 30
+      },
+      onClick: function() {}, // Callback after click
+    });
+
+    <?php
+    if (isset($_SESSION["alert"])) {
+      echo "sessionAlert.showToast()";
+      unset($_SESSION["alert"]);
+    }
+    ?>
+  </script>
 </body>
 
 </html>
