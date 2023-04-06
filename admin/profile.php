@@ -8,7 +8,7 @@ $auditLog = fetchUserAuditLog($pdo);
 <!-- Main Content -->
 <main>
   <!-- Profile Card -->
-  <div class="card">
+  <div class="card fit">
     <div class="card-header">
       <h4>User Information</h4>
     </div>
@@ -51,7 +51,7 @@ $auditLog = fetchUserAuditLog($pdo);
     </div>
   </div>
 
-  <div class="card">
+  <div class="card fit">
     <div class="card-header">
       <h4>User History Log</h4>
     </div>

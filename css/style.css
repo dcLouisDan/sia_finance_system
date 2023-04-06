@@ -36,6 +36,10 @@ input {
   outline: none;
 }
 
+select {
+  border: none;
+}
+
 input[type="radio"] {
   appearance: default;
   font-size: 18px;
@@ -134,11 +138,11 @@ body {
 .display-photo {
   height: 50px;
   width: 50px;
-  object-fit: fill;
+  object-fit: cover;
   border-radius: 50%;
 }
 
-.user-account {
+.header-user .user-account {
   flex: 1;
   line-height: 1.2;
   text-align: right;
@@ -154,9 +158,10 @@ body {
 .user-account .logout {
   font-weight: 700;
   color: var(--accent);
+  margin: 0;
 }
 
-.user-account .logout:hover {
+.header-user .user-account .logout:hover {
   text-decoration: underline;
 }
 
@@ -363,18 +368,23 @@ main {
   background-color: white;
 }
 
-.program-fees {
+.program-fees,
+.user-list {
   display: grid;
-  grid-template-columns: 3fr 7fr;
+  grid-template-columns: 3fr 5fr;
   gap: 1rem;
 }
 
 .card {
   background-color: var(--background);
   border-radius: 10px;
-  height: fit-content;
+  height: 100%;
   overflow: hidden;
   margin-bottom: 1rem;
+}
+
+.card.fit {
+  height: fit-content;
 }
 
 .h-100 {
@@ -396,7 +406,7 @@ main {
 }
 
 .card-body {
-  height: fit-content;
+  height: 100%;
   padding: 1rem;
 }
 
@@ -426,7 +436,9 @@ main {
 
 .card-list {
   height: 750px;
-  overflow: scroll;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .card-list li a {
@@ -436,6 +448,24 @@ main {
   line-height: 1;
   text-align: center;
   padding: 1rem;
+}
+
+.card-list li a.user-list-item {
+  padding-left: 2rem;
+  display: flex;
+  text-align: left;
+  gap: 1rem;
+  justify-content: center;
+}
+.card-list li a.user-list-item .user-account {
+  flex: 1;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.card-list li a.user-list-item .user-account .username {
+  color: inherit;
 }
 
 .card-list li .active {
@@ -494,12 +524,17 @@ main {
   display: grid;
   grid-template-columns: 2fr 3fr;
   margin-bottom: 1rem;
+  align-items: center;
 }
 
 .fee label {
   font-size: 16px;
   margin: auto 2rem;
   font-weight: 500;
+}
+
+.fee .input-control {
+  margin-bottom: 0;
 }
 
 .input-control.gray {
@@ -688,4 +723,8 @@ tbody tr:hover {
 .filter-group *,
 .filter-group .input-control {
   font-size: 16px;
+}
+
+select.input-control {
+  cursor: pointer;
 }

@@ -4,6 +4,11 @@ require_once '../app/user_func.php';
 require_once '../app/util_func.php';
 session_start();
 
+if (isset($_SESSION["user"])) {
+  header("Location: dashboard.php");
+  exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   loginFinanceUser($_POST["email"], $_POST["password"],  0, 'admin', $pdo);
 }

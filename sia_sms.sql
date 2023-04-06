@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 03, 2023 at 09:18 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.1.6
+-- Host: 127.0.0.1
+-- Generation Time: Apr 06, 2023 at 08:56 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,7 +65,7 @@ CREATE TABLE `tbl_fees` (
   `amount` decimal(15,2) NOT NULL DEFAULT 0.00,
   `remaining_balance` decimal(15,2) NOT NULL DEFAULT 0.00,
   `record_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_fees`
@@ -94,7 +94,7 @@ CREATE TABLE `tbl_fee_struc` (
   `computer_fee` decimal(15,2) NOT NULL DEFAULT 0.00,
   `athletic_fee` decimal(15,2) NOT NULL DEFAULT 0.00,
   `updated_on` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_fee_struc`
@@ -116,7 +116,7 @@ CREATE TABLE `tbl_finance_audit_log` (
   `user_id` int(11) NOT NULL,
   `action_date` datetime NOT NULL DEFAULT current_timestamp(),
   `action_desc` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_finance_audit_log`
@@ -136,7 +136,33 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (11, 1, '2023-03-25 11:49:33', 'Updated personal information'),
 (12, 1, '2023-03-26 19:14:28', 'Login'),
 (13, 1, '2023-04-03 11:25:23', 'Login'),
-(14, 1, '2023-04-03 15:18:28', 'Logout');
+(14, 1, '2023-04-03 15:18:28', 'Logout'),
+(15, 1, '2023-04-05 01:23:46', 'Login'),
+(16, 1, '2023-04-05 02:03:13', 'Updated personal information'),
+(17, 1, '2023-04-05 02:03:44', 'Updated personal information'),
+(18, 1, '2023-04-05 02:04:23', 'Logout'),
+(19, 1, '2023-04-05 02:05:22', 'Login'),
+(20, 1, '2023-04-05 02:05:27', 'Updated personal information'),
+(21, 1, '2023-04-05 02:05:45', 'Updated personal information'),
+(22, 1, '2023-04-05 02:07:01', 'Updated personal information'),
+(23, 1, '2023-04-05 02:07:11', 'Updated personal information'),
+(24, 1, '2023-04-05 02:07:19', 'Updated personal information'),
+(25, 1, '2023-04-05 02:13:11', 'Updated profile photo.'),
+(26, 1, '2023-04-05 02:13:39', 'Updated profile photo.'),
+(27, 1, '2023-04-05 02:19:09', 'Updated fee structure of Program ID #1'),
+(28, 1, '2023-04-05 02:21:29', 'Logout'),
+(29, 1, '2023-04-05 22:11:52', 'Login'),
+(30, 1, '2023-04-06 00:12:28', 'Login'),
+(31, 1, '2023-04-06 01:13:23', 'Updated personal information'),
+(32, 1, '2023-04-06 02:23:54', 'New user: Gustavo Fring added to the system.'),
+(33, 1, '2023-04-06 02:32:07', 'New user: Gustavo Fring added to the system.'),
+(34, 1, '2023-04-06 02:37:11', 'Logout'),
+(35, 34, '2023-04-06 02:37:40', 'Login'),
+(36, 34, '2023-04-06 02:37:45', 'Logout'),
+(37, 34, '2023-04-06 02:37:56', 'Login'),
+(38, 34, '2023-04-06 02:39:39', 'Updated profile photo.'),
+(39, 34, '2023-04-06 02:45:01', 'Logout'),
+(40, 1, '2023-04-06 02:45:05', 'Login');
 
 -- --------------------------------------------------------
 
@@ -153,24 +179,15 @@ CREATE TABLE `tbl_finance_users` (
   `profile_photo` varchar(255) NOT NULL,
   `access_lvl` tinyint(1) NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_finance_users`
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '12345', '../uploads/profile_photos/Juan642d11932f81f6.72625293.png', 0, '2023-03-17 18:56:14');
-
---
--- Triggers `tbl_finance_users`
---
-DELIMITER $$
-CREATE TRIGGER `insert_total_fee` AFTER INSERT ON `tbl_finance_users` FOR EACH ROW UPDATE tbl_fee_struc
-    SET total = tuition_fee + lab_fee + misc_fee + registration_fee + library_fee + laboratory_fee + guidance_fee + computer_fee + athletic_fee
-    WHERE id = NEW.id
-$$
-DELIMITER ;
+(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '$2y$10$0HmzNm8ko6lniUpNH.u1ouSypHj84wDoCSuC.6lfRxUS6ZDJsagyO', '../uploads/profile_photos/Juan642d11932f81f6.72625293.png', 0, '2023-03-17 18:56:14'),
+(34, 'Gustavo', 'Fring', 'gus@gmail.com', '$2y$10$bO72GhlnIZ/Fix35nU0rSuRllONbZy7yA3.S92gmEAxKlgqZBp8AO', '../uploads/profile_photos/Gustavo642e692b9b2c75.45248743.jpeg', 0, '2023-04-06 02:32:07');
 
 -- --------------------------------------------------------
 
@@ -185,7 +202,7 @@ CREATE TABLE `tbl_payments` (
   `amount_paid` decimal(15,2) NOT NULL DEFAULT 0.00,
   `payment_method` int(11) NOT NULL,
   `payment_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -198,7 +215,7 @@ CREATE TABLE `tbl_programs` (
   `program_name` varchar(255) NOT NULL,
   `program_desc` text NOT NULL,
   `updated_on` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_programs`
@@ -229,7 +246,7 @@ CREATE TABLE `tbl_semester` (
   `start_year` int(11) NOT NULL,
   `end_year` int(11) NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_semester`
@@ -251,7 +268,7 @@ CREATE TABLE `tbl_students` (
   `middle_name` varchar(150) NOT NULL,
   `last_name` varchar(150) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_students`
@@ -275,7 +292,7 @@ CREATE TABLE `tbl_student_course` (
   `sem_id` int(11) NOT NULL,
   `units` int(11) NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_student_course`
@@ -388,13 +405,13 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbl_payments`

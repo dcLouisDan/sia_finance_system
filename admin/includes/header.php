@@ -79,6 +79,11 @@ if (!isset($_SESSION["user"])) {
             User Profile
           </a>
         </li>
+        <li>
+          <a class="nav-link" href="manage_users.php">
+            Manage Users
+          </a>
+        </li>
       </ul>
 
       <h5>Student Fees</h5>
