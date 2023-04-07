@@ -10,7 +10,7 @@ $student_records = fetchAll("student_course_amount_view", $pdo);
 
 <!-- Main Content -->
 <main>
-  <div class="card">
+  <div class="card fit">
     <div class="card-header">
       <div class="filter-group">
         <h4>Search and Filter</h4>
@@ -39,12 +39,12 @@ $student_records = fetchAll("student_course_amount_view", $pdo);
 
     </div>
   </div>
-  <div class="card">
+  <div class="card fit">
     <div class="card-header">
       <h4>Student Records</h4>
     </div>
     <div class="card-body p-0">
-      <div class="table-responsive">
+      <div class="table-responsive max-500">
         <table>
           <thead>
             <th>No.</th>
@@ -65,6 +65,7 @@ $student_records = fetchAll("student_course_amount_view", $pdo);
                 <td data-field="studAmount">Php <?= $student['amount'] ?></td>
                 <td data-field="studBal">Php <?= $student['remaining_balance'] ?></td>
               </tr>
+
             <?php
             }
             ?>

@@ -1,4 +1,17 @@
 try {
+  MicroModal.init({
+    onShow: (modal) => console.info(`${modal.id} is shown`), // [1]
+    onClose: (modal) => console.info(`${modal.id} is hidden`), // [2]
+    openTrigger: "data-custom-open", // [3]
+    closeTrigger: "data-micromodal-close", // [4]
+    disableScroll: true, // [5]
+    disableFocus: false, // [6]
+    awaitCloseAnimation: false, // [7]
+    debugMode: true, // [8]
+  });
+} catch {}
+
+try {
   const mainNavLinks = Array.from(document.querySelectorAll(".nav-link"));
   const URLArray = document.URL.split("/");
   let currentFile = URLArray[URLArray.length - 1];

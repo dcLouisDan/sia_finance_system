@@ -5,6 +5,30 @@ require_once  './includes/header.php';
 $auditLog = fetchUserAuditLog($pdo);
 ?>
 
+<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+      <header class="modal__header">
+        <h2 class="modal__title" id="modal-1-title">Change your Password</h2>
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      </header>
+      <form action="../app/user_password_update.php" method="post">
+        <div class="modal__content" id="modal-1-content">
+          <input type="password" class="input-control gray" placeholder="Enter your current password." name="old_password">
+          <input type="password" class="input-control gray" placeholder="Enter new password." name="new_password">
+          <input type="password" class="input-control gray" placeholder="Repeat new password." name="repeat_new_password">
+        </div>
+        <div class="modal__footer">
+          <button class="modal__btn modal__btn-primary">Save Changes</button>
+          <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">
+            Close
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- Main Content -->
 <main>
   <!-- Profile Card -->
@@ -26,6 +50,7 @@ $auditLog = fetchUserAuditLog($pdo);
           </div>
         </form>
         <button type="button" class="btn btn-sm" id="change-dp-btn">Change Profile Photo</button>
+        <button type="button" class="btn btn-sm" id="change-dp-btn" data-custom-open="modal-1">Change Password</button>
       </div>
       <form action="../app/user_info_update.php" method="post">
         <div class="user-info" id="input-list">
@@ -56,7 +81,7 @@ $auditLog = fetchUserAuditLog($pdo);
       <h4>User History Log</h4>
     </div>
     <div class="card-body p-0" id="user-log">
-      <div class="table-responsive">
+      <div class="">
         <table>
           <thead>
             <th>Date</th>

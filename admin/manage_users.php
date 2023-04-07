@@ -58,8 +58,8 @@ $access_role = array("Admin", "User",);
               <div class="fee">
                 <label for="">Access Level</label>
                 <select disabled name="access_lvl" class="input-control gray">
-                  <option value="0">Administrator</option>
-                  <option value="1">User</option>
+                  <option <?php echo ($user['access_lvl'] == 0) ?  'active' : '' ?> value="0">Administrator</option>
+                  <option <?php echo ($user['access_lvl'] == 1) ?  'active' : '' ?> value="1">User</option>
                 </select>
               </div>
               <div class="fee">
@@ -73,14 +73,6 @@ $access_role = array("Admin", "User",);
               <div class="fee">
                 <label for="email">Email:</label>
                 <input disabled required type="email" value="<?= $getUser['email'] ?>" class="input-control gray" name="email">
-              </div>
-              <div class="fee">
-                <label for="password">Password:</label>
-                <input disabled required type="password" class="input-control gray" name="password">
-              </div>
-              <div class="fee">
-                <label for="repeat_password">Repeat Password:</label>
-                <input disabled required type="password" class="input-control gray" name="repeat_password">
               </div>
 
             </div>

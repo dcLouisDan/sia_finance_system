@@ -23,6 +23,7 @@ if (!isset($_SESSION["user"])) {
 
   <!-- CSS -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/modal.css">
   <link rel="stylesheet" href="../css/toastify.css">
 
 
