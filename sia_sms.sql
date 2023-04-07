@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2023 at 08:56 AM
+-- Generation Time: Apr 07, 2023 at 07:31 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -157,12 +157,30 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (32, 1, '2023-04-06 02:23:54', 'New user: Gustavo Fring added to the system.'),
 (33, 1, '2023-04-06 02:32:07', 'New user: Gustavo Fring added to the system.'),
 (34, 1, '2023-04-06 02:37:11', 'Logout'),
-(35, 34, '2023-04-06 02:37:40', 'Login'),
-(36, 34, '2023-04-06 02:37:45', 'Logout'),
-(37, 34, '2023-04-06 02:37:56', 'Login'),
-(38, 34, '2023-04-06 02:39:39', 'Updated profile photo.'),
-(39, 34, '2023-04-06 02:45:01', 'Logout'),
-(40, 1, '2023-04-06 02:45:05', 'Login');
+(35, 2, '2023-04-06 02:37:40', 'Login'),
+(36, 2, '2023-04-06 02:37:45', 'Logout'),
+(37, 2, '2023-04-06 02:37:56', 'Login'),
+(38, 2, '2023-04-06 02:39:39', 'Updated profile photo.'),
+(39, 2, '2023-04-06 02:45:01', 'Logout'),
+(40, 1, '2023-04-06 02:45:05', 'Login'),
+(41, 1, '2023-04-07 11:00:39', 'Login'),
+(42, 1, '2023-04-07 12:23:36', 'Updated personal account password'),
+(43, 1, '2023-04-07 12:23:40', 'Logout'),
+(44, 2, '2023-04-07 12:24:44', 'Login'),
+(45, 2, '2023-04-07 12:24:54', 'Logout'),
+(46, 1, '2023-04-07 12:29:28', 'Login'),
+(47, 1, '2023-04-07 12:29:44', 'Updated personal account password'),
+(48, 1, '2023-04-07 12:29:46', 'Logout'),
+(49, 1, '2023-04-07 12:30:00', 'Login'),
+(50, 1, '2023-04-07 13:14:39', 'Updated user information of User: Gus Fring'),
+(51, 1, '2023-04-07 13:16:16', 'Updated user information of User: Gustavo Fring'),
+(52, 1, '2023-04-07 13:26:56', 'New user: Saul Goodman added to the system.'),
+(53, 1, '2023-04-07 13:27:04', 'Updated user information of User: Saul Goodman'),
+(54, 1, '2023-04-07 13:27:42', 'Deleted User:  '),
+(55, 1, '2023-04-07 13:30:23', 'New user: Saul Goodman added to the system.'),
+(56, 1, '2023-04-07 13:30:31', 'Deleted User:  '),
+(57, 1, '2023-04-07 13:31:06', 'New user: Saul Goodman added to the system.'),
+(58, 1, '2023-04-07 13:31:09', 'Deleted User: Saul Goodman');
 
 -- --------------------------------------------------------
 
@@ -186,8 +204,8 @@ CREATE TABLE `tbl_finance_users` (
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '$2y$10$0HmzNm8ko6lniUpNH.u1ouSypHj84wDoCSuC.6lfRxUS6ZDJsagyO', '../uploads/profile_photos/Juan642d11932f81f6.72625293.png', 0, '2023-03-17 18:56:14'),
-(34, 'Gustavo', 'Fring', 'gus@gmail.com', '$2y$10$bO72GhlnIZ/Fix35nU0rSuRllONbZy7yA3.S92gmEAxKlgqZBp8AO', '../uploads/profile_photos/Gustavo642e692b9b2c75.45248743.jpeg', 0, '2023-04-06 02:32:07');
+(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '$2y$10$TqZsxrjRG0Pl2ueZiws.LeWnCnSI1rago0afcFfTQTAs9q7JdONK6', '../uploads/profile_photos/Juan642d11932f81f6.72625293.png', 0, '2023-03-17 18:56:14'),
+(2, 'Gustavo', 'Fring', 'gus@gmail.com', '$2y$10$bO72GhlnIZ/Fix35nU0rSuRllONbZy7yA3.S92gmEAxKlgqZBp8AO', '../uploads/profile_photos/Gustavo642e692b9b2c75.45248743.jpeg', 0, '2023-04-06 02:32:07');
 
 -- --------------------------------------------------------
 
@@ -405,13 +423,13 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tbl_payments`

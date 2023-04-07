@@ -11,6 +11,33 @@ if (isset($_GET["id"])) {
 $access_role = array("Admin", "User",);
 ?>
 
+
+<!-- Delete User Modal -->
+<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+      <header class="modal__header">
+        <h2 class="modal__title" id="modal-1-title">Delete User</h2>
+        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+      </header>
+      <form action="../app/user_admin_delete.php" method="post">
+        <div class="modal__content" id="modal-1-content">
+          <input type="number" name="user_id" value="<?= $getUser["id"] ?>" hidden>
+          <input type="text" name="first_name" value="<?= $getUser["first_name"] ?>" hidden>
+          <input type="text" name="last_name" value="<?= $getUser["last_name"] ?>" hidden>
+          Are you sure you want to delete <?= $getUser["first_name"] . " " . $getUser["last_name"] ?> from the system?
+        </div>
+        <div class="modal__footer">
+          <button class="modal__btn modal__btn-primary">Delete User</button>
+          <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">
+            Close
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- Main Content -->
 <main>
   <div class="user-list">
@@ -53,13 +80,14 @@ $access_role = array("Admin", "User",);
               <img srcset="<?= $getUser["profile_photo"] ?>" src="../assets/profile-placeholder.jpg" alt="" class="">
             </picture>
           </div>
-          <form action="../app/user_add.php" method="post">
+          <form action="../app/user_admin_update.php" method="post">
+            <input type="number" value="<?= $getID ?>" name="user_id" hidden>
             <div class="input-list" id="input-list">
               <div class="fee">
                 <label for="">Access Level</label>
                 <select disabled name="access_lvl" class="input-control gray">
-                  <option <?php echo ($user['access_lvl'] == 0) ?  'active' : '' ?> value="0">Administrator</option>
-                  <option <?php echo ($user['access_lvl'] == 1) ?  'active' : '' ?> value="1">User</option>
+                  <option <?php echo ($getUser['access_lvl'] == 0) ?  'selected' : '' ?> value="0">Administrator</option>
+                  <option <?php echo ($getUser['access_lvl'] == 1) ?  'selected' : '' ?> value="1">User</option>
                 </select>
               </div>
               <div class="fee">
@@ -80,6 +108,7 @@ $access_role = array("Admin", "User",);
               <button type="button" class="btn-outline gray" id="cancel-btn">Cancel</button>
               <button type="submit" class="btn positive" id="save-btn">Save Changes</button>
               <button type="button" class="btn" id="edit-btn">Edit</button>
+              <button type="button" class="btn" data-custom-open="modal-1">Delete User</button>
             </div>
           </form>
         </div>

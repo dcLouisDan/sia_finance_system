@@ -66,7 +66,7 @@ try {
   const saveBtn = document.getElementById("save-btn");
   const cancelBtn = document.getElementById("cancel-btn");
   const inputList = Array.from(
-    document.getElementById("input-list").querySelectorAll("input")
+    document.getElementById("input-list").querySelectorAll(".input-control")
   );
   function unlockInputs() {
     editBtn.style.display = "none";
