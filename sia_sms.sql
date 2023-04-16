@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2023 at 07:31 AM
+-- Generation Time: Apr 16, 2023 at 02:03 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -51,6 +51,7 @@ CREATE TABLE `student_course_view` (
 ,`first_name` varchar(150)
 ,`middle_name` varchar(150)
 ,`program_name` varchar(255)
+,`units` int(11)
 );
 
 -- --------------------------------------------------------
@@ -72,7 +73,7 @@ CREATE TABLE `tbl_fees` (
 --
 
 INSERT INTO `tbl_fees` (`id`, `student_course_id`, `amount`, `remaining_balance`, `record_date`) VALUES
-(1, 1, '5950.00', '5950.00', '2023-04-03 13:05:38'),
+(1, 1, '5740.00', '5740.00', '2023-04-03 13:05:38'),
 (2, 2, '5950.00', '5950.00', '2023-04-03 15:15:28'),
 (3, 3, '4850.00', '4850.00', '2023-04-03 15:15:28');
 
@@ -101,7 +102,7 @@ CREATE TABLE `tbl_fee_struc` (
 --
 
 INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
-(1, 1, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16'),
+(1, 1, '210.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-04-08 12:58:18'),
 (2, 2, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16'),
 (3, 3, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16');
 
@@ -180,7 +181,19 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (55, 1, '2023-04-07 13:30:23', 'New user: Saul Goodman added to the system.'),
 (56, 1, '2023-04-07 13:30:31', 'Deleted User:  '),
 (57, 1, '2023-04-07 13:31:06', 'New user: Saul Goodman added to the system.'),
-(58, 1, '2023-04-07 13:31:09', 'Deleted User: Saul Goodman');
+(58, 1, '2023-04-07 13:31:09', 'Deleted User: Saul Goodman'),
+(59, 1, '2023-04-08 12:54:29', 'Login'),
+(60, 1, '2023-04-08 12:54:50', 'Updated personal information'),
+(61, 1, '2023-04-08 12:55:06', 'Updated profile photo.'),
+(62, 1, '2023-04-08 12:55:14', 'Updated profile photo.'),
+(63, 1, '2023-04-08 12:55:50', 'Updated personal account password'),
+(64, 1, '2023-04-08 12:56:32', 'New user: Saul Goodman added to the system.'),
+(65, 1, '2023-04-08 12:56:43', 'Updated user information of User: Jimmy Goodman'),
+(66, 1, '2023-04-08 12:56:53', 'Updated user information of User: Jimmy Goodman'),
+(67, 1, '2023-04-08 12:57:01', 'Deleted User: Jimmy Goodman'),
+(68, 1, '2023-04-08 12:58:18', 'Updated fee structure of Program ID #1'),
+(69, 1, '2023-04-08 12:58:44', 'Logout'),
+(70, 1, '2023-04-16 18:11:54', 'Login');
 
 -- --------------------------------------------------------
 
@@ -204,7 +217,7 @@ CREATE TABLE `tbl_finance_users` (
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '$2y$10$TqZsxrjRG0Pl2ueZiws.LeWnCnSI1rago0afcFfTQTAs9q7JdONK6', '../uploads/profile_photos/Juan642d11932f81f6.72625293.png', 0, '2023-03-17 18:56:14'),
+(1, 'John', 'Dela Cruz', 'jdc@gmail.com', '$2y$10$hMWJ2vpIbdMLv8whZyHzLuhQo4ynpLsw0tCBnGIYSehX5lGJVopt2', '../uploads/profile_photos/John6430f3b2aeab21.82500340.png', 0, '2023-03-17 18:56:14'),
 (2, 'Gustavo', 'Fring', 'gus@gmail.com', '$2y$10$bO72GhlnIZ/Fix35nU0rSuRllONbZy7yA3.S92gmEAxKlgqZBp8AO', '../uploads/profile_photos/Gustavo642e692b9b2c75.45248743.jpeg', 0, '2023-04-06 02:32:07');
 
 -- --------------------------------------------------------
@@ -337,7 +350,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `student_course_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_view`  AS SELECT `tbl_students`.`id` AS `id`, `tbl_student_course`.`id` AS `student_course_id`, `tbl_students`.`last_name` AS `last_name`, `tbl_students`.`first_name` AS `first_name`, `tbl_students`.`middle_name` AS `middle_name`, `tbl_programs`.`program_name` AS `program_name` FROM ((`tbl_students` left join `tbl_student_course` on(`tbl_students`.`id` = `tbl_student_course`.`student_id`)) left join `tbl_programs` on(`tbl_student_course`.`program_id` = `tbl_programs`.`id`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_view`  AS SELECT `tbl_students`.`id` AS `id`, `tbl_student_course`.`id` AS `student_course_id`, `tbl_students`.`last_name` AS `last_name`, `tbl_students`.`first_name` AS `first_name`, `tbl_students`.`middle_name` AS `middle_name`, `tbl_programs`.`program_name` AS `program_name`, `tbl_student_course`.`units` AS `units` FROM ((`tbl_students` left join `tbl_student_course` on(`tbl_students`.`id` = `tbl_student_course`.`student_id`)) left join `tbl_programs` on(`tbl_student_course`.`program_id` = `tbl_programs`.`id`))  ;
 
 --
 -- Indexes for dumped tables
@@ -423,13 +436,13 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbl_payments`

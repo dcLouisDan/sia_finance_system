@@ -692,6 +692,11 @@ td {
   padding: 1rem 2rem;
 }
 
+td a:hover,
+.card-header.with-btn a:hover {
+  color: var(--primary);
+}
+
 tbody tr {
   border-bottom: 1px solid var(--light);
 }
@@ -732,4 +737,35 @@ tbody tr:hover {
 
 select.input-control {
   cursor: pointer;
+}
+
+.info-item {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light);
+}
+
+.info-label {
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.info-item .info-label {
+  padding-left: 2rem;
+  border-bottom: 1px solid var(--light);
+}
+
+.info-text {
+  padding-top: 0.5rem;
+  font-size: var(--fontSizeNormal);
+  padding-left: 2rem;
+}
+
+.card-header.with-btn {
+  display: flex;
+  gap: 1rem;
+}
+
+.card-header.with-btn a {
+  color: var(--secondary);
+  font-size: var(--fontSizeNormal);
 }

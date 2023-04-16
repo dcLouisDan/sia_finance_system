@@ -60,7 +60,11 @@ $student_records = fetchAll("student_course_amount_view", $pdo);
             ?>
               <tr>
                 <td data-field="studNum"><?= $student['student_id'] ?></td>
-                <td data-field="studName"><?= $student['last_name'] . ", " . $student['first_name'] . " " . $student["middle_name"] ?></td>
+                <td data-field="studName">
+                  <a href="./student.php?id=<?= $student['student_id'] ?>">
+                    <?= $student['last_name'] . ", " . $student['first_name'] . " " . $student["middle_name"] ?>
+                  </a>
+                </td>
                 <td data-field="studProgram"><?= ucwords(strtolower($student['program_name'])) ?></td>
                 <td data-field="studAmount">Php <?= $student['amount'] ?></td>
                 <td data-field="studBal">Php <?= $student['remaining_balance'] ?></td>
