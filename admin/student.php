@@ -8,17 +8,20 @@ if (!isset($_GET["id"])) {
 }
 
 require_once '../app/fee_func.php';
+require_once '../app/payment_func.php';
 
 $student = fetchItem('student_course_view', $_GET["id"], $pdo);
 $student_course = fetchItem("tbl_student_course", $student["student_course_id"], $pdo);
 $programFees = fetchFeesOnProgram($student_course['program_id'], $pdo);
 $fee = fetchFeeOnStudentCourse($student_course['id'], $pdo);
+
+$payments = fetchStudentPaymentHistory($student['id'], $pdo);
 ?>
 
 <!-- Main Content -->
 <main>
   <div class="user-list">
-    <div class="card fit">
+    <div class="card">
       <div class="card-header with-btn">
         <a href="./students.php"><i class="bi bi-box-arrow-left"></i></a>
         <h4>Student Record</h4>
@@ -50,7 +53,7 @@ $fee = fetchFeeOnStudentCourse($student_course['id'], $pdo);
         </div>
       </div>
     </div>
-    <div class="card fit">
+    <div class="card">
       <div class="card-header">
         <h4>Fees Breakdown</h4>
       </div>
@@ -101,7 +104,41 @@ $fee = fetchFeeOnStudentCourse($student_course['id'], $pdo);
         </table>
       </div>
     </div>
-  </div>
+    <div class="card fit full-span">
+      <div class="card-header">
+        <h4>Payment History</h4>
+      </div>
+      <div class="card-body p-0" id="user-log">
+        <div class="">
+          <table>
+            <thead>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Amount Paid</th>
+              <th>Payment Method</th>
+            </thead>
+            <tbody>
+              <?php
+              if (!isset($payments)) {
+                echo "<tr><td colspan='4' class='empty-record'>There are no records to display.</td></tr>";
+              } else {
+                foreach ($payments as $payment) {
+              ?>
+                  <tr>
+                    <td><?= date("F d, Y", strtotime($payment["payment_date"])) ?></td>
+                    <td><?= date("h:i:s A", strtotime($payment["payment_date"])) ?></td>
+                    <td>Php <?= $payment["amount_paid"] ?></td>
+                    <td>Php <?= $payment["payment_method"] ?></td>
+                  </tr>
+              <?php
+                }
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 </main>
 
 <?php

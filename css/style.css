@@ -376,6 +376,10 @@ main {
   gap: 1rem;
 }
 
+.full-span {
+  grid-column: 1 / 3;
+}
+
 .card {
   background-color: var(--background);
   border-radius: 10px;
@@ -705,6 +709,12 @@ tbody tr:hover {
   background-color: var(--light);
   filter: brightness(103%);
 }
+
+.empty-record {
+  text-align: center;
+  color: var(--accent);
+}
+
 .table-responsive {
   overflow-y: scroll;
 }
