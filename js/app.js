@@ -135,7 +135,7 @@ try {
     });
   });
   searchStudName.addEventListener("keyup", (e) => {
-    let nameKey = e.target.value;
+    let nameKey = e.target.value.toLowerCase();
 
     studentRows.forEach((row) => {
       let itemName = row.querySelector("[data-field='studName']").textContent;

@@ -106,7 +106,12 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
     </div>
     <div class="card fit full-span">
       <div class="card-header">
-        <h4>Payment History</h4>
+        <div class="filter-group">
+          <h4>Payment History</h4>
+          <div class="filter-group">
+            <a href="process_payment.php?id=<?= $student['id'] ?>" class="btn">Add Payment</a>
+          </div>
+        </div>
       </div>
       <div class="card-body p-0" id="user-log">
         <div class="">
