@@ -1,5 +1,7 @@
 <?php
 
+$methods = array('Cash', 'Check');
+
 function fetchStudentPaymentHistory($id, $pdo)
 {
   $sql = "SELECT * FROM tbl_payments WHERE student_id = ?";

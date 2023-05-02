@@ -91,7 +91,7 @@ if (!isset($_SESSION["user"])) {
       <ul>
         <li>
           <a class="nav-link" href="students.php">
-            Student Records
+            Students
           </a>
         </li>
         <li>
@@ -100,7 +100,7 @@ if (!isset($_SESSION["user"])) {
           </button>
 
           <ul class="nav-menu">
-            <li><a href="process_payment.php">Process Payment</a></li>
+            <!-- <li><a href="process_payment.php">Process Payment</a></li> -->
             <li><a href="">Payment History</a></li>
             <li><a href="program_fees.php" class="active">Manage Program Fees</a></li>
           </ul>

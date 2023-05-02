@@ -30,6 +30,14 @@ function fetchItem(string $table, $id, $pdo)
   return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
 }
 
+function fetchItemOnColumn(string $table, string $column, $id, $pdo)
+{
+  $sql = "SELECT * FROM $table WHERE $column = ?";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([$id]);
+  return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
+}
+
 function logAction(string $desc, $pdo)
 {
   $user_id = $_SESSION["user"]["id"];

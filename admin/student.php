@@ -14,6 +14,7 @@ $student = fetchItem('student_course_view', $_GET["id"], $pdo);
 $student_course = fetchItem("tbl_student_course", $student["student_course_id"], $pdo);
 $programFees = fetchFeesOnProgram($student_course['program_id'], $pdo);
 $fee = fetchFeeOnStudentCourse($student_course['id'], $pdo);
+generateStudentCollegeBill($student["id"], 1, $pdo);
 
 $payments = fetchStudentPaymentHistory($student['id'], $pdo);
 ?>
@@ -133,7 +134,7 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
                     <td><?= date("F d, Y", strtotime($payment["payment_date"])) ?></td>
                     <td><?= date("h:i:s A", strtotime($payment["payment_date"])) ?></td>
                     <td>Php <?= $payment["amount_paid"] ?></td>
-                    <td>Php <?= $payment["payment_method"] ?></td>
+                    <td><?= $methods[$payment["payment_method"]] ?></td>
                   </tr>
               <?php
                 }

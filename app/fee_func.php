@@ -40,7 +40,15 @@ function generateStudentCollegeBill($student_id, $sem_id, $pdo)
   $studentFee = fetchFeeOnStudentCourse($studentCourse["id"], $pdo);
 
   if ($studentFee) {
-    if (fetchAllPaymentsOnFee($studentFee['id'], $pdo)) {
+    if ($payments = fetchAllPaymentsOnFee($studentFee['id'], $pdo)) {
+      $balance = $totalFee;
+      foreach ($payments as $payment) {
+        $balance -= $payment['amount_paid'];
+      }
+      $sql = "UPDATE tbl_fees SET amount = ?, remaining_balance = ? WHERE id = ?";
+      $stmt = $pdo->prepare($sql);
+      $stmt->execute([$totalFee, $balance, $studentFee['id']]);
+      $studentFee = fetchFeeOnStudentCourse($studentCourse["id"], $pdo);
     } else {
       $sql = "UPDATE tbl_fees SET amount = ?, remaining_balance = ? WHERE id = ?";
       $stmt = $pdo->prepare($sql);
