@@ -5,7 +5,12 @@ $page_title = 'Students';
 
 require_once './includes/header.php';
 require_once '../app/fee_func.php';
-$student_records = fetchAll("student_course_amount_view", $pdo);
+
+$semList = fetchAll('tbl_semester', $pdo);
+
+$last_sem = fetchlastItem('tbl_semester', $pdo);
+$sem_id = (isset($_GET["sem_id"])) ? $_GET["sem_id"] : $last_sem['id'];
+$student_records = fetchStudentRecordsOnSem($sem_id, $pdo);
 ?>
 
 <!-- Main Content -->
@@ -41,7 +46,22 @@ $student_records = fetchAll("student_course_amount_view", $pdo);
   </div>
   <div class="card fit">
     <div class="card-header">
-      <h4>Student Records</h4>
+      <div class="filter-group">
+        <h4>Student Records</h4>
+        <form method="get" id="selectSubmit">
+          <select name="sem_id" class="input-control gray small" onchange="document.getElementById('selectSubmit').submit()">
+            <?php
+            foreach ($semList as $sem) {
+              if ($sem['id'] == $sem_id) {
+                echo "<option selected value='" . $sem['id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+              } else {
+                echo "<option value='" . $sem['id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+              }
+            }
+            ?>
+          </select>
+        </form>
+      </div>
     </div>
     <div class="card-body p-0">
       <div class="table-responsive max-500">
@@ -56,12 +76,12 @@ $student_records = fetchAll("student_course_amount_view", $pdo);
           <tbody id="studentRows">
             <?php
             foreach ($student_records as $student) {
-              generateStudentCollegeBill($student["student_id"], 1, $pdo);
+              generateStudentCollegeBill($student["student_id"], $sem_id, $pdo);
             ?>
               <tr>
                 <td data-field="studNum"><?= $student['student_id'] ?></td>
                 <td data-field="studName">
-                  <a href="./student.php?id=<?= $student['student_id'] ?>">
+                  <a href="./student.php?id=<?= $student['student_id'] ?>&sem_id=<?= $sem_id ?>">
                     <?= $student['last_name'] . ", " . $student['first_name'] . " " . $student["middle_name"] ?>
                   </a>
                 </td>

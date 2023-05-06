@@ -1,5 +1,16 @@
 <?php
 
+function getOrdinal($number)
+{
+  $suffix = array('th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th');
+  if ((($number % 100) >= 11) && (($number % 100) <= 13)) {
+    $ordinal = $number . 'th';
+  } else {
+    $ordinal = $number . $suffix[$number % 10];
+  }
+
+  return $ordinal;
+}
 
 function notEmpty($str)
 {
@@ -30,12 +41,29 @@ function fetchItem(string $table, $id, $pdo)
   return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
 }
 
+function fetchlastItem(string $table, $pdo)
+{
+  $sql = "SELECT * FROM $table ORDER BY id DESC LIMIT 1
+  ";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
+}
+
 function fetchItemOnColumn(string $table, string $column, $id, $pdo)
 {
   $sql = "SELECT * FROM $table WHERE $column = ?";
   $stmt = $pdo->prepare($sql);
   $stmt->execute([$id]);
   return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
+}
+
+function fetchAllItemsOnColumn(string $table, string $column, $id, $pdo)
+{
+  $sql = "SELECT * FROM $table WHERE $column = ?";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([$id]);
+  return ($stmt->rowCount() > 0) ? $stmt->fetchAll() : null;
 }
 
 function logAction(string $desc, $pdo)

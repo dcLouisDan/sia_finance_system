@@ -9,12 +9,16 @@ if (!isset($_GET["id"])) {
 
 require_once '../app/fee_func.php';
 require_once '../app/payment_func.php';
+$last_sem = fetchlastItem('tbl_semester', $pdo);
+$sem_id = (isset($_GET["sem_id"])) ? $_GET["sem_id"] : $last_sem['id'];
 
 $student = fetchItem('student_course_view', $_GET["id"], $pdo);
-$student_course = fetchItem("tbl_student_course", $student["student_course_id"], $pdo);
+$student_course = fetchStudentCourseOnSem($student['id'], $sem_id, $pdo);
 $programFees = fetchFeesOnProgram($student_course['program_id'], $pdo);
 $fee = fetchFeeOnStudentCourse($student_course['id'], $pdo);
-generateStudentCollegeBill($student["id"], 1, $pdo);
+$semList = fetchAllItemsOnColumn('student_semester_view', 'student_id', $student['id'], $pdo);
+
+generateStudentCollegeBill($student["id"], $sem_id, $pdo);
 
 $payments = fetchStudentPaymentHistory($student['id'], $pdo);
 ?>
@@ -50,13 +54,29 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
         </div>
         <div class="info-item">
           <p class="info-label">Number of Units:</p>
-          <p class="info-text"><?= $student['units'] ?></p>
+          <p class="info-text"><?= $student_course['units'] ?></p>
         </div>
       </div>
     </div>
     <div class="card">
       <div class="card-header">
-        <h4>Fees Breakdown</h4>
+        <div class="filter-group">
+          <h4>Fees Breakdown</h4>
+          <form method="get" id="studentSem" action="student.php">
+            <input type="number" name="id" value="<?= $student['id'] ?>" hidden>
+            <select name="sem_id" class="input-control gray small" onchange="document.getElementById('studentSem').submit()">
+              <?php
+              foreach ($semList as $sem) {
+                if ($sem['sem_id'] == $sem_id) {
+                  echo "<option selected value='" . $sem['sem_id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+                } else {
+                  echo "<option value='" . $sem['sem_id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+                }
+              }
+              ?>
+            </select>
+          </form>
+        </div>
       </div>
       <div class="card-body p-0">
         <table>
@@ -110,7 +130,7 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
         <div class="filter-group">
           <h4>Payment History</h4>
           <div class="filter-group">
-            <a href="process_payment.php?id=<?= $student['id'] ?>" class="btn">Add Payment</a>
+            <a href="process_payment.php?id=<?= $student['id'] ?>&sem_id=<?= $sem_id ?>" class="btn">Add Payment</a>
           </div>
         </div>
       </div>

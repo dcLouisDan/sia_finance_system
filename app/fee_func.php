@@ -7,6 +7,14 @@ function fetchFeesOnProgram($program_id, $pdo)
   return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
 }
 
+function fetchStudentRecordsOnSem($sem_id, $pdo)
+{
+  $sql = "SELECT * FROM student_course_amount_view WHERE sem_id = ?";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([$sem_id]);
+  return ($stmt->rowCount() > 0) ? $stmt->fetchAll() : null;
+}
+
 function fetchFeeOnStudentCourse($program_id, $pdo)
 {
   $sql = "SELECT * FROM tbl_fees WHERE student_course_id = ?";
@@ -41,18 +49,13 @@ function generateStudentCollegeBill($student_id, $sem_id, $pdo)
 
   if ($studentFee) {
     if ($payments = fetchAllPaymentsOnFee($studentFee['id'], $pdo)) {
-      $balance = $totalFee;
+      $balance = $studentFee['amount'];
       foreach ($payments as $payment) {
         $balance -= $payment['amount_paid'];
       }
       $sql = "UPDATE tbl_fees SET amount = ?, remaining_balance = ? WHERE id = ?";
       $stmt = $pdo->prepare($sql);
-      $stmt->execute([$totalFee, $balance, $studentFee['id']]);
-      $studentFee = fetchFeeOnStudentCourse($studentCourse["id"], $pdo);
-    } else {
-      $sql = "UPDATE tbl_fees SET amount = ?, remaining_balance = ? WHERE id = ?";
-      $stmt = $pdo->prepare($sql);
-      $stmt->execute([$totalFee, $totalFee, $studentFee['id']]);
+      $stmt->execute([$studentFee['amount'], $balance, $studentFee['id']]);
       $studentFee = fetchFeeOnStudentCourse($studentCourse["id"], $pdo);
     }
   } else {
