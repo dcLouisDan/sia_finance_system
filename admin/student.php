@@ -53,8 +53,16 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
           <p class="info-text"><?= ucwords(strtolower($student['program_name'])) ?></p>
         </div>
         <div class="info-item">
+          <p class="info-label">Year Level:</p>
+          <p class="info-text"><?= $student_course['year_lvl'] ?></p>
+        </div>
+        <div class="info-item">
           <p class="info-label">Number of Units:</p>
           <p class="info-text"><?= $student_course['units'] ?></p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Download:</p>
+          <p class="info-text"><a href="../app/account_pdf.php?id=<?= $student['id'] ?>&sem_id=<?= $sem_id ?>" class="btn">Statement of Account</a></p>
         </div>
       </div>
     </div>
@@ -81,6 +89,10 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
       <div class="card-body p-0">
         <table>
           <tbody>
+            <tr>
+              <td class="info-label">Fee ID:</td>
+              <td><?= $fee['id'] ?></td>
+            </tr>
             <tr>
               <td class="info-label">Tuition Fee (<?= $student['units'] ?> units)</td>
               <td>Php <?= number_format((float)$programFees['tuition_fee'] * $student['units'], 2, '.', ''); ?></td>
@@ -140,6 +152,7 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
             <thead>
               <th>Date</th>
               <th>Time</th>
+              <th>Fee ID</th>
               <th>Amount Paid</th>
               <th>Payment Method</th>
             </thead>
@@ -153,6 +166,7 @@ $payments = fetchStudentPaymentHistory($student['id'], $pdo);
                   <tr>
                     <td><?= date("F d, Y", strtotime($payment["payment_date"])) ?></td>
                     <td><?= date("h:i:s A", strtotime($payment["payment_date"])) ?></td>
+                    <td><?= $payment["fee_id"] ?></td>
                     <td>Php <?= $payment["amount_paid"] ?></td>
                     <td><?= $methods[$payment["payment_method"]] ?></td>
                   </tr>

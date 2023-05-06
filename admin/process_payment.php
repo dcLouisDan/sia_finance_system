@@ -2,16 +2,36 @@
 $page_title = 'Process Payment';
 require_once  './includes/header.php';
 require_once '../app/fee_func.php';
-$student = fetchItemOnColumn("student_course_amount_view", 'student_id', $_GET["id"], $pdo);
+$last_sem = fetchlastItem('tbl_semester', $pdo);
+$sem_id = (isset($_GET["sem_id"])) ? $_GET["sem_id"] : $last_sem['id'];
+$student = fetchOneStudentRecordOnSem($_GET["id"], $sem_id, $pdo);
 $fee = fetchFeeOnStudentCourse($student['student_course_id'], $pdo);
-generateStudentCollegeBill($student["student_id"], 1, $pdo);
+generateStudentCollegeBill($student["student_id"], $sem_id, $pdo);
+$semList = fetchAllItemsOnColumn('student_semester_view', 'student_id', $student['student_id'], $pdo);
+
 ?>
 
 <!-- Main Content -->
 <main>
   <div class="card fit">
     <div class="card-header">
-      <h4>Student Record</h4>
+      <div class="filter-group">
+        <h4>Student Records</h4>
+        <form method="get" id="studentSem">
+          <input type="number" name="id" value="<?= $student['student_id'] ?>" hidden>
+          <select name="sem_id" class="input-control gray small" onchange="document.getElementById('studentSem').submit()">
+            <?php
+            foreach ($semList as $sem) {
+              if ($sem['sem_id'] == $sem_id) {
+                echo "<option selected value='" . $sem['sem_id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+              } else {
+                echo "<option value='" . $sem['sem_id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+              }
+            }
+            ?>
+          </select>
+        </form>
+      </div>
     </div>
     <div class="card-body p-0">
       <div class="table-responsive max-500">
@@ -49,6 +69,7 @@ generateStudentCollegeBill($student["student_id"], 1, $pdo);
         <input type="number" value="<?= $fee['id'] ?>" name="fee_id" hidden>
         <input type="number" value="<?= $student['student_id'] ?>" name="student_id" hidden>
         <input type="number" value="<?= $student['remaining_balance'] ?>" name="balance" hidden>
+        <input type="number" value="<?= $sem_id ?>" name="sem_id" hidden>
         <div class="input-list">
           <div class="fee">
             <label for="">Payment Method:</label>

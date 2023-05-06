@@ -6,6 +6,7 @@ require_once '../config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   $fee_id = $_POST["fee_id"];
+  $sem_id = $_POST["sem_id"];
   $student_id = $_POST["student_id"];
   $payment_method = $_POST["payment_method"];
   $amount_paid = $_POST["amount_paid"];
@@ -34,13 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
     if ($stmt->execute($param)) {
       logAction("Php $amount_paid was paid for Fee No. $fee_id by Student NO. $student_id", $pdo);
-      generateStudentCollegeBill($student_id, 1, $pdo);
+      generateStudentCollegeBill($student_id, $sem_id, $pdo);
 
 
       $folder = $_SESSION["folder"];
       $_SESSION["alert"] = "Payment successfully recorded.";
       header("Location: ../$folder/student.php?id=$student_id");
-      clearPostInputs(["first_name", "last_name", "email"]);
+      clearPostInputs(["fee_id", "sem_id", "student_id", "payment_method", "amount_paid", "balance"]);
       exit;
     } else {
       $folder = $_SESSION["folder"];

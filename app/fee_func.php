@@ -14,6 +14,13 @@ function fetchStudentRecordsOnSem($sem_id, $pdo)
   $stmt->execute([$sem_id]);
   return ($stmt->rowCount() > 0) ? $stmt->fetchAll() : null;
 }
+function fetchOneStudentRecordOnSem($student_id, $sem_id, $pdo)
+{
+  $sql = "SELECT * FROM student_course_amount_view WHERE student_id = ? AND sem_id = ?";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([$student_id, $sem_id]);
+  return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
+}
 
 function fetchFeeOnStudentCourse($program_id, $pdo)
 {

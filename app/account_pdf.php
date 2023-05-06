@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../app/fee_func.php';
 require_once '../app/util_func.php';
 require_once '../app/payment_func.php';
@@ -17,7 +18,7 @@ $fee = fetchFeeOnStudentCourse($student_course['id'], $pdo);
 $sem = fetchItem('tbl_semester', $sem_id, $pdo);
 
 
-$payments = fetchStudentPaymentHistory($student['id'], $pdo);
+$payments = fetchStudentPaymentHistoryOnFee($student['id'], $fee['id'], $pdo);
 
 $html = '<!DOCTYPE html>
 <html lang="en">
@@ -107,7 +108,7 @@ $html = '<!DOCTYPE html>
     Student Name: <strong>' . $student['last_name'] . ", " . $student['first_name'] . " " . $student['middle_name'] . ' </strong>
   </td>
   <td>
-    Registration #: <strong>' . $student_course['id'] . ' </strong>
+    Year level: <strong>' . $student_course['year_lvl'] . ' </strong>
   </td>
 </tr>
 <tr>
@@ -115,7 +116,7 @@ $html = '<!DOCTYPE html>
     Student No: <strong>' . $student['id'] . ' </strong>
   </td>
   <td>
-    Academic Year & Term: <strong>' . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] . '</strong>
+    Academic Year & Term: <strong>' . getOrdinal($sem['sem_num']) . " Semester AY " . $sem['start_year'] . "-" . $sem['end_year'] . '</strong>
   </td>
 </tr>
 <tr>
@@ -129,6 +130,9 @@ $html = '<!DOCTYPE html>
 </table>
 <table>
 <tr>
+      <th colspan="2">Assessment</th>
+    </tr>
+<tr class="brd-top">
 <td>Tuition Fee (' . $student_course['units'] . ' units)</td>
       <td>Php ' . number_format((float)$programFees['tuition_fee'] * $student['units'], 2, '.', '') . '</td>
     </tr>
@@ -199,8 +203,6 @@ $html .= '    </tbody>
     
     </html>';
 
-echo $html;
-
 $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
 $options = $dompdf->getOptions();
@@ -211,4 +213,8 @@ $options->setChroot($_SERVER['DOCUMENT_ROOT']);
 $dompdf->setOptions($options);
 $dompdf->setPaper('letter', 'portait');
 $dompdf->render();
-// $dompdf->stream();
+$dompdf->stream();
+$folder = $_SESSION["folder"];
+$id = $student['id'];
+header("Location: ../$folder/student.php?id=$id&sem_id=$sem_id");
+exit;
