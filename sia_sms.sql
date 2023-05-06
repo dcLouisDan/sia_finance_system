@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2023 at 02:03 PM
+-- Generation Time: May 06, 2023 at 01:53 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `student_course_amount_view` (
 `student_id` int(11)
 ,`student_course_id` int(11)
+,`sem_id` int(11)
 ,`last_name` varchar(150)
 ,`first_name` varchar(150)
 ,`middle_name` varchar(150)
@@ -51,7 +52,25 @@ CREATE TABLE `student_course_view` (
 ,`first_name` varchar(150)
 ,`middle_name` varchar(150)
 ,`program_name` varchar(255)
+,`sem_id` int(11)
 ,`units` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `student_semester_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `student_semester_view` (
+`id` int(11)
+,`student_id` int(11)
+,`program_id` int(11)
+,`year_lvl` int(11)
+,`sem_id` int(11)
+,`sem_num` varchar(10)
+,`start_year` int(11)
+,`end_year` int(11)
 );
 
 -- --------------------------------------------------------
@@ -73,9 +92,10 @@ CREATE TABLE `tbl_fees` (
 --
 
 INSERT INTO `tbl_fees` (`id`, `student_course_id`, `amount`, `remaining_balance`, `record_date`) VALUES
-(1, 1, '5740.00', '5740.00', '2023-04-03 13:05:38'),
-(2, 2, '5950.00', '5950.00', '2023-04-03 15:15:28'),
-(3, 3, '4850.00', '4850.00', '2023-04-03 15:15:28');
+(1, 1, '5740.00', '0.00', '2023-04-03 13:05:38'),
+(2, 2, '5950.00', '1550.00', '2023-04-03 15:15:28'),
+(3, 3, '4850.00', '4850.00', '2023-04-03 15:15:28'),
+(4, 4, '6160.00', '0.00', '2023-05-06 18:11:30');
 
 -- --------------------------------------------------------
 
@@ -193,7 +213,18 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (67, 1, '2023-04-08 12:57:01', 'Deleted User: Jimmy Goodman'),
 (68, 1, '2023-04-08 12:58:18', 'Updated fee structure of Program ID #1'),
 (69, 1, '2023-04-08 12:58:44', 'Logout'),
-(70, 1, '2023-04-16 18:11:54', 'Login');
+(70, 1, '2023-04-16 18:11:54', 'Login'),
+(71, 1, '2023-05-01 09:36:33', 'Login'),
+(72, 1, '2023-05-02 17:30:13', 'Login'),
+(73, 1, '2023-05-02 22:36:23', 'Php 100 was paid for Fee No. 2 by Student NO. 2'),
+(74, 1, '2023-05-02 22:48:51', 'Php 4000 was paid for Fee No. 2 by Student NO. 2'),
+(75, 1, '2023-05-02 22:49:54', 'Php 50 was paid for Fee No. 2 by Student NO. 2'),
+(76, 1, '2023-05-02 22:50:23', 'Php 50 was paid for Fee No. 2 by Student NO. 2'),
+(77, 1, '2023-05-02 22:54:39', 'Php 5740 was paid for Fee No. 1 by Student NO. 1'),
+(78, 1, '2023-05-06 12:57:48', 'Login'),
+(79, 1, '2023-05-06 13:04:42', 'Php 200 was paid for Fee No. 2 by Student NO. 2'),
+(80, 1, '2023-05-06 19:41:55', 'Php 5000 was paid for Fee No. 4 by Student NO. 1'),
+(81, 1, '2023-05-06 19:44:46', 'Php 1160 was paid for Fee No. 4 by Student NO. 1');
 
 -- --------------------------------------------------------
 
@@ -234,6 +265,20 @@ CREATE TABLE `tbl_payments` (
   `payment_method` int(11) NOT NULL,
   `payment_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_payments`
+--
+
+INSERT INTO `tbl_payments` (`id`, `student_id`, `fee_id`, `amount_paid`, `payment_method`, `payment_date`) VALUES
+(1, 2, 2, '100.00', 0, '2023-05-02 22:36:23'),
+(2, 2, 2, '4000.00', 1, '2023-05-02 22:48:50'),
+(3, 2, 2, '50.00', 0, '2023-05-02 22:49:54'),
+(4, 2, 2, '50.00', 0, '2023-05-02 22:50:23'),
+(5, 1, 1, '5740.00', 0, '2023-05-02 22:54:39'),
+(6, 2, 2, '200.00', 0, '2023-05-06 13:04:42'),
+(7, 1, 4, '5000.00', 0, '2023-05-06 19:41:55'),
+(8, 1, 4, '1160.00', 0, '2023-05-06 19:44:46');
 
 -- --------------------------------------------------------
 
@@ -321,6 +366,7 @@ CREATE TABLE `tbl_student_course` (
   `student_id` int(11) NOT NULL,
   `program_id` int(11) NOT NULL,
   `sem_id` int(11) NOT NULL,
+  `year_lvl` int(11) NOT NULL DEFAULT 1,
   `units` int(11) NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -329,10 +375,11 @@ CREATE TABLE `tbl_student_course` (
 -- Dumping data for table `tbl_student_course`
 --
 
-INSERT INTO `tbl_student_course` (`id`, `student_id`, `program_id`, `sem_id`, `units`, `date_created`) VALUES
-(1, 1, 1, 1, 21, '2023-04-03 11:18:12'),
-(2, 2, 3, 1, 21, '2023-04-03 15:14:38'),
-(3, 3, 2, 1, 16, '2023-04-03 15:14:59');
+INSERT INTO `tbl_student_course` (`id`, `student_id`, `program_id`, `sem_id`, `year_lvl`, `units`, `date_created`) VALUES
+(1, 1, 1, 1, 1, 21, '2023-04-03 11:18:12'),
+(2, 2, 3, 1, 1, 21, '2023-04-03 15:14:38'),
+(3, 3, 2, 1, 1, 16, '2023-04-03 15:14:59'),
+(4, 1, 1, 2, 1, 23, '2023-05-06 17:42:17');
 
 -- --------------------------------------------------------
 
@@ -341,7 +388,7 @@ INSERT INTO `tbl_student_course` (`id`, `student_id`, `program_id`, `sem_id`, `u
 --
 DROP TABLE IF EXISTS `student_course_amount_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_amount_view`  AS SELECT `student_course_view`.`id` AS `student_id`, `student_course_view`.`student_course_id` AS `student_course_id`, `student_course_view`.`last_name` AS `last_name`, `student_course_view`.`first_name` AS `first_name`, `student_course_view`.`middle_name` AS `middle_name`, `student_course_view`.`program_name` AS `program_name`, `tbl_fees`.`amount` AS `amount`, `tbl_fees`.`remaining_balance` AS `remaining_balance` FROM (`student_course_view` left join `tbl_fees` on(`student_course_view`.`student_course_id` = `tbl_fees`.`student_course_id`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_amount_view`  AS SELECT `student_course_view`.`id` AS `student_id`, `student_course_view`.`student_course_id` AS `student_course_id`, `student_course_view`.`sem_id` AS `sem_id`, `student_course_view`.`last_name` AS `last_name`, `student_course_view`.`first_name` AS `first_name`, `student_course_view`.`middle_name` AS `middle_name`, `student_course_view`.`program_name` AS `program_name`, `tbl_fees`.`amount` AS `amount`, `tbl_fees`.`remaining_balance` AS `remaining_balance` FROM (`student_course_view` left join `tbl_fees` on(`student_course_view`.`student_course_id` = `tbl_fees`.`student_course_id`))  ;
 
 -- --------------------------------------------------------
 
@@ -350,7 +397,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `student_course_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_view`  AS SELECT `tbl_students`.`id` AS `id`, `tbl_student_course`.`id` AS `student_course_id`, `tbl_students`.`last_name` AS `last_name`, `tbl_students`.`first_name` AS `first_name`, `tbl_students`.`middle_name` AS `middle_name`, `tbl_programs`.`program_name` AS `program_name`, `tbl_student_course`.`units` AS `units` FROM ((`tbl_students` left join `tbl_student_course` on(`tbl_students`.`id` = `tbl_student_course`.`student_id`)) left join `tbl_programs` on(`tbl_student_course`.`program_id` = `tbl_programs`.`id`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_course_view`  AS SELECT `tbl_students`.`id` AS `id`, `tbl_student_course`.`id` AS `student_course_id`, `tbl_students`.`last_name` AS `last_name`, `tbl_students`.`first_name` AS `first_name`, `tbl_students`.`middle_name` AS `middle_name`, `tbl_programs`.`program_name` AS `program_name`, `tbl_student_course`.`sem_id` AS `sem_id`, `tbl_student_course`.`units` AS `units` FROM ((`tbl_students` left join `tbl_student_course` on(`tbl_students`.`id` = `tbl_student_course`.`student_id`)) left join `tbl_programs` on(`tbl_student_course`.`program_id` = `tbl_programs`.`id`))  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `student_semester_view`
+--
+DROP TABLE IF EXISTS `student_semester_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `student_semester_view`  AS SELECT `tbl_student_course`.`id` AS `id`, `tbl_student_course`.`student_id` AS `student_id`, `tbl_student_course`.`program_id` AS `program_id`, `tbl_student_course`.`year_lvl` AS `year_lvl`, `tbl_student_course`.`sem_id` AS `sem_id`, `tbl_semester`.`sem_num` AS `sem_num`, `tbl_semester`.`start_year` AS `start_year`, `tbl_semester`.`end_year` AS `end_year` FROM (`tbl_student_course` left join `tbl_semester` on(`tbl_student_course`.`sem_id` = `tbl_semester`.`id`))  ;
 
 --
 -- Indexes for dumped tables
@@ -424,7 +480,7 @@ ALTER TABLE `tbl_student_course`
 -- AUTO_INCREMENT for table `tbl_fees`
 --
 ALTER TABLE `tbl_fees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_fee_struc`
@@ -436,7 +492,7 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
@@ -448,7 +504,7 @@ ALTER TABLE `tbl_finance_users`
 -- AUTO_INCREMENT for table `tbl_payments`
 --
 ALTER TABLE `tbl_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_programs`
@@ -472,7 +528,7 @@ ALTER TABLE `tbl_students`
 -- AUTO_INCREMENT for table `tbl_student_course`
 --
 ALTER TABLE `tbl_student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
