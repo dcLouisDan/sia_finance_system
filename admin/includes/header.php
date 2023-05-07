@@ -26,7 +26,6 @@ if (!isset($_SESSION["user"])) {
   <link rel="stylesheet" href="../css/modal.css">
   <link rel="stylesheet" href="../css/toastify.css">
 
-
   <!-- JS -->
   <script defer src="../js/micromodal.min.js"></script>
   <script defer src="../js/app.js"></script>
@@ -134,7 +133,7 @@ if (!isset($_SESSION["user"])) {
           </a>
         </li>
         <li>
-          <a class="nav-link" href="">
+          <a class="nav-link" href="audit_log.php">
             Audit log
           </a>
         </li>

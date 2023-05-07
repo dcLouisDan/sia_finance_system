@@ -18,14 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     if ($balance == 0) {
       $folder = $_SESSION["folder"];
       $_SESSION["alert"] = "This fee is already paid.";
-      header("Location: ../$folder/process_payment.php?id=$student_id");
+      header("Location: ../$folder/process_payment.php?id=$student_id&sem_id=$sem_id");
       exit;
     }
 
     if ($amount_paid < 0) {
       $folder = $_SESSION["folder"];
       $_SESSION["alert"] = "Amount paid cannot have a negative value";
-      header("Location: ../$folder/process_payment.php?id=$student_id");
+      header("Location: ../$folder/process_payment.php?id=$student_id&sem_id=$sem_id");
       exit;
     }
 
@@ -40,24 +40,24 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
       $folder = $_SESSION["folder"];
       $_SESSION["alert"] = "Payment successfully recorded.";
-      header("Location: ../$folder/student.php?id=$student_id");
+      header("Location: ../$folder/student.php?id=$student_id&sem_id=$sem_id");
       clearPostInputs(["fee_id", "sem_id", "student_id", "payment_method", "amount_paid", "balance"]);
       exit;
     } else {
       $folder = $_SESSION["folder"];
       $_SESSION["alert"] = "Something went wrong.";
-      header("Location: ../$folder/process_payment.php?id=$student_id");
+      header("Location: ../$folder/process_payment.php?id=$student_id&sem_id=$sem_id");
       exit;
     }
   } else {
     $folder = $_SESSION["folder"];
     $_SESSION["alert"] = "Incomplete input";
-    header("Location: ../$folder/process_payment.php?id=$student_id");
+    header("Location: ../$folder/process_payment.php?id=$student_id&sem_id=$sem_id");
     exit;
   }
 } else {
   $folder = $_SESSION["folder"];
   $_SESSION["alert"] = "Something went wrong.";
-  header("Location: ../$folder/process_payment.php?id=$student_id");
+  header("Location: ../$folder/process_payment.php?id=$student_id&sem_id=$sem_id");
   exit;
 }

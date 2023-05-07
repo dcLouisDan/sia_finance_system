@@ -9,14 +9,14 @@ if (!isset($_GET["id"])) {
 
 require_once '../app/fee_func.php';
 require_once '../app/payment_func.php';
-$last_sem = fetchlastItem('tbl_semester', $pdo);
+$semList = fetchAllItemsOnColumn('student_semester_view', 'student_id', $_GET['id'], $pdo);
+$last_sem = $semList[count($semList) - 1];
 $sem_id = (isset($_GET["sem_id"])) ? $_GET["sem_id"] : $last_sem['id'];
 
 $student = fetchItem('student_course_view', $_GET["id"], $pdo);
 $student_course = fetchStudentCourseOnSem($student['id'], $sem_id, $pdo);
 $programFees = fetchFeesOnProgram($student_course['program_id'], $pdo);
 $fee = fetchFeeOnStudentCourse($student_course['id'], $pdo);
-$semList = fetchAllItemsOnColumn('student_semester_view', 'student_id', $student['id'], $pdo);
 
 generateStudentCollegeBill($student["id"], $sem_id, $pdo);
 

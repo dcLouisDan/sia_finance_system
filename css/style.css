@@ -784,3 +784,30 @@ select.input-control {
   color: var(--secondary);
   font-size: var(--fontSizeNormal);
 }
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.dash-counter {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  place-items: center;
+  align-items: center;
+}
+
+.dash-counter .counter-label {
+  padding: 0 1rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--primary);
+  border-right: 1px solid var(--primary);
+}
+
+.dash-counter .counter-count {
+  font-weight: 700;
+  font-size: 30px;
+}

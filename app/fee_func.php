@@ -72,3 +72,11 @@ function generateStudentCollegeBill($student_id, $sem_id, $pdo)
     $studentFee = fetchFeeOnStudentCourse($studentCourse["id"], $pdo);
   }
 }
+
+function fetchFeesTotals($pdo)
+{
+  $sql = "SELECT SUM(amount) AS total, SUM(remaining_balance) AS balance FROM `tbl_fees`";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute();
+  return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
+}
