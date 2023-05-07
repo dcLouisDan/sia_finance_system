@@ -147,7 +147,7 @@ try {
     });
   });
   searchStudProgram.addEventListener("keyup", (e) => {
-    let progKey = e.target.value;
+    let progKey = e.target.value.toLowerCase();
 
     studentRows.forEach((row) => {
       let itemName = row.querySelector(
