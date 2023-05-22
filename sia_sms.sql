@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2023 at 01:53 PM
+-- Generation Time: May 22, 2023 at 01:46 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -76,6 +76,55 @@ CREATE TABLE `student_semester_view` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_department`
+--
+
+CREATE TABLE `tbl_department` (
+  `id` int(11) NOT NULL,
+  `department_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_department`
+--
+
+INSERT INTO `tbl_department` (`id`, `department_name`) VALUES
+(1, 'Faculty'),
+(2, 'Administation'),
+(3, 'Staff'),
+(4, 'Registrar'),
+(5, 'Finance');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_employees`
+--
+
+CREATE TABLE `tbl_employees` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `middle_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `birthday` date NOT NULL,
+  `address` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `hire_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `profile_photo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_employees`
+--
+
+INSERT INTO `tbl_employees` (`id`, `first_name`, `middle_name`, `last_name`, `birthday`, `address`, `email`, `title`, `department_id`, `hire_date`, `profile_photo`) VALUES
+(1, 'Dan', 'Louis', 'Dela Cruz', '2001-02-20', 'Sta. Rita, Pampanga', 'dan@email.com', 'Professor', 5, '2023-05-22 19:25:57', '../uploads/profile_photos/1646b55ef2607f4.21820670.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_fees`
 --
 
@@ -93,9 +142,31 @@ CREATE TABLE `tbl_fees` (
 
 INSERT INTO `tbl_fees` (`id`, `student_course_id`, `amount`, `remaining_balance`, `record_date`) VALUES
 (1, 1, '5740.00', '0.00', '2023-04-03 13:05:38'),
-(2, 2, '5950.00', '1550.00', '2023-04-03 15:15:28'),
-(3, 3, '4850.00', '4850.00', '2023-04-03 15:15:28'),
-(4, 4, '6160.00', '0.00', '2023-05-06 18:11:30');
+(2, 2, '5950.00', '0.00', '2023-04-03 15:15:28'),
+(3, 3, '4850.00', '0.00', '2023-04-03 15:15:28'),
+(4, 4, '6160.00', '0.00', '2023-05-06 18:11:30'),
+(5, 5, '5730.00', '0.00', '2023-05-06 20:05:11'),
+(6, 6, '5730.00', '5730.00', '2023-05-06 20:05:11'),
+(7, 17, '5950.00', '5950.00', '2023-05-07 22:28:40'),
+(8, 18, '5730.00', '5730.00', '2023-05-07 22:28:40'),
+(9, 19, '6170.00', '6170.00', '2023-05-07 22:28:40'),
+(10, 20, '5740.00', '5740.00', '2023-05-07 22:28:40'),
+(11, 21, '6170.00', '6170.00', '2023-05-07 22:28:40'),
+(12, 22, '5290.00', '5290.00', '2023-05-07 22:28:40'),
+(13, 23, '5950.00', '5950.00', '2023-05-07 22:28:40'),
+(14, 24, '5950.00', '5950.00', '2023-05-07 22:28:40'),
+(15, 25, '5950.00', '5950.00', '2023-05-07 22:28:40'),
+(16, 26, '5530.00', '5530.00', '2023-05-07 22:28:40'),
+(17, 7, '5320.00', '0.00', '2023-05-07 22:29:09'),
+(18, 8, '5730.00', '0.00', '2023-05-07 22:29:09'),
+(19, 9, '5950.00', '5950.00', '2023-05-07 22:29:09'),
+(20, 10, '5950.00', '5950.00', '2023-05-07 22:29:09'),
+(21, 11, '6170.00', '6170.00', '2023-05-07 22:29:09'),
+(22, 12, '6170.00', '0.00', '2023-05-07 22:29:09'),
+(23, 13, '5530.00', '5530.00', '2023-05-07 22:29:09'),
+(24, 14, '6390.00', '6390.00', '2023-05-07 22:29:09'),
+(25, 15, '5290.00', '5290.00', '2023-05-07 22:29:09'),
+(26, 16, '5740.00', '5740.00', '2023-05-07 22:29:09');
 
 -- --------------------------------------------------------
 
@@ -122,7 +193,7 @@ CREATE TABLE `tbl_fee_struc` (
 --
 
 INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
-(1, 1, '210.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-04-08 12:58:18'),
+(1, 1, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-05-08 08:06:34'),
 (2, 2, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16'),
 (3, 3, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16');
 
@@ -224,7 +295,38 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (78, 1, '2023-05-06 12:57:48', 'Login'),
 (79, 1, '2023-05-06 13:04:42', 'Php 200 was paid for Fee No. 2 by Student NO. 2'),
 (80, 1, '2023-05-06 19:41:55', 'Php 5000 was paid for Fee No. 4 by Student NO. 1'),
-(81, 1, '2023-05-06 19:44:46', 'Php 1160 was paid for Fee No. 4 by Student NO. 1');
+(81, 1, '2023-05-06 19:44:46', 'Php 1160 was paid for Fee No. 4 by Student NO. 1'),
+(82, 1, '2023-05-06 19:57:33', 'Php 1550 was paid for Fee No. 2 by Student NO. 2'),
+(83, 1, '2023-05-06 20:06:23', 'Php 1550 was paid for Fee No. 2 by Student NO. 2'),
+(84, 1, '2023-05-07 18:14:29', 'Login'),
+(85, 1, '2023-05-07 19:58:48', 'Php 4850 was paid for Fee No. 3 by Student NO. 3'),
+(86, 1, '2023-05-07 21:15:50', 'Logout'),
+(87, 1, '2023-05-07 22:28:33', 'Login'),
+(88, 1, '2023-05-07 22:29:43', 'Php 6170 was paid for Fee No. 22 by Student NO. 9'),
+(89, 1, '2023-05-07 22:32:11', 'Php 5320 was paid for Fee No. 17 by Student NO. 4'),
+(90, 1, '2023-05-07 22:32:31', 'Php 5730 was paid for Fee No. 18 by Student NO. 5'),
+(91, 1, '2023-05-07 22:33:21', 'Logout'),
+(92, 2, '2023-05-08 07:51:26', 'Login'),
+(93, 2, '2023-05-08 07:51:43', 'Logout'),
+(94, 1, '2023-05-08 08:00:47', 'Login'),
+(95, 1, '2023-05-08 08:01:44', 'Updated personal information'),
+(96, 1, '2023-05-08 08:02:00', 'Updated profile photo.'),
+(97, 1, '2023-05-08 08:02:35', 'New user: Saul Goodman added to the system.'),
+(98, 1, '2023-05-08 08:02:42', 'Updated user information of User: James Goodman'),
+(99, 1, '2023-05-08 08:02:45', 'Deleted User: James Goodman'),
+(100, 1, '2023-05-08 08:04:49', 'Php 5730 was paid for Fee No. 5 by Student NO. 2'),
+(101, 1, '2023-05-08 08:05:57', 'Updated fee structure of Program ID #1'),
+(102, 1, '2023-05-08 08:06:34', 'Updated fee structure of Program ID #1'),
+(103, 1, '2023-05-08 08:28:56', 'Logout'),
+(104, 1, '2023-05-22 16:27:28', 'Login'),
+(105, 1, '2023-05-22 19:21:57', 'New employee: Dan Dela Cruz added to the system.'),
+(106, 1, '2023-05-22 19:24:39', 'New employee: Gustavo Fring added to the system.'),
+(107, 1, '2023-05-22 19:25:57', 'New employee: Dan Dela Cruz added to the system.'),
+(108, 1, '2023-05-22 19:43:44', 'Updated profile photo of Employee No. 1.'),
+(109, 1, '2023-05-22 19:45:00', 'Logout'),
+(110, 1, '2023-05-22 19:45:05', 'Login'),
+(111, 1, '2023-05-22 19:45:37', 'Updated profile photo of Employee No. 1.'),
+(112, 1, '2023-05-22 19:45:51', 'Updated profile photo of Employee No. 1.');
 
 -- --------------------------------------------------------
 
@@ -248,7 +350,7 @@ CREATE TABLE `tbl_finance_users` (
 --
 
 INSERT INTO `tbl_finance_users` (`id`, `first_name`, `last_name`, `email`, `password`, `profile_photo`, `access_lvl`, `date_created`) VALUES
-(1, 'John', 'Dela Cruz', 'jdc@gmail.com', '$2y$10$hMWJ2vpIbdMLv8whZyHzLuhQo4ynpLsw0tCBnGIYSehX5lGJVopt2', '../uploads/profile_photos/John6430f3b2aeab21.82500340.png', 0, '2023-03-17 18:56:14'),
+(1, 'Juan', 'Dela Cruz', 'jdc@gmail.com', '$2y$10$hMWJ2vpIbdMLv8whZyHzLuhQo4ynpLsw0tCBnGIYSehX5lGJVopt2', '../uploads/profile_photos/Juan64583bf8079d20.89281810.jpg', 0, '2023-03-17 18:56:14'),
 (2, 'Gustavo', 'Fring', 'gus@gmail.com', '$2y$10$bO72GhlnIZ/Fix35nU0rSuRllONbZy7yA3.S92gmEAxKlgqZBp8AO', '../uploads/profile_photos/Gustavo642e692b9b2c75.45248743.jpeg', 0, '2023-04-06 02:32:07');
 
 -- --------------------------------------------------------
@@ -278,7 +380,13 @@ INSERT INTO `tbl_payments` (`id`, `student_id`, `fee_id`, `amount_paid`, `paymen
 (5, 1, 1, '5740.00', 0, '2023-05-02 22:54:39'),
 (6, 2, 2, '200.00', 0, '2023-05-06 13:04:42'),
 (7, 1, 4, '5000.00', 0, '2023-05-06 19:41:55'),
-(8, 1, 4, '1160.00', 0, '2023-05-06 19:44:46');
+(8, 1, 4, '1160.00', 0, '2023-05-06 19:44:46'),
+(9, 2, 2, '1550.00', 0, '2023-05-06 20:06:23'),
+(10, 3, 3, '4850.00', 0, '2023-05-07 19:58:48'),
+(11, 9, 22, '6170.00', 0, '2023-05-07 22:29:43'),
+(12, 4, 17, '5320.00', 0, '2023-05-07 22:32:11'),
+(13, 5, 18, '5730.00', 0, '2023-05-07 22:32:31'),
+(14, 2, 5, '5730.00', 0, '2023-05-08 08:04:49');
 
 -- --------------------------------------------------------
 
@@ -353,7 +461,17 @@ CREATE TABLE `tbl_students` (
 INSERT INTO `tbl_students` (`id`, `first_name`, `middle_name`, `last_name`, `date_added`) VALUES
 (1, 'Walter', 'Hartwell', 'White', '2023-04-03 11:17:07'),
 (2, 'James', 'Morgan', 'McGill', '2023-04-03 15:12:20'),
-(3, 'Jesse', 'Bruce', 'Pinkman', '2023-04-03 15:12:37');
+(3, 'Jesse', 'Bruce', 'Pinkman', '2023-04-03 15:12:37'),
+(4, 'John', 'Michael', 'Doe', '2023-05-07 22:19:31'),
+(5, 'Jane', 'Elizabeth', 'Smith', '2023-05-07 22:19:31'),
+(6, 'David', 'William', 'Johnson', '2023-05-07 22:19:31'),
+(7, 'Emily', 'Marie', 'Brown', '2023-05-07 22:19:31'),
+(8, 'James', 'Robert', 'Taylor', '2023-05-07 22:19:31'),
+(9, 'Sophia', 'Grace', 'Davis', '2023-05-07 22:19:31'),
+(10, 'William', 'Andrew', 'Wilson', '2023-05-07 22:19:31'),
+(11, 'Olivia', 'Jane', 'Thomas', '2023-05-07 22:19:31'),
+(12, 'Benjamin', 'Edward', 'Clark', '2023-05-07 22:19:31'),
+(13, 'Isabella', 'Rose', 'Green', '2023-05-07 22:19:31');
 
 -- --------------------------------------------------------
 
@@ -379,7 +497,29 @@ INSERT INTO `tbl_student_course` (`id`, `student_id`, `program_id`, `sem_id`, `y
 (1, 1, 1, 1, 1, 21, '2023-04-03 11:18:12'),
 (2, 2, 3, 1, 1, 21, '2023-04-03 15:14:38'),
 (3, 3, 2, 1, 1, 16, '2023-04-03 15:14:59'),
-(4, 1, 1, 2, 1, 23, '2023-05-06 17:42:17');
+(4, 1, 1, 2, 1, 23, '2023-05-06 17:42:17'),
+(5, 2, 3, 2, 1, 20, '2023-05-06 20:05:04'),
+(6, 3, 2, 2, 1, 20, '2023-05-06 20:05:04'),
+(7, 4, 1, 1, 1, 19, '2023-05-07 22:26:36'),
+(8, 5, 3, 1, 1, 20, '2023-05-07 22:26:36'),
+(9, 6, 2, 1, 1, 21, '2023-05-07 22:26:36'),
+(10, 7, 1, 1, 1, 22, '2023-05-07 22:26:36'),
+(11, 8, 2, 1, 1, 22, '2023-05-07 22:26:36'),
+(12, 9, 3, 1, 1, 22, '2023-05-07 22:26:36'),
+(13, 10, 1, 1, 1, 20, '2023-05-07 22:26:36'),
+(14, 11, 2, 1, 1, 23, '2023-05-07 22:26:36'),
+(15, 12, 3, 1, 1, 18, '2023-05-07 22:26:36'),
+(16, 13, 1, 1, 1, 21, '2023-05-07 22:26:36'),
+(17, 4, 1, 2, 1, 22, '2023-05-07 22:28:19'),
+(18, 5, 3, 2, 1, 20, '2023-05-07 22:28:19'),
+(19, 6, 2, 2, 1, 22, '2023-05-07 22:28:19'),
+(20, 7, 1, 2, 1, 21, '2023-05-07 22:28:19'),
+(21, 8, 2, 2, 1, 22, '2023-05-07 22:28:19'),
+(22, 9, 3, 2, 1, 18, '2023-05-07 22:28:19'),
+(23, 10, 1, 2, 1, 22, '2023-05-07 22:28:19'),
+(24, 11, 2, 2, 1, 21, '2023-05-07 22:28:19'),
+(25, 12, 3, 2, 1, 21, '2023-05-07 22:28:19'),
+(26, 13, 1, 2, 1, 20, '2023-05-07 22:28:19');
 
 -- --------------------------------------------------------
 
@@ -411,6 +551,19 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_department`
+--
+ALTER TABLE `tbl_department`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_employees`
+--
+ALTER TABLE `tbl_employees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `department_id` (`department_id`);
 
 --
 -- Indexes for table `tbl_fees`
@@ -477,10 +630,22 @@ ALTER TABLE `tbl_student_course`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_department`
+--
+ALTER TABLE `tbl_department`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_employees`
+--
+ALTER TABLE `tbl_employees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_fees`
 --
 ALTER TABLE `tbl_fees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tbl_fee_struc`
@@ -492,19 +657,19 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
 --
 ALTER TABLE `tbl_finance_users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_payments`
 --
 ALTER TABLE `tbl_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_programs`
@@ -522,17 +687,23 @@ ALTER TABLE `tbl_semester`
 -- AUTO_INCREMENT for table `tbl_students`
 --
 ALTER TABLE `tbl_students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_course`
 --
 ALTER TABLE `tbl_student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_employees`
+--
+ALTER TABLE `tbl_employees`
+  ADD CONSTRAINT `department_id` FOREIGN KEY (`department_id`) REFERENCES `tbl_department` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_fees`

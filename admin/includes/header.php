@@ -109,7 +109,7 @@ if (!isset($_SESSION["user"])) {
       <h5>Employee Payroll</h5>
       <ul>
         <li>
-          <a class="nav-link" href="">
+          <a class="nav-link" href="employees.php">
             Employees
           </a>
         </li>
