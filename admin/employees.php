@@ -10,20 +10,18 @@ if (isset($_GET["id"])) {
 }
 
 $departments = fetchAll('tbl_department', $pdo);
-
-$access_role = array("Admin", "User",);
 ?>
 
 
-<!-- Delete User Modal -->
+<!-- Delete Employee Modal -->
 <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
   <div class="modal__overlay" tabindex="-1" data-micromodal-close>
     <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
       <header class="modal__header">
-        <h2 class="modal__title" id="modal-1-title">Delete User</h2>
+        <h2 class="modal__title" id="modal-1-title">Delete Employee</h2>
         <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
       </header>
-      <form action="../app/employee_admin_delete.php" method="post">
+      <form action="../app/employee_delete.php" method="post">
         <div class="modal__content" id="modal-1-content">
           <input type="number" name="employee_id" value="<?= $getEmployee["id"] ?>" hidden>
           <input type="text" name="first_name" value="<?= $getEmployee["first_name"] ?>" hidden>
@@ -31,7 +29,7 @@ $access_role = array("Admin", "User",);
           Are you sure you want to delete <?= $getEmployee["first_name"] . " " . $getEmployee["last_name"] ?> from the system?
         </div>
         <div class="modal__footer">
-          <button class="modal__btn modal__btn-primary">Delete User</button>
+          <button class="modal__btn modal__btn-primary">Delete Employee</button>
           <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">
             Close
           </button>
@@ -134,6 +132,10 @@ $access_role = array("Admin", "User",);
                   ?>
                 </select>
               </div>
+              <div class="fee">
+                <label for="title">Date Hired:</label>
+                <div class="input-control gray"><?= date("F d, Y", strtotime($getEmployee["hire_date"])) ?></div>
+              </div>
             </div>
             <div class="edit-btn-group">
               <button type="button" class="btn-outline gray" id="cancel-btn">Cancel</button>
@@ -184,7 +186,7 @@ $access_role = array("Admin", "User",);
                 <input required type="text" placeholder="Enter Employee title..." class="input-control gray" name="title">
               </div>
               <div class="fee">
-                <label for="">Department</label>
+                <label for="">Department:</label>
                 <select name="department_id" class="input-control gray">
                   <?php
                   foreach ($departments as $dep) {
