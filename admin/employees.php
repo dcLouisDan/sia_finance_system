@@ -133,6 +133,13 @@ $departments = fetchAll('tbl_department', $pdo);
                 </select>
               </div>
               <div class="fee">
+                <label for="">Salary (per day)</label>
+                <div class="input-with-currency">
+                  <div class="currency">Php</div>
+                  <input type="number" value="<?= $getEmployee['salary_day'] ?>" disabled placeholder="0.00" step="0.01" class="input-control gray" name="salary_day">
+                </div>
+              </div>
+              <div class="fee">
                 <label for="title">Date Hired:</label>
                 <div class="input-control gray"><?= date("F d, Y", strtotime($getEmployee["hire_date"])) ?></div>
               </div>
@@ -195,10 +202,16 @@ $departments = fetchAll('tbl_department', $pdo);
                   ?>
                 </select>
               </div>
-            </div>
-            <div class="edit-btn-group">
-              <button type="submit" class="btn positive">Save</button>
-            </div>
+              <div class="fee">
+                <label for="">Salary (per day)</label>
+                <div class="input-with-currency">
+                  <div class="currency">Php</div>
+                  <input type="number" placeholder="0.00" step="0.01" class="input-control gray" name="salary_day">
+                </div>
+              </div>
+              <div class="edit-btn-group">
+                <button type="submit" class="btn positive">Save</button>
+              </div>
           </form>
         </div>
       </div>

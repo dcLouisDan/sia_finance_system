@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 01:46 PM
+-- Generation Time: May 23, 2023 at 05:20 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -76,6 +76,31 @@ CREATE TABLE `student_semester_view` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_attendance`
+--
+
+CREATE TABLE `tbl_attendance` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `attendance_date` date NOT NULL DEFAULT current_timestamp(),
+  `status_id` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_attendance`
+--
+
+INSERT INTO `tbl_attendance` (`id`, `employee_id`, `attendance_date`, `status_id`) VALUES
+(2, 3, '2023-05-23', 1),
+(3, 4, '2023-05-23', 1),
+(4, 5, '2023-05-23', 0),
+(5, 3, '2023-05-24', 1),
+(6, 4, '2023-05-24', 1),
+(7, 5, '2023-05-24', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_department`
 --
 
@@ -112,6 +137,7 @@ CREATE TABLE `tbl_employees` (
   `title` varchar(255) NOT NULL,
   `department_id` int(11) NOT NULL,
   `hire_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `salary_day` decimal(15,2) NOT NULL DEFAULT 0.00,
   `profile_photo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -119,8 +145,10 @@ CREATE TABLE `tbl_employees` (
 -- Dumping data for table `tbl_employees`
 --
 
-INSERT INTO `tbl_employees` (`id`, `first_name`, `middle_name`, `last_name`, `birthday`, `address`, `email`, `title`, `department_id`, `hire_date`, `profile_photo`) VALUES
-(1, 'Dan', 'Louis', 'Dela Cruz', '2001-02-20', 'Sta. Rita, Pampanga', 'dan@email.com', 'Professor', 5, '2023-05-22 19:25:57', '../uploads/profile_photos/1646b55ef2607f4.21820670.png');
+INSERT INTO `tbl_employees` (`id`, `first_name`, `middle_name`, `last_name`, `birthday`, `address`, `email`, `title`, `department_id`, `hire_date`, `salary_day`, `profile_photo`) VALUES
+(3, 'Dan', 'Louis', 'Dela Cruz', '2001-02-20', 'Sta. Rita, Pampanga', 'dan@email.com', 'Professor', 1, '2023-05-23 10:22:22', '1000.00', ''),
+(4, 'James', 'Morgan', 'McGill', '1990-04-10', 'San Fernando, Pampanga', 'saul@gmail.com', 'Manager', 2, '2023-05-23 10:31:00', '2000.00', ''),
+(5, 'Walter', 'Hartwell', 'White', '1980-11-04', 'San Fernando, Pampanga', 'walt@gmail.com', 'Supervisor', 4, '2023-05-23 10:31:47', '1500.00', '');
 
 -- --------------------------------------------------------
 
@@ -326,7 +354,21 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (109, 1, '2023-05-22 19:45:00', 'Logout'),
 (110, 1, '2023-05-22 19:45:05', 'Login'),
 (111, 1, '2023-05-22 19:45:37', 'Updated profile photo of Employee No. 1.'),
-(112, 1, '2023-05-22 19:45:51', 'Updated profile photo of Employee No. 1.');
+(112, 1, '2023-05-22 19:45:51', 'Updated profile photo of Employee No. 1.'),
+(113, 1, '2023-05-22 19:56:15', 'Employee: Daniel Dela Cruz information successfully updated.'),
+(114, 1, '2023-05-22 19:56:24', 'Employee: Daniel Dela Cruz information successfully updated.'),
+(115, 1, '2023-05-22 19:59:11', 'Deleted Employee: Daniel Dela Cruz'),
+(116, 1, '2023-05-22 19:59:45', 'New employee: Dan Dela Cruz added to the system.'),
+(117, 1, '2023-05-22 19:59:52', 'Updated profile photo of Employee No. 2.'),
+(118, 1, '2023-05-23 09:54:08', 'Login'),
+(119, 1, '2023-05-23 10:01:07', 'Employee: Dan Dela Cruz information successfully updated.'),
+(120, 1, '2023-05-23 10:02:28', 'Employee: Dan Dela Cruz information successfully updated.'),
+(121, 1, '2023-05-23 10:09:46', 'Deleted Employee: Dan Dela Cruz'),
+(122, 1, '2023-05-23 10:22:22', 'New employee: Dan Dela Cruz added to the system.'),
+(123, 1, '2023-05-23 10:31:00', 'New employee: James McGill added to the system.'),
+(124, 1, '2023-05-23 10:31:47', 'New employee: Walter White added to the system.'),
+(125, 1, '2023-05-23 11:15:10', 'Employee Attendance for 2023-05-23 successfully recorded.'),
+(126, 1, '2023-05-23 11:15:45', 'Employee Attendance for 2023-05-24 successfully recorded.');
 
 -- --------------------------------------------------------
 
@@ -553,6 +595,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `tbl_attendance`
+--
+ALTER TABLE `tbl_attendance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employee-attend` (`employee_id`);
+
+--
 -- Indexes for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
@@ -630,6 +679,12 @@ ALTER TABLE `tbl_student_course`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_attendance`
+--
+ALTER TABLE `tbl_attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
@@ -639,7 +694,7 @@ ALTER TABLE `tbl_department`
 -- AUTO_INCREMENT for table `tbl_employees`
 --
 ALTER TABLE `tbl_employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_fees`
@@ -657,7 +712,7 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
@@ -698,6 +753,12 @@ ALTER TABLE `tbl_student_course`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_attendance`
+--
+ALTER TABLE `tbl_attendance`
+  ADD CONSTRAINT `employee-attend` FOREIGN KEY (`employee_id`) REFERENCES `tbl_employees` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_employees`

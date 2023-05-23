@@ -115,13 +115,19 @@ if (!isset($_SESSION["user"])) {
         </li>
         <li>
           <a class="nav-link" href="">
-            Manage Salaries
+            Manage Payroll
           </a>
         </li>
         <li>
-          <a class="nav-link" href="">
-            Time & Attendance
-          </a>
+          <button type="button" class="nav-menu-btn" href="">
+            <i class="bi bi-caret-down-fill"></i>Time & Attendance
+          </button>
+
+          <ul class="nav-menu">
+            <!-- <li><a href="process_payment.php">Process Payment</a></li> -->
+            <li><a href="record_attendance.php">Record Attendance</a></li>
+            <li><a href="program_fees.php" class="active">Manage</a></li>
+          </ul>
         </li>
       </ul>
 
