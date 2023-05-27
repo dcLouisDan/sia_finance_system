@@ -50,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="site-name">
           <p class="school">DHVSU</p>
           <p class="office">Finance Office</p>
+          <p>Admin</p>
         </div>
       </div>
       <h1>

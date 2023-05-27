@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 05:20 AM
+-- Generation Time: May 27, 2023 at 04:11 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -83,20 +83,19 @@ CREATE TABLE `tbl_attendance` (
   `id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `attendance_date` date NOT NULL DEFAULT current_timestamp(),
-  `status_id` int(11) NOT NULL DEFAULT 0
+  `status_id` int(11) NOT NULL DEFAULT 0,
+  `time_in` time DEFAULT NULL,
+  `time_out` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_attendance`
 --
 
-INSERT INTO `tbl_attendance` (`id`, `employee_id`, `attendance_date`, `status_id`) VALUES
-(2, 3, '2023-05-23', 1),
-(3, 4, '2023-05-23', 1),
-(4, 5, '2023-05-23', 0),
-(5, 3, '2023-05-24', 1),
-(6, 4, '2023-05-24', 1),
-(7, 5, '2023-05-24', 1);
+INSERT INTO `tbl_attendance` (`id`, `employee_id`, `attendance_date`, `status_id`, `time_in`, `time_out`) VALUES
+(1, 3, '2023-05-27', 1, '20:38:00', '20:39:00'),
+(2, 4, '2023-05-27', 1, '20:39:00', '20:39:00'),
+(3, 5, '2023-05-27', 1, '20:39:00', '20:39:00');
 
 -- --------------------------------------------------------
 
@@ -368,7 +367,51 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (123, 1, '2023-05-23 10:31:00', 'New employee: James McGill added to the system.'),
 (124, 1, '2023-05-23 10:31:47', 'New employee: Walter White added to the system.'),
 (125, 1, '2023-05-23 11:15:10', 'Employee Attendance for 2023-05-23 successfully recorded.'),
-(126, 1, '2023-05-23 11:15:45', 'Employee Attendance for 2023-05-24 successfully recorded.');
+(126, 1, '2023-05-23 11:15:45', 'Employee Attendance for 2023-05-24 successfully recorded.'),
+(127, 1, '2023-05-27 19:23:18', 'Login'),
+(128, 1, '2023-05-27 19:30:48', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(129, 1, '2023-05-27 19:54:55', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(130, 1, '2023-05-27 19:55:51', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(131, 1, '2023-05-27 19:58:19', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(132, 1, '2023-05-27 20:06:12', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(133, 1, '2023-05-27 20:06:50', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(134, 1, '2023-05-27 20:07:50', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(135, 1, '2023-05-27 20:11:12', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(136, 1, '2023-05-27 20:13:40', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(137, 1, '2023-05-27 20:14:49', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(138, 1, '2023-05-27 20:15:14', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(139, 1, '2023-05-27 20:15:25', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(140, 1, '2023-05-27 20:15:26', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(141, 1, '2023-05-27 20:15:28', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(142, 1, '2023-05-27 20:15:29', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(143, 1, '2023-05-27 20:17:19', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(144, 1, '2023-05-27 20:17:44', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(145, 1, '2023-05-27 20:17:45', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(146, 1, '2023-05-27 20:17:46', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(147, 1, '2023-05-27 20:18:02', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(148, 1, '2023-05-27 20:18:05', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(149, 1, '2023-05-27 20:18:23', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(150, 1, '2023-05-27 20:18:59', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(151, 1, '2023-05-27 20:19:11', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(152, 1, '2023-05-27 20:19:43', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(153, 1, '2023-05-27 20:19:50', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(154, 1, '2023-05-27 20:19:53', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(155, 1, '2023-05-27 20:20:03', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(156, 1, '2023-05-27 20:20:34', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(157, 1, '2023-05-27 20:25:42', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(158, 1, '2023-05-27 20:25:52', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(159, 1, '2023-05-27 20:26:02', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(160, 1, '2023-05-27 20:27:10', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(161, 1, '2023-05-27 20:27:19', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(162, 1, '2023-05-27 20:28:12', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(163, 1, '2023-05-27 20:31:22', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(164, 1, '2023-05-27 20:37:49', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(165, 1, '2023-05-27 20:37:53', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(166, 1, '2023-05-27 20:38:22', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(167, 1, '2023-05-27 20:38:35', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(168, 1, '2023-05-27 20:39:08', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(169, 1, '2023-05-27 20:39:17', 'Employee Attendance for 2023-05-27 successfully recorded.'),
+(170, 1, '2023-05-27 22:03:05', 'Employee Attendance for  successfully recorded.');
 
 -- --------------------------------------------------------
 
@@ -682,7 +725,7 @@ ALTER TABLE `tbl_student_course`
 -- AUTO_INCREMENT for table `tbl_attendance`
 --
 ALTER TABLE `tbl_attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_department`
@@ -712,7 +755,7 @@ ALTER TABLE `tbl_fee_struc`
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
