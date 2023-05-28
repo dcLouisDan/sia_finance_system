@@ -13,14 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   $email = $_POST["email"];
   $title = $_POST["title"];
   $department_id = $_POST["department_id"];
-  $salary_day = $_POST["salary_day"];
+  $salary_hour = $_POST["salary_hour"];
   $employee_id = $_POST["employee_id"];
 
 
-  if (notEmpty($first_name) && notEmpty($middle_name) && notEmpty($last_name) && notEmpty($birthday) && notEmpty($address) && notEmpty($email) && notEmpty($title) && notEmpty($department_id) && notEmpty($salary_day) && notEmpty($employee_id)) {
-    $qry = "UPDATE `tbl_employees` SET `first_name`= ?,`middle_name`= ?,`last_name`= ?,`birthday`= ?,`address`= ?,`email`= ?,`title`= ?,`department_id`= ?, `salary_day` = ? WHERE id = ?";
+  if (notEmpty($first_name) && notEmpty($middle_name) && notEmpty($last_name) && notEmpty($birthday) && notEmpty($address) && notEmpty($email) && notEmpty($title) && notEmpty($department_id) && notEmpty($salary_hour) && notEmpty($employee_id)) {
+    $qry = "UPDATE `tbl_employees` SET `first_name`= ?,`middle_name`= ?,`last_name`= ?,`birthday`= ?,`address`= ?,`email`= ?,`title`= ?,`department_id`= ?, `salary_hour` = ? WHERE id = ?";
     $stmt = $pdo->prepare($qry);
-    $param = array($first_name, $middle_name, $last_name, $birthday, $address, $email, $title, $department_id, $salary_day, $employee_id);
+    $param = array($first_name, $middle_name, $last_name, $birthday, $address, $email, $title, $department_id, $salary_hour, $employee_id);
 
     if ($stmt->execute($param)) {
       logAction("Employee: $first_name $last_name information successfully updated.", $pdo);
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       $folder = $_SESSION["folder"];
       $_SESSION["alert"] = "Employee information successfully added.";
       header("Location: ../$folder/employees.php?id=$employee_id");
-      clearPostInputs(["first_name", "last_name", "middle_name", "birthday", "address", "email", "title", "department_id", "employee_id", "salary_day"]);
+      clearPostInputs(["first_name", "last_name", "middle_name", "birthday", "address", "email", "title", "department_id", "employee_id", "salary_hour"]);
       exit;
     } else {
       $folder = $_SESSION["folder"];

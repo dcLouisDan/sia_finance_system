@@ -133,10 +133,10 @@ $departments = fetchAll('tbl_department', $pdo);
                 </select>
               </div>
               <div class="fee">
-                <label for="">Salary (per day)</label>
+                <label for="">Salary (per hour)</label>
                 <div class="input-with-currency">
                   <div class="currency">Php</div>
-                  <input type="number" value="<?= $getEmployee['salary_day'] ?>" disabled placeholder="0.00" step="0.01" class="input-control gray" name="salary_day">
+                  <input type="number" value="<?= $getEmployee['salary_hour'] ?>" disabled placeholder="0.00" step="0.01" class="input-control gray" name="salary_hour">
                 </div>
               </div>
               <div class="fee">
@@ -203,10 +203,10 @@ $departments = fetchAll('tbl_department', $pdo);
                 </select>
               </div>
               <div class="fee">
-                <label for="">Salary (per day)</label>
+                <label for="">Salary (per hour)</label>
                 <div class="input-with-currency">
                   <div class="currency">Php</div>
-                  <input type="number" placeholder="0.00" step="0.01" class="input-control gray" name="salary_day">
+                  <input type="number" placeholder="0.00" step="0.01" class="input-control gray" name="salary_hour">
                 </div>
               </div>
               <div class="edit-btn-group">

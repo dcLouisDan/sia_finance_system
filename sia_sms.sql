@@ -136,7 +136,7 @@ CREATE TABLE `tbl_employees` (
   `title` varchar(255) NOT NULL,
   `department_id` int(11) NOT NULL,
   `hire_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `salary_day` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `salary_hour` decimal(15,2) NOT NULL DEFAULT 0.00,
   `profile_photo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -144,7 +144,7 @@ CREATE TABLE `tbl_employees` (
 -- Dumping data for table `tbl_employees`
 --
 
-INSERT INTO `tbl_employees` (`id`, `first_name`, `middle_name`, `last_name`, `birthday`, `address`, `email`, `title`, `department_id`, `hire_date`, `salary_day`, `profile_photo`) VALUES
+INSERT INTO `tbl_employees` (`id`, `first_name`, `middle_name`, `last_name`, `birthday`, `address`, `email`, `title`, `department_id`, `hire_date`, `salary_hour`, `profile_photo`) VALUES
 (3, 'Dan', 'Louis', 'Dela Cruz', '2001-02-20', 'Sta. Rita, Pampanga', 'dan@email.com', 'Professor', 1, '2023-05-23 10:22:22', '1000.00', ''),
 (4, 'James', 'Morgan', 'McGill', '1990-04-10', 'San Fernando, Pampanga', 'saul@gmail.com', 'Manager', 2, '2023-05-23 10:31:00', '2000.00', ''),
 (5, 'Walter', 'Hartwell', 'White', '1980-11-04', 'San Fernando, Pampanga', 'walt@gmail.com', 'Supervisor', 4, '2023-05-23 10:31:47', '1500.00', '');

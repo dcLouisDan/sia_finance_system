@@ -13,13 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   $email = $_POST["email"];
   $title = $_POST["title"];
   $department_id = $_POST["department_id"];
-  $salary_day = $_POST["salary_day"];
+  $salary_hour = $_POST["salary_hour"];
 
 
-  if (notEmpty($first_name) && notEmpty($middle_name) && notEmpty($last_name) && notEmpty($birthday) && notEmpty($address) && notEmpty($email) && notEmpty($title) && notEmpty($department_id) && notEmpty($salary_day)) {
-    $qry = "INSERT INTO `tbl_employees`(`first_name`, `middle_name`, `last_name`, `birthday`, `address`, `email`, `title`, `department_id`, `salary_day`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  if (notEmpty($first_name) && notEmpty($middle_name) && notEmpty($last_name) && notEmpty($birthday) && notEmpty($address) && notEmpty($email) && notEmpty($title) && notEmpty($department_id) && notEmpty($salary_hour)) {
+    $qry = "INSERT INTO `tbl_employees`(`first_name`, `middle_name`, `last_name`, `birthday`, `address`, `email`, `title`, `department_id`, `salary_hour`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($qry);
-    $param = array($first_name, $middle_name, $last_name, $birthday, $address, $email, $title, $department_id, $salary_day);
+    $param = array($first_name, $middle_name, $last_name, $birthday, $address, $email, $title, $department_id, $salary_hour);
 
     if ($stmt->execute($param)) {
       logAction("New employee: $first_name $last_name added to the system.", $pdo);
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       $folder = $_SESSION["folder"];
       $_SESSION["alert"] = "New employee successfully added.";
       header("Location: ../$folder/employees.php");
-      clearPostInputs(["first_name", "last_name", "middle_name", "birthday", "address", "email", "title", "department_id", "salary_day"]);
+      clearPostInputs(["first_name", "last_name", "middle_name", "birthday", "address", "email", "title", "department_id", "salary_hour"]);
       exit;
     } else {
       $folder = $_SESSION["folder"];

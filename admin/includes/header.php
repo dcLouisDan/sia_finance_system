@@ -126,7 +126,7 @@ if (!isset($_SESSION["user"])) {
           <ul class="nav-menu">
             <!-- <li><a href="process_payment.php">Process Payment</a></li> -->
             <li><a href="record_attendance.php">Record Attendance</a></li>
-            <li><a href="program_fees.php" class="active">Manage</a></li>
+            <li><a href="program_fees.php" class="active">Leave &<br> Vacations</a></li>
           </ul>
         </li>
       </ul>

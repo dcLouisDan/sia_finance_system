@@ -59,7 +59,7 @@ $departments = fetchAll('tbl_department', $pdo);
         </form>
       </div>
     </div>
-    <form action="../app/attendace_record.php" method="post">
+    <form action="../app/attendance_record.php" method="post">
       <input type="date" placeholder="00/00/0000" name="date" class="input-control gray small" value="<?= $date ?>" hidden>
       <div class="card-body" style="max-height: 800px; overflow-y: scroll;">
         <table>
@@ -75,8 +75,12 @@ $departments = fetchAll('tbl_department', $pdo);
             <?php
             foreach ($employees as $employee) {
               $employeeCount++;
-              $attendace = fetchAttendaceOnEmployeeAndDate($date, $employee['id'], $pdo);
-              switch ($attendace['status_id']) {
+              $attendance = fetchAttendanceOnEmployeeAndDate($date, $employee['id'], $pdo) ?? [
+                'time_in' => null,
+                'time_out' => null,
+                'status_id' => '0'
+              ];
+              switch ($attendance['status_id']) {
                 case '0':
                   $present = '';
                   $absent = 'checked';
@@ -107,7 +111,7 @@ $departments = fetchAll('tbl_department', $pdo);
                 </td>
                 <td>
                   <div class="clock-in">
-                    <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_in" value="<?= $attendace['time_in'] ?>">
+                    <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_in" value="<?= $attendance['time_in'] ?>">
                     <div class="btn-group">
                       <button class="btn" type="button">
                         <i class="bi bi-clock"></i>
@@ -120,7 +124,7 @@ $departments = fetchAll('tbl_department', $pdo);
                 </td>
                 <td>
                   <div class="clock-in">
-                    <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_out" value="<?= ($attendace['time_out']) ?>">
+                    <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_out" value="<?= ($attendance['time_out']) ?>">
                     <div class="btn-group">
                       <button class="btn clock" type="button">
                         <i class="bi bi-clock"></i>

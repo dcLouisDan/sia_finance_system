@@ -9,7 +9,7 @@ require_once '../config.php';
 if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   $date = $_POST["date"];
   $employee_count = $_POST["employee_count"];
-  $attendace = fetchItemOnColumn('tbl_attendance', 'attendance_date', $date, $pdo);
+  $attendance = fetchItemOnColumn('tbl_attendance', 'attendance_date', $date, $pdo);
 
   for ($i = 1; $i <= $employee_count; $i++) {
     $id = $i . "_id";
@@ -21,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $attendance_time_in = ($_POST["$time_in"]) ? $_POST["$time_in"] : null;
     $attendance_time_out = ($_POST["$time_out"]) ? $_POST["$time_out"] : null;
 
-    if ($attendace != null) {
-      $attendance_employee = fetchAttendaceOnEmployeeAndDate($date, $employee_id, $pdo);
+    if ($attendance != null) {
+      $attendance_employee = fetchAttendanceOnEmployeeAndDate($date, $employee_id, $pdo);
       $qry = "UPDATE `tbl_attendance` SET `employee_id`= ?,`attendance_date`= ?,`status_id`= ?,`time_in`= ?,`time_out`= ? WHERE id = ?";
 
 
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   }
   logAction("Employee Attendance for $date successfully recorded.", $pdo);
   $folder = $_SESSION["folder"];
-  $_SESSION["alert"] = "Attendace successfully recorded.";
+  $_SESSION["alert"] = "Attendance successfully recorded.";
   header("Location: ../$folder/record_attendance.php?date=$date");
   exit;
 } else {
