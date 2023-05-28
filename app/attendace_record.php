@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
   logAction("Employee Attendance for $date successfully recorded.", $pdo);
   $folder = $_SESSION["folder"];
   $_SESSION["alert"] = "Attendace successfully recorded.";
-  header("Location: ../$folder/record_attendance.php");
+  header("Location: ../$folder/record_attendance.php?date=$date");
   exit;
 } else {
   $folder = $_SESSION["folder"];

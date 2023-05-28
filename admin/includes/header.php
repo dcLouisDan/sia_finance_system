@@ -120,7 +120,7 @@ if (!isset($_SESSION["user"])) {
         </li>
         <li>
           <button type="button" class="nav-menu-btn" href="">
-            <i class="bi bi-caret-down-fill"></i>Time & Attendance
+            <i class="bi bi-caret-down-fill"></i>Time & <br> Attendance
           </button>
 
           <ul class="nav-menu">

@@ -130,3 +130,16 @@ function fetchLimitedAuditLog($limit, $pdo)
     return $data;
   }
 }
+
+function calculateHoursPassed($time1, $time2)
+{
+  $format = "H:i:s";
+  $dateTime1 = DateTime::createFromFormat($format, $time1);
+  $dateTime2 = DateTime::createFromFormat($format, $time2);
+  $interval = $dateTime1->diff($dateTime2);
+
+  $hoursPassed = $interval->h;
+  $hoursPassed += $interval->days * 24;
+
+  return $hoursPassed;
+}

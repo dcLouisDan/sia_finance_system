@@ -60,10 +60,11 @@ $departments = fetchAll('tbl_department', $pdo);
       </div>
     </div>
     <form action="../app/attendace_record.php" method="post">
+      <input type="date" placeholder="00/00/0000" name="date" class="input-control gray small" value="<?= $date ?>" hidden>
       <div class="card-body" style="max-height: 800px; overflow-y: scroll;">
         <table>
           <thead>
-            <th>Employee ID</th>
+            <th style="width: 5%;">ID</th>
             <th>Name</th>
             <th>Department</th>
             <th>Status</th>
@@ -75,6 +76,19 @@ $departments = fetchAll('tbl_department', $pdo);
             foreach ($employees as $employee) {
               $employeeCount++;
               $attendace = fetchAttendaceOnEmployeeAndDate($date, $employee['id'], $pdo);
+              switch ($attendace['status_id']) {
+                case '0':
+                  $present = '';
+                  $absent = 'checked';
+                  break;
+                case '1':
+                  $present = 'checked';
+                  $absent = '';
+                  break;
+                default:
+                  $present = 'checked';
+                  $absent = '';
+              }
             ?>
               <tr>
                 <td><?= $employee['id'] ?></td>
@@ -83,28 +97,38 @@ $departments = fetchAll('tbl_department', $pdo);
                 <td>
                   <input type="number" name="<?= $employeeCount ?>_id" value="<?= $employee['id'] ?>" hidden>
                   <label for="paid" class="radio-control">
-                    <input name="<?= $employeeCount ?>_status" type="radio" id="radPaid" checked value="1">
+                    <input name="<?= $employeeCount ?>_status" type="radio" <?= $present ?> value="1">
                     Present
                   </label>
                   <label for="paid" class="radio-control">
-                    <input name="<?= $employeeCount ?>_status" type="radio" id="radPaid" value="0">
+                    <input name="<?= $employeeCount ?>_status" type="radio" <?= $absent ?> value="0">
                     Absent
                   </label>
                 </td>
                 <td>
                   <div class="clock-in">
-                    <input type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_in" value="<?= $attendace['time_in'] ?>">
-                    <button class="btn" type="button">
-                      <i class="bi bi-clock"></i>
-                    </button>
+                    <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_in" value="<?= $attendace['time_in'] ?>">
+                    <div class="btn-group">
+                      <button class="btn" type="button">
+                        <i class="bi bi-clock"></i>
+                      </button>
+                      <button class="btn" type="button">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
                   </div>
                 </td>
                 <td>
                   <div class="clock-in">
-                    <input type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_out" value="<?= ($attendace['time_out']) ?>">
-                    <button class="btn" type="button">
-                      <i class="bi bi-clock"></i>
-                    </button>
+                    <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_out" value="<?= ($attendace['time_out']) ?>">
+                    <div class="btn-group">
+                      <button class="btn clock" type="button">
+                        <i class="bi bi-clock"></i>
+                      </button>
+                      <button class="btn x" type="button">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -124,7 +148,9 @@ $departments = fetchAll('tbl_department', $pdo);
   const clockInInputs = Array.from(document.querySelectorAll('.clock-in'));
 
   clockInInputs.map(input => {
-    var clockBtn = input.querySelector('button');
+    var buttons = Array.from(input.querySelectorAll('button'));
+    var clockBtn = buttons[0]
+    var xBtn = buttons[1];
     var timeInput = input.querySelector('input');
 
     clockBtn.addEventListener('click', () => {
@@ -137,6 +163,10 @@ $departments = fetchAll('tbl_department', $pdo);
 
       console.log(time)
       timeInput.value = time;
+    })
+
+    xBtn.addEventListener('click', () => {
+      timeInput.value = '';
     })
 
   })

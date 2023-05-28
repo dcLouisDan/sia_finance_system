@@ -7,6 +7,7 @@ $feestotals = fetchFeesTotals($pdo);
 $recentLogs = fetchLimitedAuditLog(5, $pdo);
 $totalStudents = countItems('tbl_students', $pdo);
 $totalUsers = countItems('tbl_finance_users', $pdo);
+$totalEmployees = countItems('tbl_employees', $pdo);
 ?>
 
 <!-- Main Content -->
@@ -36,7 +37,7 @@ $totalUsers = countItems('tbl_finance_users', $pdo);
       <div class="card-body">
         <div class="dash-counter">
           <div class="counter-label">Number of Employees</div>
-          <div class="counter-count"><?= 0 ?></div>
+          <div class="counter-count"><?= $totalEmployees['total'] ?></div>
         </div>
       </div>
     </div>
