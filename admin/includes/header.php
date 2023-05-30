@@ -114,7 +114,7 @@ if (!isset($_SESSION["user"])) {
           </a>
         </li>
         <li>
-          <a class="nav-link" href="">
+          <a class="nav-link" href="payroll.php">
             Manage Payroll
           </a>
         </li>
@@ -126,7 +126,7 @@ if (!isset($_SESSION["user"])) {
           <ul class="nav-menu">
             <!-- <li><a href="process_payment.php">Process Payment</a></li> -->
             <li><a href="record_attendance.php">Record Attendance</a></li>
-            <li><a href="program_fees.php" class="active">Leave &<br> Vacations</a></li>
+            <li><a href="leave_and_vacation.php" class="active">Leave &<br> Vacations</a></li>
           </ul>
         </li>
       </ul>

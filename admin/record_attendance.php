@@ -21,33 +21,6 @@ if (isset($_GET["date"])) {
 $departments = fetchAll('tbl_department', $pdo);
 ?>
 
-
-<!-- Delete Employee Modal -->
-<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
-  <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-      <header class="modal__header">
-        <h2 class="modal__title" id="modal-1-title">Delete Employee</h2>
-        <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
-      </header>
-      <form action="../app/employee_delete.php" method="post">
-        <div class="modal__content" id="modal-1-content">
-          <input type="number" name="employee_id" value="<?= $getEmployee["id"] ?>" hidden>
-          <input type="text" name="first_name" value="<?= $getEmployee["first_name"] ?>" hidden>
-          <input type="text" name="last_name" value="<?= $getEmployee["last_name"] ?>" hidden>
-          Are you sure you want to delete <?= $getEmployee["first_name"] . " " . $getEmployee["last_name"] ?> from the system?
-        </div>
-        <div class="modal__footer">
-          <button class="modal__btn modal__btn-primary">Delete Employee</button>
-          <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">
-            Close
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <!-- Main Content -->
 <main>
   <div class="card full-span">
@@ -113,10 +86,10 @@ $departments = fetchAll('tbl_department', $pdo);
                   <div class="clock-in">
                     <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_in" value="<?= $attendance['time_in'] ?>">
                     <div class="btn-group">
-                      <button class="btn" type="button">
+                      <button class="btn" type="button" title="Current Time">
                         <i class="bi bi-clock"></i>
                       </button>
-                      <button class="btn" type="button">
+                      <button class="btn" type="button" title="Clear">
                         <i class="bi bi-x-lg"></i>
                       </button>
                     </div>
@@ -126,10 +99,10 @@ $departments = fetchAll('tbl_department', $pdo);
                   <div class="clock-in">
                     <input step="any" type="time" class="input-control gray small" name="<?= $employeeCount ?>_time_out" value="<?= ($attendance['time_out']) ?>">
                     <div class="btn-group">
-                      <button class="btn clock" type="button">
+                      <button class="btn clock" type="button" title="Current Time">
                         <i class="bi bi-clock"></i>
                       </button>
-                      <button class="btn x" type="button">
+                      <button class="btn x" type="button" title="Clear">
                         <i class="bi bi-x-lg"></i>
                       </button>
                     </div>

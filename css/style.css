@@ -546,6 +546,10 @@ main {
   background-color: var(--light);
 }
 
+.input-control.m-0 {
+  margin: 0;
+}
+
 .input-with-currency {
   position: relative;
 }
@@ -586,6 +590,10 @@ main {
 
 .btn.positive {
   background-color: var(--positive);
+}
+
+.btn.accent {
+  background-color: var(--accent);
 }
 
 .btn:hover {
@@ -826,10 +834,16 @@ select.input-control {
   padding: 0.25rem;
 }
 
-.clock-in .btn {
-  padding: 0.25rem 1rem;
+.clock-in .btn,
+.btn-group a .btn,
+.btn-group .btn {
+  padding: 0.25rem 0.5rem;
 }
 
 .clock-in .btn-group {
   margin-top: 0.25rem;
+}
+
+.max-width-800 {
+  max-width: 800px;
 }
