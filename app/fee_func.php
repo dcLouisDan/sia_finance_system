@@ -80,3 +80,11 @@ function fetchFeesTotals($pdo)
   $stmt->execute();
   return ($stmt->rowCount() > 0) ? $stmt->fetch() : null;
 }
+
+function fetchFeesReportOnSem($sem_id, $pdo)
+{
+  $sql = "SELECT `tbl_programs`.`id` AS `id`,`tbl_programs`.`program_name` AS `program_name`,sum(`tbl_fees`.`amount`) AS `amount`,sum(`tbl_fees`.`remaining_balance`) AS `remaining_balance` from ((`tbl_programs` left join `tbl_student_course` on(`tbl_programs`.`id` = `tbl_student_course`.`program_id`)) left join `tbl_fees` on(`tbl_student_course`.`id` = `tbl_fees`.`student_course_id`)) WHERE `tbl_student_course`.`sem_id` = ? group by `tbl_programs`.`id`";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute([$sem_id]);
+  return ($stmt->rowCount() > 0) ? $stmt->fetchAll() : null;
+}

@@ -41,16 +41,17 @@ if (!isset($_SESSION["user"])) {
       <div class="site-name">
         <p class="school">DHVSU</p>
         <p class="office">Finance Office</p>
+        <p>Admin</p>
       </div>
     </a>
 
-    <div class="header-icon">
+    <!-- <div class="header-icon">
       <i class="bi bi-gear-fill"></i>
     </div>
 
     <div class="header-icon">
       <i class="bi bi-bell-fill"></i>
-    </div>
+    </div> -->
 
 
     <div class="header-user">
@@ -94,15 +95,9 @@ if (!isset($_SESSION["user"])) {
           </a>
         </li>
         <li>
-          <button type="button" class="nav-menu-btn" href="">
-            <i class="bi bi-caret-down-fill"></i>Fees
-          </button>
-
-          <ul class="nav-menu">
-            <!-- <li><a href="process_payment.php">Process Payment</a></li> -->
-            <li><a href="">Payment History</a></li>
-            <li><a href="program_fees.php" class="active">Manage Program Fees</a></li>
-          </ul>
+          <a class="nav-link" href="program_fees.php">
+            Program Fees
+          </a>
         </li>
       </ul>
 
@@ -134,7 +129,7 @@ if (!isset($_SESSION["user"])) {
       <h5>Reports</h5>
       <ul>
         <li>
-          <a class="nav-link" href="">
+          <a class="nav-link" href="finance_reports.php">
             Financial Reports
           </a>
         </li>
