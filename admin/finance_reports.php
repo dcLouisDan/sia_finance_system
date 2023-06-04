@@ -10,6 +10,7 @@ $semList = fetchAll('tbl_semester', $pdo);
 
 $last_sem = fetchlastItem('tbl_semester', $pdo);
 $sem_id = (isset($_GET["sem_id"])) ? $_GET["sem_id"] : $last_sem['id'];
+$semester = fetchItem('tbl_semester', $sem_id, $pdo);
 $student_records = fetchStudentRecordsOnSem($sem_id, $pdo);
 $program_fee_reports = fetchFeesReportOnSem($sem_id, $pdo);
 ?>
@@ -20,19 +21,22 @@ $program_fee_reports = fetchFeesReportOnSem($sem_id, $pdo);
     <div class="card-header">
       <div class="filter-group">
         <h4>Financial Reports</h4>
-        <form method="get" id="selectSubmit">
-          <select name="sem_id" class="input-control gray small" onchange="document.getElementById('selectSubmit').submit()">
-            <?php
-            foreach ($semList as $sem) {
-              if ($sem['id'] == $sem_id) {
-                echo "<option selected value='" . $sem['id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
-              } else {
-                echo "<option value='" . $sem['id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+        <div class="filter-group">
+          <form method="get" id="selectSubmit">
+            <select name="sem_id" class="input-control gray small" onchange="document.getElementById('selectSubmit').submit()" style="margin-bottom: 0;">
+              <?php
+              foreach ($semList as $sem) {
+                if ($sem['id'] == $sem_id) {
+                  echo "<option selected value='" . $sem['id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+                } else {
+                  echo "<option value='" . $sem['id'] . "'>" . getOrdinal($sem['sem_num']) . " AY " . $sem['start_year'] . "-" . $sem['end_year'] .  "</option>";
+                }
               }
-            }
-            ?>
-          </select>
-        </form>
+              ?>
+            </select>
+          </form>
+          <a href="<?= "../app/finance_report_csv.php?sem_id=" . $sem_id ?>"><button class="btn">Export to CSV</button></a>
+        </div>
       </div>
     </div>
     <div class="card-body p-0">
@@ -40,7 +44,7 @@ $program_fee_reports = fetchFeesReportOnSem($sem_id, $pdo);
         <table>
           <thead>
             <tr>
-              <th colspan="4" style="background-color: var(--background); text-align:center;">College Fees</th>
+              <th colspan="4" style="background-color: var(--background); text-align:center;">College Fees ( <?= getOrdinal($semester['sem_num']) . " Semester AY " . $semester['start_year'] . "-" . $semester['end_year'] ?> )</th>
             </tr>
             <tr>
               <th style="width: 40%;">Program</th>
