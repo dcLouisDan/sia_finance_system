@@ -6,6 +6,8 @@ function loginFinanceUser(string $email, string $password, int $access_lvl, stri
     $stmt = $pdo->prepare("SELECT * FROM `tbl_finance_users` WHERE email= ? AND access_lvl = ?");
     $stmt->execute([$email, $access_lvl]);
 
+    $first = ($access_lvl == 0) ? "dashboard.php" : "students.php";
+
     if ($stmt->rowCount() > 0) {
       $row = $stmt->fetch();
 
@@ -17,7 +19,7 @@ function loginFinanceUser(string $email, string $password, int $access_lvl, stri
         $_SESSION["folder"] = $folder;
         logAction("Login", $pdo);
         clearPostInputs(['email', 'password']);
-        header("Location: ./dashboard.php");
+        header("Location: ./$first");
         exit;
       }
     } else {

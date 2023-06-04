@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2023 at 04:49 PM
+-- Generation Time: Jun 04, 2023 at 02:56 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `sia_sms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `program_fees_report_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `program_fees_report_view` (
+`id` int(11)
+,`program_name` varchar(255)
+,`amount` decimal(37,2)
+,`remaining_balance` decimal(37,2)
+);
 
 -- --------------------------------------------------------
 
@@ -205,10 +218,10 @@ INSERT INTO `tbl_fees` (`id`, `student_course_id`, `amount`, `remaining_balance`
 (3, 3, '4850.00', '0.00', '2023-04-03 15:15:28'),
 (4, 4, '6160.00', '0.00', '2023-05-06 18:11:30'),
 (5, 5, '5730.00', '0.00', '2023-05-06 20:05:11'),
-(6, 6, '5730.00', '5730.00', '2023-05-06 20:05:11'),
-(7, 17, '5950.00', '5950.00', '2023-05-07 22:28:40'),
-(8, 18, '5730.00', '5730.00', '2023-05-07 22:28:40'),
-(9, 19, '6170.00', '6170.00', '2023-05-07 22:28:40'),
+(6, 6, '5730.00', '0.00', '2023-05-06 20:05:11'),
+(7, 17, '5950.00', '0.00', '2023-05-07 22:28:40'),
+(8, 18, '5730.00', '0.00', '2023-05-07 22:28:40'),
+(9, 19, '6170.00', '0.00', '2023-05-07 22:28:40'),
 (10, 20, '5740.00', '5740.00', '2023-05-07 22:28:40'),
 (11, 21, '6170.00', '6170.00', '2023-05-07 22:28:40'),
 (12, 22, '5290.00', '5290.00', '2023-05-07 22:28:40'),
@@ -218,14 +231,34 @@ INSERT INTO `tbl_fees` (`id`, `student_course_id`, `amount`, `remaining_balance`
 (16, 26, '5530.00', '5530.00', '2023-05-07 22:28:40'),
 (17, 7, '5320.00', '0.00', '2023-05-07 22:29:09'),
 (18, 8, '5730.00', '0.00', '2023-05-07 22:29:09'),
-(19, 9, '5950.00', '5950.00', '2023-05-07 22:29:09'),
+(19, 9, '5950.00', '0.00', '2023-05-07 22:29:09'),
 (20, 10, '5950.00', '5950.00', '2023-05-07 22:29:09'),
 (21, 11, '6170.00', '6170.00', '2023-05-07 22:29:09'),
 (22, 12, '6170.00', '0.00', '2023-05-07 22:29:09'),
 (23, 13, '5530.00', '5530.00', '2023-05-07 22:29:09'),
 (24, 14, '6390.00', '6390.00', '2023-05-07 22:29:09'),
 (25, 15, '5290.00', '5290.00', '2023-05-07 22:29:09'),
-(26, 16, '5740.00', '5740.00', '2023-05-07 22:29:09');
+(26, 16, '5740.00', '5740.00', '2023-05-07 22:29:09'),
+(27, 39, '5930.00', '5930.00', '2023-06-04 20:50:26'),
+(28, 40, '5730.00', '5730.00', '2023-06-04 20:50:26'),
+(29, 41, '5130.00', '5130.00', '2023-06-04 20:50:26'),
+(30, 42, '5930.00', '5930.00', '2023-06-04 20:50:26'),
+(31, 43, '5530.00', '5530.00', '2023-06-04 20:50:26'),
+(32, 44, '5330.00', '5330.00', '2023-06-04 20:50:26'),
+(33, 45, '5530.00', '5530.00', '2023-06-04 20:50:26'),
+(34, 46, '4930.00', '4930.00', '2023-06-04 20:50:26'),
+(35, 47, '4930.00', '4930.00', '2023-06-04 20:50:26'),
+(36, 48, '5130.00', '5130.00', '2023-06-04 20:50:26'),
+(37, 49, '4930.00', '4930.00', '2023-06-04 20:50:26'),
+(38, 50, '5530.00', '5530.00', '2023-06-04 20:50:26'),
+(39, 59, '5530.00', '5530.00', '2023-06-04 20:53:59'),
+(40, 60, '4930.00', '4930.00', '2023-06-04 20:53:59'),
+(41, 61, '5130.00', '5130.00', '2023-06-04 20:53:59'),
+(42, 62, '5530.00', '5530.00', '2023-06-04 20:53:59'),
+(43, 63, '5330.00', '5330.00', '2023-06-04 20:53:59'),
+(44, 64, '5730.00', '5730.00', '2023-06-04 20:53:59'),
+(45, 65, '5930.00', '5930.00', '2023-06-04 20:53:59'),
+(46, 66, '5730.00', '5730.00', '2023-06-04 20:53:59');
 
 -- --------------------------------------------------------
 
@@ -253,8 +286,34 @@ CREATE TABLE `tbl_fee_struc` (
 
 INSERT INTO `tbl_fee_struc` (`id`, `program_id`, `tuition_fee`, `misc_fee`, `registration_fee`, `library_fee`, `laboratory_fee`, `guidance_fee`, `computer_fee`, `athletic_fee`, `updated_on`) VALUES
 (1, 1, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-05-08 08:06:34'),
-(2, 2, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16'),
-(3, 3, '220.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-03-25 11:47:16');
+(2, 2, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(3, 3, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(4, 4, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(5, 5, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(6, 6, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(7, 7, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(8, 8, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(9, 9, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(10, 10, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(11, 11, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(12, 12, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(13, 13, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(14, 14, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(15, 15, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(16, 16, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(17, 17, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(18, 18, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(19, 19, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(20, 20, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(21, 21, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(22, 22, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(23, 23, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(24, 24, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(25, 25, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(26, 26, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(27, 27, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(28, 28, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50'),
+(29, 29, '200.00', '70.00', '100.00', '150.00', '600.00', '50.00', '200.00', '160.00', '2023-06-02 12:02:50');
 
 -- --------------------------------------------------------
 
@@ -481,7 +540,18 @@ INSERT INTO `tbl_finance_audit_log` (`id`, `user_id`, `action_date`, `action_des
 (205, 1, '2023-05-31 22:45:31', 'Employee: James McGill information successfully updated.'),
 (206, 1, '2023-05-31 22:45:39', 'Employee: Walter White information successfully updated.'),
 (207, 1, '2023-05-31 22:45:48', 'Employee: Gus Fring information successfully updated.'),
-(208, 1, '2023-05-31 22:45:56', 'New payroll added to the system.');
+(208, 1, '2023-05-31 22:45:56', 'New payroll added to the system.'),
+(209, 1, '2023-06-02 11:39:21', 'Login'),
+(210, 1, '2023-06-02 12:02:50', 'Updated fee structure of all College Programs'),
+(211, 1, '2023-06-02 12:31:47', 'Php 5730 was paid for Fee No. 6 by Student NO. 3'),
+(212, 1, '2023-06-02 21:29:48', 'Login'),
+(213, 1, '2023-06-02 21:30:42', 'Logout'),
+(214, 1, '2023-06-02 21:30:46', 'Login'),
+(215, 1, '2023-06-04 17:25:42', 'Login'),
+(216, 1, '2023-06-04 20:54:26', 'Php 5950 was paid for Fee No. 7 by Student NO. 4'),
+(217, 1, '2023-06-04 20:54:53', 'Php 5730 was paid for Fee No. 8 by Student NO. 5'),
+(218, 1, '2023-06-04 20:55:14', 'Php 6170 was paid for Fee No. 9 by Student NO. 6'),
+(219, 1, '2023-06-04 20:55:22', 'Php 5950 was paid for Fee No. 19 by Student NO. 6');
 
 -- --------------------------------------------------------
 
@@ -608,7 +678,12 @@ INSERT INTO `tbl_payments` (`id`, `student_id`, `fee_id`, `amount_paid`, `paymen
 (11, 9, 22, '6170.00', 0, '2023-05-07 22:29:43'),
 (12, 4, 17, '5320.00', 0, '2023-05-07 22:32:11'),
 (13, 5, 18, '5730.00', 0, '2023-05-07 22:32:31'),
-(14, 2, 5, '5730.00', 0, '2023-05-08 08:04:49');
+(14, 2, 5, '5730.00', 0, '2023-05-08 08:04:49'),
+(15, 3, 6, '5730.00', 0, '2023-06-02 12:31:47'),
+(16, 4, 7, '5950.00', 0, '2023-06-04 20:54:26'),
+(17, 5, 8, '5730.00', 0, '2023-06-04 20:54:53'),
+(18, 6, 9, '6170.00', 0, '2023-06-04 20:55:14'),
+(19, 6, 19, '5950.00', 0, '2023-06-04 20:55:22');
 
 -- --------------------------------------------------------
 
@@ -639,7 +714,6 @@ INSERT INTO `tbl_payroll` (`id`, `start_date`, `end_date`, `record_date`) VALUES
 CREATE TABLE `tbl_programs` (
   `id` int(11) NOT NULL,
   `program_name` varchar(255) NOT NULL,
-  `program_desc` text NOT NULL,
   `updated_on` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -647,10 +721,36 @@ CREATE TABLE `tbl_programs` (
 -- Dumping data for table `tbl_programs`
 --
 
-INSERT INTO `tbl_programs` (`id`, `program_name`, `program_desc`, `updated_on`) VALUES
-(1, 'BACHELOR OF SCIENCE IN  INFORMATION TECHNOLOGY', 'The BS Information Technology (BSIT) program includes the study of the utilization of both hardware and software technologies involving planning, installing, customizing, operating, managing and administering, and maintaining information technology infrastructure that provides computing solutions to address the needs of an organization.', '2023-03-17 18:53:46'),
-(2, 'BACHELOR OF SCIENCE IN COMPUTER SCIENCE', 'The BS Computer Science (BSCS) program includes the study of computing concepts and theories, algorithm foundations and new developments in computing. The program prepares students to design and create algorithmically complex software and develop new and effective algorithms for solving computing problems.\r\n\r\nThe program also includes the study of standards and practices in Software Engineering. It prepares students to acquire skills and disciplines required for designing, writing and modifying software components, modules and applications that comprise software solutions.', '2023-03-17 18:54:21'),
-(3, 'BACHELOR OF SCIENCE IN INFORMATION SYSTEMS', 'The BS Information System (BSIS) program includes the study of application and effect of information technology to organizations. Graduates of the program should be able to implement an information system, which considers complex technological and organizational factors affecting it. These include components, tools, techniques, strategies, methodologies. etc.', '2023-03-17 18:54:26');
+INSERT INTO `tbl_programs` (`id`, `program_name`, `updated_on`) VALUES
+(1, 'BACHELOR OF SCIENCE IN  INFORMATION TECHNOLOGY', '2023-03-17 18:53:46'),
+(2, 'BACHELOR OF SCIENCE IN COMPUTER SCIENCE', '2023-03-17 18:54:21'),
+(3, 'BACHELOR OF SCIENCE IN INFORMATION SYSTEMS', '2023-03-17 18:54:26'),
+(4, 'ASSOCIATE IN COMPUTER TECHNOLOGY', '2023-06-02 12:00:43'),
+(5, 'BACHELOR OF SCIENCE IN ARCHITECTURE', '2023-06-02 12:00:43'),
+(6, 'BACHELOR OF SCIENCE IN CIVIL ENGINEERING', '2023-06-02 12:00:43'),
+(7, 'BACHELOR OF SCIENCE IN MECHANICAL ENGINEERING', '2023-06-02 12:00:43'),
+(8, 'BACHELOR OF SCIENCE IN ELECTRICAL ENGINEERING', '2023-06-02 12:00:43'),
+(9, 'BACHELOR OF SCIENCE IN ELECTRONICS ENGINEERING', '2023-06-02 12:00:43'),
+(10, 'BACHELOR OF SCIENCE IN INDUSTRIAL ENGINEERING', '2023-06-02 12:00:43'),
+(11, 'BACHELOR OF SCIENCE IN COMPUTER ENGINEERING', '2023-06-02 12:00:43'),
+(12, 'BACHELOR OF SCIENCE IN BUSINESS ADMINISTRATION', '2023-06-02 12:00:43'),
+(13, 'BACHELOR OF SCIENCE IN ENTREPRENEURSHIP', '2023-06-02 12:00:43'),
+(14, 'BACHELOR OF SCIENCE IN ACCOUNTANCY', '2023-06-02 12:00:43'),
+(15, 'BACHELOR OF SCIENCE IN ACCOUNTING INFORMATION SYSTEMS', '2023-06-02 12:00:43'),
+(16, 'BACHELOR IN PUBLIC ADMINISTRATRATION', '2023-06-02 12:00:43'),
+(17, 'BACHELOR OF SCIENCE IN ENVIRONMENTAL SCIENCE', '2023-06-02 12:00:43'),
+(18, 'BACHELOR OF SCIENCE IN BIOLOGY', '2023-06-02 12:00:43'),
+(19, 'BACHELOR OF SCIENCE IN HOTEL AND RESTAURANT MANAGEMENT', '2023-06-02 12:00:43'),
+(20, 'BACHELOR OF SCIENCE IN HOSPITALITY MANAGEMENT', '2023-06-02 12:00:43'),
+(21, 'BACHELOR OF SCIENCE IN TOURISM MANAGEMENT', '2023-06-02 12:00:43'),
+(22, 'BACHELOR OF SCIENCE IN SOCIAL WORK', '2023-06-02 12:00:43'),
+(23, 'BACHELOR OF SCIENCE IN PSYCHOLOGY', '2023-06-02 12:00:43'),
+(24, 'BACHELOR OF SCIENCE IN SOCIOLOGY', '2023-06-02 12:00:43'),
+(25, 'BACHELOR OF ELEMENTARY EDUCATION', '2023-06-02 12:00:43'),
+(26, 'BACHELOR OF SECONDARY EDUCATION', '2023-06-02 12:00:43'),
+(27, 'BACHELOR OF PHYSICAL  EDUCATION', '2023-06-02 12:00:43'),
+(28, 'BACHELOR OF TECHNICAL AND LIVELIHOOD EDUCATION', '2023-06-02 12:00:43'),
+(29, 'BACHELOR OF TECHNICAL-VOCATIONAL TEACHER EDUCATION', '2023-06-02 12:00:43');
 
 --
 -- Triggers `tbl_programs`
@@ -713,7 +813,27 @@ INSERT INTO `tbl_students` (`id`, `first_name`, `middle_name`, `last_name`, `dat
 (10, 'William', 'Andrew', 'Wilson', '2023-05-07 22:19:31'),
 (11, 'Olivia', 'Jane', 'Thomas', '2023-05-07 22:19:31'),
 (12, 'Benjamin', 'Edward', 'Clark', '2023-05-07 22:19:31'),
-(13, 'Isabella', 'Rose', 'Green', '2023-05-07 22:19:31');
+(13, 'Isabella', 'Rose', 'Green', '2023-05-07 22:19:31'),
+(14, 'John', 'Doe', 'Smith', '2023-06-04 20:46:08'),
+(15, 'Jane', 'Doe', 'Johnson', '2023-06-04 20:46:08'),
+(16, 'Michael', 'Lee', 'Williams', '2023-06-04 20:46:08'),
+(17, 'Emily', 'Rose', 'Brown', '2023-06-04 20:46:08'),
+(18, 'David', 'James', 'Davis', '2023-06-04 20:46:08'),
+(19, 'Olivia', 'Grace', 'Jones', '2023-06-04 20:46:08'),
+(20, 'Daniel', 'Robert', 'Miller', '2023-06-04 20:46:08'),
+(21, 'Sophia', 'Elizabeth', 'Anderson', '2023-06-04 20:46:08'),
+(22, 'Matthew', 'Thomas', 'Taylor', '2023-06-04 20:46:08'),
+(23, 'Ava', 'Marie', 'Martinez', '2023-06-04 20:46:08'),
+(24, 'Joseph', 'Charles', 'Anderson', '2023-06-04 20:46:08'),
+(25, 'Isabella', 'Ann', 'Hernandez', '2023-06-04 20:46:08'),
+(26, 'William', 'Joseph', 'Garcia', '2023-06-04 20:46:08'),
+(27, 'Mia', 'Nicole', 'Wilson', '2023-06-04 20:46:08'),
+(28, 'Andrew', 'David', 'Lopez', '2023-06-04 20:46:08'),
+(29, 'Charlotte', 'Victoria', 'Martin', '2023-06-04 20:46:08'),
+(30, 'Benjamin', 'Alexander', 'Moore', '2023-06-04 20:46:08'),
+(31, 'Ella', 'Rose', 'Clark', '2023-06-04 20:46:08'),
+(32, 'James', 'William', 'Young', '2023-06-04 20:46:08'),
+(33, 'Amelia', 'Michelle', 'Scott', '2023-06-04 20:46:08');
 
 -- --------------------------------------------------------
 
@@ -761,7 +881,56 @@ INSERT INTO `tbl_student_course` (`id`, `student_id`, `program_id`, `sem_id`, `y
 (23, 10, 1, 2, 1, 22, '2023-05-07 22:28:19'),
 (24, 11, 2, 2, 1, 21, '2023-05-07 22:28:19'),
 (25, 12, 3, 2, 1, 21, '2023-05-07 22:28:19'),
-(26, 13, 1, 2, 1, 20, '2023-05-07 22:28:19');
+(26, 13, 1, 2, 1, 20, '2023-05-07 22:28:19'),
+(27, 14, 5, 1, 1, 21, '2023-06-04 20:49:10'),
+(28, 15, 7, 1, 1, 23, '2023-06-04 20:49:10'),
+(29, 16, 4, 1, 1, 20, '2023-06-04 20:49:10'),
+(30, 17, 23, 1, 1, 19, '2023-06-04 20:49:10'),
+(31, 18, 21, 1, 1, 18, '2023-06-04 20:49:10'),
+(32, 19, 7, 1, 1, 20, '2023-06-04 20:49:10'),
+(33, 20, 14, 1, 1, 19, '2023-06-04 20:49:10'),
+(34, 21, 7, 1, 1, 22, '2023-06-04 20:49:10'),
+(35, 22, 9, 1, 1, 18, '2023-06-04 20:49:10'),
+(36, 23, 11, 1, 1, 22, '2023-06-04 20:49:10'),
+(37, 24, 17, 1, 1, 23, '2023-06-04 20:49:10'),
+(38, 25, 21, 1, 1, 19, '2023-06-04 20:49:10'),
+(39, 14, 10, 2, 1, 23, '2023-06-04 20:50:19'),
+(40, 15, 9, 2, 1, 22, '2023-06-04 20:50:19'),
+(41, 16, 18, 2, 1, 19, '2023-06-04 20:50:19'),
+(42, 17, 6, 2, 1, 23, '2023-06-04 20:50:19'),
+(43, 18, 15, 2, 1, 21, '2023-06-04 20:50:19'),
+(44, 19, 13, 2, 1, 20, '2023-06-04 20:50:19'),
+(45, 20, 4, 2, 1, 21, '2023-06-04 20:50:19'),
+(46, 21, 8, 2, 1, 18, '2023-06-04 20:50:19'),
+(47, 22, 17, 2, 1, 18, '2023-06-04 20:50:19'),
+(48, 23, 10, 2, 1, 19, '2023-06-04 20:50:19'),
+(49, 24, 17, 2, 1, 18, '2023-06-04 20:50:19'),
+(50, 25, 21, 2, 1, 21, '2023-06-04 20:50:19'),
+(51, 26, 25, 1, 1, 19, '2023-06-04 20:53:13'),
+(52, 27, 12, 1, 1, 19, '2023-06-04 20:53:13'),
+(53, 28, 23, 1, 1, 22, '2023-06-04 20:53:13'),
+(54, 29, 12, 1, 1, 20, '2023-06-04 20:53:13'),
+(55, 30, 8, 1, 1, 21, '2023-06-04 20:53:13'),
+(56, 31, 8, 1, 1, 19, '2023-06-04 20:53:13'),
+(57, 32, 22, 1, 1, 20, '2023-06-04 20:53:13'),
+(58, 33, 16, 1, 1, 21, '2023-06-04 20:53:13'),
+(59, 26, 23, 2, 1, 21, '2023-06-04 20:53:51'),
+(60, 27, 17, 2, 1, 18, '2023-06-04 20:53:51'),
+(61, 28, 24, 2, 1, 19, '2023-06-04 20:53:51'),
+(62, 29, 9, 2, 1, 21, '2023-06-04 20:53:51'),
+(63, 30, 14, 2, 1, 20, '2023-06-04 20:53:51'),
+(64, 31, 16, 2, 1, 22, '2023-06-04 20:53:51'),
+(65, 32, 22, 2, 1, 23, '2023-06-04 20:53:51'),
+(66, 33, 11, 2, 1, 22, '2023-06-04 20:53:51');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `program_fees_report_view`
+--
+DROP TABLE IF EXISTS `program_fees_report_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `program_fees_report_view`  AS SELECT `tbl_programs`.`id` AS `id`, `tbl_programs`.`program_name` AS `program_name`, sum(`tbl_fees`.`amount`) AS `amount`, sum(`tbl_fees`.`remaining_balance`) AS `remaining_balance` FROM ((`tbl_programs` left join `tbl_student_course` on(`tbl_programs`.`id` = `tbl_student_course`.`program_id`)) left join `tbl_fees` on(`tbl_student_course`.`id` = `tbl_fees`.`student_course_id`)) GROUP BY `tbl_programs`.`id``id`  ;
 
 -- --------------------------------------------------------
 
@@ -941,19 +1110,19 @@ ALTER TABLE `tbl_employee_payroll`
 -- AUTO_INCREMENT for table `tbl_fees`
 --
 ALTER TABLE `tbl_fees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `tbl_fee_struc`
 --
 ALTER TABLE `tbl_fee_struc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_audit_log`
 --
 ALTER TABLE `tbl_finance_audit_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
 
 --
 -- AUTO_INCREMENT for table `tbl_finance_users`
@@ -983,7 +1152,7 @@ ALTER TABLE `tbl_leave_type`
 -- AUTO_INCREMENT for table `tbl_payments`
 --
 ALTER TABLE `tbl_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_payroll`
@@ -995,7 +1164,7 @@ ALTER TABLE `tbl_payroll`
 -- AUTO_INCREMENT for table `tbl_programs`
 --
 ALTER TABLE `tbl_programs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_semester`
@@ -1007,13 +1176,13 @@ ALTER TABLE `tbl_semester`
 -- AUTO_INCREMENT for table `tbl_students`
 --
 ALTER TABLE `tbl_students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_course`
 --
 ALTER TABLE `tbl_student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- Constraints for dumped tables
